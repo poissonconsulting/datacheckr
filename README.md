@@ -2,7 +2,7 @@
 deckr
 =====
 
-This README is the outline for a possible an R package to check the names, classes and values of columns in objects inheriting from class data.frame.
+This README is the outline for a possible R package to check the names, classes and values of columns in objects inheriting from class `data.frame`.
 
 The Problem
 -----------
@@ -11,12 +11,12 @@ Most of the packages I write need to check that one or more user supplied data f
 
 In short, I need a function that is able to input a data frame and test whether or not it includes certain named columns of particular classes that may or may not contain particular values including missing values. If not it should return an informative error message. Otherwise it should return the original data frame so the function can be used in piping sequences.
 
-To the best of my knowledge an elegant solution to this problem does not currently exist. **If you think it does please let me know right away by filing an issue feedback in the form of an [issue](https://github.com/poissonconsulting/deckr/issues)**.
+To the best of my knowledge an elegant solution to this problem does not currently exist. **If you think it does please let me know right away by filing an [issue](https://github.com/poissonconsulting/deckr/issues)**.
 
 An Elegant Solution?
 --------------------
 
-It seems to me that a function that takes as its two arguments the input data frame and a named list of vectors specifying the possible values would fit the bill. Let us call the function `deck` (short for `data_checker`). The names of the list elements would specify those columns that need to appear in the data.frame while the classes of the vectors would specify the classes of the column.
+It seems to me that a function that takes as its two arguments the input data frame and a named list of vectors specifying the possible values would fit the bill. Let us call the function `deck` (short for `data_checker`). The names of the list elements would specify those columns that need to appear in the data.frame while the classes of the vectors would specify the classes of the columns.
 
 ### Checking Columns and Classes
 
@@ -55,7 +55,7 @@ The above code test that `col1` contains just the counts 0, 1 and 4.
 
 ### Numeric, Date and Logical Classes
 
-Missing values, ranges and particular values work identically for numeric, and Date vectors while for logical values two and three or more non-missing values behave identically, i.e., use `deck(x, list("col1" = c(TRUE, TRUE)))` to indicate only `TRUE` values.
+Missing values, ranges and specific values would work the same for integer, numeric, and Date vectors. With logical values two and three or more non-missing values would behave identically, i.e., use `deck(x, list("col1" = c(TRUE, TRUE)))` to indicate only `TRUE` values.
 
 ### Character Class
 
@@ -67,11 +67,11 @@ while the following requires that the values match both character elements which
 
     deck(x, list("col1" = c("^//d", ".*")))
 
-with three or more non-missing character elements each value in `col1` must match at least one.
+with three or more non-missing character elements each value in `col1` must match at least one of the elements which are treated as regular expressions.
 
 ### Factor Class
 
-To indicate that `col1` should simply be a factor use
+To indicate that `col1` should be a factor use
 
     deck(x, list("col1" = factor("c")))
 
@@ -79,9 +79,9 @@ while the following specifies that `col1` should be a factor that includes the f
 
     deck(x, list("col1" = factor("c", "b")))
 
-The following specifies that `col1` must be a factor with levels `c("b","c", "f")`
+The following specifies that `col1` must be a factor with levels `c("b", "c", "f")`
 
-    deck(x, list("col1" = factor("c", "b" "f")))
+    deck(x, list("col1" = factor("c", "b", "f")))
 
 Feedback
 --------

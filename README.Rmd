@@ -24,24 +24,30 @@ columns in objects inheriting from class data.frame.
 
 Most of the packages I write need to check that one or more user supplied data frames
 have the correct type of data in them before proceeding to analysis or plotting. 
-If they don't the packages need to provide a helpful
-error message so the user is able to correct the input data. To the best of
-my knowledge an elegant solution to this problem does not currently exist.
-If you think it does please let me know right away <joe@poissonconsulting.ca>.
+If they don't then I need to provide a helpful
+error message so the user is able to correct the input data.
 
-## A Solution?
-
-I need a function that is able to input a data frame and test whether or not
+In short, I need a function that is able to input a data frame and test whether or not
 it includes certain named columns of particular classes that may or may not
 contain particular values including missing values. If not it should return
-an informative error message if so it should return the original data frame
-so it is able to be used in piping sequences.
+an informative error message. Otherwise it should return the original data frame
+so the function can be used in piping sequences.
 
-It seems to me that a function that takes the input data frame and 
+To the best of
+my knowledge an elegant solution to this problem does not currently exist.
+**If you think it does please let me know right away <joe@poissonconsulting.ca>**.
+
+## An Elegant Solution?
+
+It seems to me that a function that takes 
+as its two arguments the input data frame and 
 a named list of vectors specifying the possible values would fit the bill.
-Let us call it `deck`. The names of the list elements would specify
+Let us call the function `deck` (short for `data_checker`). 
+The names of the list elements would specify
 those columns that need to appear in the data.frame while the classes
 of the vectors would specify the classes of the column.
+
+### Checking Columns and Classes
 
 Thus, to specify that x should contain a column called `col1` of class integer
 the call would be one of the following because with a single value only
@@ -61,16 +67,25 @@ be integer or numeric values the call would be
 ```
 deck(x, list("col1" = 3L, "col1" = NULL, "col1" = 9))
 ```
+
+### Checking Missing Values
+
 To specify that a column can include missing values just
 add an `NA` to the vector.
 ```
 deck(x, list("col1" = c(1L, NA)))
 ```
+
+### Checking Ranges
+
 And to indicate that it must fall within a range use
 two non-missing values (the following code tests for counts).
 ```
 deck(x, list("col1" = c(0L, .Machine$integer.max)))
 ```
+
+### Checking Specific Values
+
 If particular values are required then specify them
 as vector of three or more missing values
 ```
@@ -78,11 +93,15 @@ deck(x, list("col1" = c(0L, 1L, 4L)))
 ```
 The above code test that `col1` contains just the counts 0, 1 and 4.
 
+### Numeric, Date and Logical Classes
+
 Missing values, ranges and particular values work identically 
 for numeric, and Date vectors while for logical values two and 
 three or more non-missing values behave identically, i.e.,
 use `deck(x, list("col1" = c(TRUE, TRUE)))` to indicate only
 `TRUE` values.
+
+### Character Class
 
 To specify that `col1` must be a character vector use
 ```
@@ -96,6 +115,27 @@ deck(x, list("col1" = c("^//d", ".*")))
 with three or more non-missing character elements
 each value in `col1` must match at least one.
 
+### Factor Class
+
+To indicate that `col1` should simply be a factor use
+```
+deck(x, list("col1" = factor("c")))
+```
+while the following specifies that `col1`
+should be a factor that includes the factor
+levels `b` and `c` (in any order)
+```
+deck(x, list("col1" = factor("c", "b")))
+```
+The following specifies
+that `col1` must be a factor with levels
+`c("b","c", "f")`
+```
+deck(x, list("col1" = factor("c", "b" "f")))
+```
+
+
+## 
 
 
 The behaviour of `deck` should be independent of the

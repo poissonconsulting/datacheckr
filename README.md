@@ -11,7 +11,7 @@ Most of the packages I write need to check that one or more user supplied data f
 
 In short, I need a function that is able to input a data frame and test whether or not it includes certain named columns of particular classes that may or may not contain particular values including missing values. If not it should return an informative error message. Otherwise it should return the original data frame so the function can be used in piping sequences.
 
-To the best of my knowledge an elegant solution to this problem does not currently exist. **If you think it does please let me know right away <joe@poissonconsulting.ca>**.
+To the best of my knowledge an elegant solution to this problem does not currently exist. **If you think it does please let me know right away by filing an issue feedback in the form of an [issue](https://github.com/poissonconsulting/deckr/issues)**.
 
 An Elegant Solution?
 --------------------
@@ -83,8 +83,18 @@ The following specifies that `col1` must be a factor with levels `c("b","c", "f"
 
     deck(x, list("col1" = factor("c", "b" "f")))
 
-The behaviour of `deck` should be independent of the order of the list elements (or the vector elements for that matter).
+Feedback
+--------
 
-The following call says `x` must have a `col1` that is a integer or numeric and `col2` that is a Date and no columns called `col3`.
+I currently think the above outlines a very intuitive solution for checking basic properties of data frames. Consider the following example
 
-    deck(x, list("col1" = 3L, "col1" = NULL, "col1" = 9))
+    deck(df, list("Count" = c(0L, .Machine$integer.max), 
+                 "Comments" = NULL, 
+                 "LocationX" = c(NA, 2345, 1012),
+                 "LocationX" = NULL))
+
+it states that `df` should have column `Count` of non-missing counts, should not have a column `Comments` and can include a column `LocationX` with missing values between 1012 and 2345.
+
+This would make an excellent three month project for a talented student.
+
+I would really appreciate your feedback in the form of an [issue](https://github.com/poissonconsulting/deckr/issues).

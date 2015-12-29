@@ -66,5 +66,14 @@ test_that("deck works", {
     data <- data.frame(Count = 2)
   expect_identical(deck(data, values = list(Count = c(4, 1.01))), data)
 
+    data <- data.frame(Count = TRUE)
+  expect_identical(deck(data, values = list(Count = c(TRUE, TRUE))), data)
+
+      data <- data.frame(Count = TRUE)
+  expect_identical(deck(data, values = list(Count = c(TRUE, FALSE))), data)
+
+      data <- data.frame(Count = TRUE)
+  expect_error(deck(data, values = list(Count = c(FALSE, FALSE))), "column Count in data can only include FALSE values")
+
   #    expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
 })

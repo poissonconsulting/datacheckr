@@ -18,7 +18,7 @@ get_class <- function(x) {
   classes()[which]
 }
 
-get_classes <- function (values) {
+get_classes <- function(values) {
   vapply(values, get_class, character(1))
 }
 
@@ -56,22 +56,21 @@ deck_vector_values_nulls <- function(vector, values, column_name, substituted_da
 }
 
 deck_vector_values_class <- function(vector, values, column_name, substituted_data) {
-#   value_classes <- vapply(values, get_class, character(1))
-#
-#
-#   which <- inherits(vector, classes(), which = TRUE) == 1
-#   if (!any(which)) {
-#     deck_stop("column ", column_name, " in ", substituted_data, "must be of class",
-#           punctuate(classes()[]))
-#   }
-#   classes <- classes()[vapply(values, inherits, logical(1), classes())]
-#   if(!inherits(vector), )
+  classes <- get_classes(values)
+
+  which <- inherits(vector, classes, which = TRUE) == 1
+  if (!any(which)) {
+       deck_stop("column ", column_name, " in ", substituted_data, " must be of class ",
+             punctuate(classes))
+  }
+  #   classs <- classes()[vapply(values, inherits, logical(1), classes())]
+  #   if(!inherits(vector), )
   TRUE
 }
 
 deck_data_values_column <- function(column_name, data, values, substituted_data) {
   vector <- data[[column_name]]
-  values <- values[column_name]
+  values <- values[names(values) == column_name]
 
   values <- deck_vector_values_nulls(vector, values, column_name, substituted_data)
   if (identical(values, TRUE))
@@ -81,7 +80,8 @@ deck_data_values_column <- function(column_name, data, values, substituted_data)
   if (identical(value, TRUE))
     return(TRUE)
 
-  deck_vector_value(vector, value, column_name, substituted_data)
+  TRUE
+  #  deck_vector_value(vector, value, column_name, substituted_data)
 }
 
 deck_data_values <- function(data, values, substituted_data) {

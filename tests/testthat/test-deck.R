@@ -22,7 +22,11 @@ test_that("deck works", {
                  "LocationX" = c(NA, 2345, 1012),
                  "LocationX" = NULL)
 
-  data <- data.frame(Count = c(0,3,2,10), Location = c(2000, NA, 2345, 1012))
+    data <- data.frame(Count = c(0L,3L,2L,10L), LocationX = c(2000, NA, 2345, 1012))
+  expect_identical(data, deck(data))
+  expect_identical(data, deck(data, values))
+
+  data <- data.frame(Count = c(0L,3L,2L,10L), Location = c(2000, NA, 2345, 1012))
   expect_identical(data, deck(data))
   expect_identical(data, deck(data, values))
 

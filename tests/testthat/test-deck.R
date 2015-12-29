@@ -77,3 +77,18 @@ test_that("deck works", {
 
   #    expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
 })
+
+test_that("deck works with Dates", {
+    data <- data.frame(Date1 = as.Date("2000-01-01"))
+
+    values <- list(Date1 = as.Date(c("2000-01-01", "2000-01-03")))
+    expect_identical(deck(data, values), data)
+    values <- list(Date1 = as.Date(c("1999-01-01", "2000-01-03")))
+    expect_identical(deck(data, values), data)
+    values <- list(Date1 = as.Date(c("1999-01-01", "2000-01-03", "2000-02-01")))
+    expect_error(deck(data, values), "column Date1 in data includes non-permitted values")
+    values <- list(Date1 = as.Date(c("1999-01-01", "2000-01-03", "2000-01-03")))
+    expect_error(deck(data, values), "column Date1 in data includes non-permitted values")
+    values <- list(Date1 = as.Date(c("2000-01-03", "2000-01-03", "2000-01-03")))
+    expect_error(deck(data, values), "column Date1 in data includes non-permitted values")
+})

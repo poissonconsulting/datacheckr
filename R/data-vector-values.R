@@ -24,4 +24,15 @@ value, " values")
   TRUE
 }
 
+deck_vector_values.logical <- function(vector, value, column_name, substituted_data) {
+  value <- unique(value)
+  if (length(value) == 2)
+    return(TRUE)
+  if (!all(vector == value))
+    deck_stop("column ", column_name, " in ", substituted_data, " can only include ",
+value, " values")
+  TRUE
+}
+
+
 

@@ -14,8 +14,8 @@ classes <- function() {
 }
 
 get_class <- function(x) {
-  which <- inherits(x, classes(), which = TRUE) == 1
-  classes()[which]
+  logical_vector <- inherits(x, classes(), which = TRUE) == 1
+  classes()[logical_vector]
 }
 
 get_classes <- function(values) {
@@ -58,13 +58,30 @@ deck_vector_values_nulls <- function(vector, values, column_name, substituted_da
 deck_vector_values_class <- function(vector, values, column_name, substituted_data) {
   classes <- get_classes(values)
 
-  which <- inherits(vector, classes, which = TRUE) == 1
-  if (!any(which)) {
-       deck_stop("column ", column_name, " in ", substituted_data, " must be of class ",
-             punctuate(classes))
+  logical_vector <- inherits(vector, classes, which = TRUE) == 1
+  if (!any(logical_vector)) {
+    deck_stop("column ", column_name, " in ", substituted_data, " must be of class ",
+              punctuate(classes))
   }
-  #   classs <- classes()[vapply(values, inherits, logical(1), classes())]
-  #   if(!inherits(vector), )
+  stopifnot(sum(logical_vector) == 1)
+  values[[logical_vector]]
+}
+
+deck_vector_value <- function(vector, value, column_name, substituted_data) {
+  if (!length(value) || !length(vector))
+    return(TRUE)
+  missing <- any(is.na(value))
+  value <- value[!is.na(value)]
+
+  if (!missing && any(is.na(vector)))
+    deck_stop("column ", column_name, " in ", substituted_data, " cannot include missing values")
+
+  if (!length(value)) {
+    if (!all(is.na(vector)))
+      deck_stop("column ", column_name, " in ", substituted_data, " cannot include non-missing values")
+    return(TRUE)
+  }
+
   TRUE
 }
 
@@ -77,11 +94,7 @@ deck_data_values_column <- function(column_name, data, values, substituted_data)
     return(TRUE)
 
   value <- deck_vector_values_class(vector, values, column_name, substituted_data)
-  if (identical(value, TRUE))
-    return(TRUE)
-
-  TRUE
-  #  deck_vector_value(vector, value, column_name, substituted_data)
+  deck_vector_value(vector, value, column_name, substituted_data)
 }
 
 deck_data_values <- function(data, values, substituted_data) {

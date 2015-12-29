@@ -22,13 +22,14 @@ test_that("deck works", {
                  "LocationX" = c(NA, 2345, 1012),
                  "LocationX" = NULL)
 
-    data <- data.frame(Count = c(0L,3L,2L,10L), LocationX = c(2000, NA, 2345, 1012))
+  data <- data.frame(Count = c(0L,3L,2L,10L), LocationX = c(2000, NA, 2345, 1012))
   expect_identical(data, deck(data))
   expect_identical(data, deck(data, values))
 
   data <- data.frame(Count = c(0L,3L,2L,10L), Location = c(2000, NA, 2345, 1012))
   expect_identical(data, deck(data))
   expect_identical(data, deck(data, values))
+  expect_identical(data, deck(data, values = list(Count = integer())))
 
   expect_error(deck(data, values = list(Count = NULL)),
                "data must not include column Count")
@@ -36,5 +37,23 @@ test_that("deck works", {
   expect_error(deck(data, values = list(Count = 1L, Count = 2L)),
                "values cannot have multiple vectors with the same name and class")
 
-})
+  expect_error(deck(data, values = list(Count = 1)),
+               "column Count in data must be of class 'numeric'")
 
+  expect_error(deck(data, values = list(Count = 1, Count = TRUE)),
+               "column Count in data must be of class 'numeric' or 'logical'")
+
+  data <- data.frame(Count = rep(NA, 3))
+  expect_identical(data, deck(data, values = list(Count = NA)))
+
+  data <- data.frame(Count = as.integer(rep(NA, 3)))
+  expect_identical(data, deck(data, values = list(Count = as.integer(NA))))
+
+  expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
+
+    data <- data.frame(Count = c(TRUE, NA))
+
+    expect_error(deck(data, values = list(Count = NA)), "column Count in data cannot include non-missing values")
+
+#    expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
+})

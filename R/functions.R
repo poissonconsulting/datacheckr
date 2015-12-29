@@ -84,22 +84,6 @@ deck_vector_value_missing <- function(vector, value, column_name, substituted_da
   value
 }
 
-deck_vector_value_nonmissing <- function(vector, value, column_name, substituted_data) {
-  if (length(value) == 1)
-    return(TRUE)
-
-  if (length(value) == 2) {
-    range <- range(vector, na.rm = TRUE)
-    value <- sort(value)
-    if (range[1] < value[1] || range[2] > value[2])
-      deck_stop("the values in column ", column_name, " in ", substituted_data, " must lie between ", value[1], " and ", value[2])
-    return(TRUE)
-  }
-  if (!all(vector %in% value))
-
-  TRUE
-}
-
 deck_data_values_column <- function(column_name, data, values, substituted_data) {
   vector <- data[[column_name]]
   values <- values[names(values) == column_name]
@@ -109,8 +93,8 @@ deck_data_values_column <- function(column_name, data, values, substituted_data)
 
   value <- deck_vector_values_class(vector, values, column_name, substituted_data)
   value <- deck_vector_value_missing(vector, value, column_name, substituted_data)
-  if (identical(value, TRUE)) return(TRUE)
-  deck_vector_value_nonmissing(vector, value, column_name, substituted_data)
+  if (length(value) == 1) return(TRUE)
+  deck_vector_values(vector, value, column_name, substituted_data)
 }
 
 deck_data_values <- function(data, values, substituted_data) {

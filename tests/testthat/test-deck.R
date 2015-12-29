@@ -63,5 +63,8 @@ test_that("deck works", {
   data <- data.frame(Count = 1)
   expect_error(deck(data, values = list(Count = c(4, 1.01))), "the values in column Count in data must lie between 1.01 and 4")
 
+    data <- data.frame(Count = 2)
+  expect_identical(deck(data, values = list(Count = c(4, 1.01))), data)
+
   #    expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
 })

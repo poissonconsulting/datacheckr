@@ -67,7 +67,7 @@ deck_vector_values_class <- function(vector, values, column_name, substituted_da
   values[[logical_vector]]
 }
 
-deck_vector_value <- function(vector, value, column_name, substituted_data) {
+deck_vector_value_missing <- function(vector, value, column_name, substituted_data) {
   if (!length(value) || !length(vector))
     return(TRUE)
   missing <- any(is.na(value))
@@ -78,9 +78,24 @@ deck_vector_value <- function(vector, value, column_name, substituted_data) {
 
   if (!length(value)) {
     if (!all(is.na(vector)))
-      deck_stop("column ", column_name, " in ", substituted_data, " cannot include non-missing values")
+      deck_stop("column ", column_name, " in ", substituted_data, " can only include missing values")
     return(TRUE)
   }
+  value
+}
+
+deck_vector_value_nonmissing <- function(vector, value, column_name, substituted_data) {
+  if (length(value) == 1)
+    return(TRUE)
+
+  if (length(value) == 2) {
+    range <- range(vector, na.rm = TRUE)
+    value <- sort(value)
+    if (range[1] < value[1] || range[2] > value[2])
+      deck_stop("the values in column ", column_name, " in ", substituted_data, " must lie between ", value[1], " and ", value[2])
+    return(TRUE)
+  }
+  if (!all(vector %in% value))
 
   TRUE
 }
@@ -90,11 +105,12 @@ deck_data_values_column <- function(column_name, data, values, substituted_data)
   values <- values[names(values) == column_name]
 
   values <- deck_vector_values_nulls(vector, values, column_name, substituted_data)
-  if (identical(values, TRUE))
-    return(TRUE)
+  if (identical(values, TRUE)) return(TRUE)
 
   value <- deck_vector_values_class(vector, values, column_name, substituted_data)
-  deck_vector_value(vector, value, column_name, substituted_data)
+  value <- deck_vector_value_missing(vector, value, column_name, substituted_data)
+  if (identical(value, TRUE)) return(TRUE)
+  deck_vector_value_nonmissing(vector, value, column_name, substituted_data)
 }
 
 deck_data_values <- function(data, values, substituted_data) {

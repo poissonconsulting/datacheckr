@@ -51,9 +51,17 @@ test_that("deck works", {
 
   expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
 
-    data <- data.frame(Count = c(TRUE, NA))
+  data <- data.frame(Count = c(NA, NA))
+  expect_identical(data, deck(data, values = list(Count = NA)))
 
-    expect_error(deck(data, values = list(Count = NA)), "column Count in data cannot include non-missing values")
+  data <- data.frame(Count = c(TRUE, NA))
+  expect_error(deck(data, values = list(Count = NA)), "column Count in data can only include missing values")
 
-#    expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
+  data <- data.frame(Count = NA)
+  expect_error(deck(data, values = list(Count = TRUE)), "column Count in data cannot include missing values")
+
+  data <- data.frame(Count = 1)
+  expect_error(deck(data, values = list(Count = c(4, 1.01))), "the values in column Count in data must lie between 1.01 and 4")
+
+  #    expect_error(deck(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
 })

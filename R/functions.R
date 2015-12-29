@@ -13,21 +13,84 @@ classes <- function() {
   c("NULL", "logical", "integer", "numeric", "character", "factor", "Date")
 }
 
+get_class <- function(x) {
+  which <- inherits(x, classes(), which = TRUE) == 1
+  classes()[which]
+}
+
+get_classes <- function (values) {
+  vapply(values, get_class, character(1))
+}
+
 deck_data <- function(data, substituted_data) {
   if (!is.data.frame(data)) deck_stop(substituted_data, " must be a data frame")
+  if (anyDuplicated(colnames(data)))
+    deck_stop(substituted_data, " must be a data frame with unique column names")
   TRUE
 }
 
-
-deck_values <- function(values, substituted_values) {
-  if (!is.list(values)) deck_stop(substituted_values, " must be a list")
-  if (!is_named(values)) deck_stop(substituted_values, " must be a named list")
+deck_values <- function(values) {
+  if (!is.list(values)) deck_stop("values must be a list")
+  if (!is_named(values)) deck_stop("values must be a named list")
   implemented <- vapply(values, inherits, logical(1), classes())
   if (any(!implemented))
-    deck_stop(substituted_values, " must be a named list of vectors of class ",
+    deck_stop("values must be a named list of vectors of class ",
               punctuate(classes()))
+
+  classes <- get_classes(values)
+  if (anyDuplicated(paste(names(values), classes)))
+    deck_stop("values cannot have multiple vectors with the same name and class")
   TRUE
 }
+
+deck_vector_values_nulls <- function(vector, values, column_name, substituted_data) {
+  nulls <- vapply(values, is.null, logical(1))
+  if (all(nulls)) {
+    if (!is.null(vector))
+      deck_stop(substituted_data, " must not include column ", column_name)
+    return(TRUE)
+  }
+  if (any(nulls) && is.null(vector))
+    return(TRUE)
+  values[!nulls]
+}
+
+deck_vector_values_class <- function(vector, values, column_name, substituted_data) {
+#   value_classes <- vapply(values, get_class, character(1))
+#
+#
+#   which <- inherits(vector, classes(), which = TRUE) == 1
+#   if (!any(which)) {
+#     deck_stop("column ", column_name, " in ", substituted_data, "must be of class",
+#           punctuate(classes()[]))
+#   }
+#   classes <- classes()[vapply(values, inherits, logical(1), classes())]
+#   if(!inherits(vector), )
+  TRUE
+}
+
+deck_data_values_column <- function(column_name, data, values, substituted_data) {
+  vector <- data[[column_name]]
+  values <- values[column_name]
+
+  values <- deck_vector_values_nulls(vector, values, column_name, substituted_data)
+  if (identical(values, TRUE))
+    return(TRUE)
+
+  value <- deck_vector_values_class(vector, values, column_name, substituted_data)
+  if (identical(value, TRUE))
+    return(TRUE)
+
+  deck_vector_value(vector, value, column_name, substituted_data)
+}
+
+deck_data_values <- function(data, values, substituted_data) {
+  column_names <- sort(unique(names(values)))
+  sapply(column_names, FUN = deck_data_values_column, data = data, values = values,
+         substituted_data = substituted_data)
+  TRUE
+}
+
 
 #' Data Check
 #'
@@ -46,11 +109,11 @@ deck_values <- function(values, substituted_values) {
 #' @export
 deck <- function(data, values = NULL) {
   substituted_data <- substitute(data)
-  substituted_values <- substitute(values)
 
   deck_data(data, substituted_data)
   if (!is.null(values)) {
-    deck_values(values, substituted_values)
+    deck_values(values)
+    deck_data_values(data, values, substituted_data)
   }
   data
 }

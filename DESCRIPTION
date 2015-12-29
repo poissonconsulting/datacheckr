@@ -6,6 +6,7 @@ Description: What the package does (one paragraph).
 Depends:
     R (>= 3.2.3)
 License: What license is it under?
+URL: https://github.com/poissonconsulting/deckr
 LazyData: true
 Suggests:
     testthat

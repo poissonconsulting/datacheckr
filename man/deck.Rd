@@ -15,6 +15,13 @@ deck(data, values = NULL)
 Throws an informative error or returns the original data object.
 }
 \description{
-Data Check
+The deck (short for data check) function takes a data frame data and a named
+list values that specifies the columns in data and their associated values.
+If data passes all the conditions set by values then deck returns the original
+data frame (which allows the function to be inserted in piping chains).
+Otherwise deck throws an informative error.
+}
+\details{
+If values is unspecified deck simply checks that data is a data frame.
 }
 

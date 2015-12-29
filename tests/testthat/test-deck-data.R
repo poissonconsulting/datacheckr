@@ -5,5 +5,5 @@ test_that("deck_data passes", {
 })
 
 test_that("deck_data fails", {
-  expect_error(deck_data(3, "abc"), "abc must be a data frame")
+  expect_error(deck_data(3, "w"), "w must be a data frame")
 })

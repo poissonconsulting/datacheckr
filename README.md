@@ -118,7 +118,9 @@ check_data(mtcars, list("col1" = integer(),
                   "col1" = numeric()))
 ```
 
-If a column is not named in the list then no checks are performed on it. \#\#\# Checking Missing Values
+If a column is not named in the list then no checks are performed on it.
+
+### Checking Missing Values
 
 To specify that a column cannot include missing values pass a single non-missing value.
 
@@ -150,7 +152,7 @@ check_data(data1, list("Count" = c(0L, .Machine$integer.max)))
 
 ### Checking Specific Values
 
-If particular values are required then specify them as a vector of three or more missing values
+If particular values are required then specify them as a vector of three or more non-missing values
 
 ``` r
 check_data(data1, list("Count" = c(0L, 1L, 3L)))
@@ -206,10 +208,20 @@ check_data(ToothGrowth, list("supp" = factor(c("VC", "OJ", "OJ"))))
 Installation
 ------------
 
-To install the most recent release from GitHub
+To install the latest release version from GitHub
 
-    devtools::install_github("poissonconsulting/datacheckr@v0.0.1")
+    library(devtools)
+    install_github("poissonconsulting/datacheckr@v0.0.1")
 
 To install the development version from GitHub
 
-    devtools::install_github("poissonconsulting/datacheckr")
+    library(devtools)
+    install_github("poissonconsulting/datacheckr")
+
+Contact
+-------
+
+You are welcome to:
+
+-   submit suggestions and bug reports at: <https://github.com/poissonconsulting/datacheckr/issues>
+-   send a pull request on: <https://github.com/poissonconsulting/datacheckr>

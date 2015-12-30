@@ -16,5 +16,7 @@ License: MIT + file LICENSE
 URL: https://github.com/poissonconsulting/datacheckr
 LazyData: true
 Suggests:
-    testthat
+    assertr,
+    magrittr,
+    testthat,
 RoxygenNote: 5.0.1

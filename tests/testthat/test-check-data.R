@@ -134,3 +134,34 @@ test_that("check_data works with character", {
   expect_error(check_data(x, values = list(c1 = c("ee", "eu", "oeu"))), "column c1 in x includes non-permitted strings")
   expect_identical(check_data(x, values = list(c1 = c("oeu", "eu", "ch"))), x)
 })
+
+test_that("check_data works with factor", {
+  x <- data.frame(z2 = "char", stringsAsFactors = TRUE)
+
+  expect_identical(check_data(x, values = list(z2 = factor())), x)
+  expect_identical(check_data(x, values = list(z2 = factor("x"))), x)
+  expect_error(check_data(x, values = list(z2 = factor(c("x", "char")))),
+               "column z2 in x lacks factor levels 'char' and 'x'")
+
+  x <- data.frame(z2 = c("char", "x"), stringsAsFactors = TRUE)
+  expect_identical(check_data(x, values = list(z2 = factor(c("x", "char")))), x)
+
+  x$z3 <- factor(c("char", "x"), levels = c("x", "3", "char"))
+  expect_identical(check_data(x, values = list(z3 = factor(c("x", "char")))), x)
+
+  x$z3 <- factor(c("char", "x1"), levels = c("x1", "3", "char"))
+  expect_error(check_data(x, values = list(z3 = factor(c("x", "char")))),
+               "column z3 in x lacks factor levels 'char' and 'x'")
+
+  expect_error(check_data(x, values = list(z3 = factor(c("x1", "char", "3")))),
+               "column z3 in x has incompatible factor levels")
+
+  expect_identical(check_data(x, values = list(
+    z3 = factor(c("x1", "char", "3"), levels = c("x1", "3", "char")))),
+                   x)
+
+  expect_identical(check_data(x, values = list(
+    z3 = factor(c("x1", "x1", "x1"), levels = c("x1", "3", "char")))),
+                   x)
+})
+

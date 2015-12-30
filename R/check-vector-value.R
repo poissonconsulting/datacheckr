@@ -43,12 +43,24 @@ check_vector_value.logical <- function(vector, value, column_name, substituted_d
 
 check_vector_value.character <- function(vector, value, column_name, substituted_data) {
   if (length(value) == 2) {
-    if (!all(grepl(value[1], vector) & grepl(value[2], vector)))
+    if (!all(grepl(value[1], vector, perl = TRUE) & grepl(value[2], vector, perl = TRUE)))
       check_stop("column ", column_name, " in ", substituted_data, " contains strings that do not match both regular expressions ", punctuate(sort(value), qualifier = "and"))
     return(TRUE)
   }
   value <- paste0("(", paste(value, collapse = ")|(") , ")")
-  if (!all(grepl(value, vector)))
+  if (!all(grepl(value, vector, perl = TRUE)))
     check_stop("column ", column_name, " in ", substituted_data, " includes non-permitted strings")
   TRUE
 }
+
+check_vector_value.factor <- function(vector, value, column_name, substituted_data) {
+  if (length(value) == 2) {
+    if (!all(as.character(value) %in% levels(vector)))
+      check_stop("column ", column_name, " in ", substituted_data, " lacks factor levels ", punctuate(sort(as.character(value)), qualifier = "and"))
+    return(TRUE)
+  }
+  if (!identical(levels(value), levels(vector)))
+    check_stop("column ", column_name, " in ", substituted_data, " has incompatible factor levels")
+  TRUE
+}
+

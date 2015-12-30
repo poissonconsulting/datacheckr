@@ -1,38 +1,23 @@
-check_vector_values <- function(vector, value, column_name, substituted_data)
-  UseMethod("check_vector_values")
-
-check_vector_values.default <- function(vector, value, column_name, substituted_data) {
-  if (length(value) == 2) {
-    range <- range(vector, na.rm = TRUE)
-    value <- sort(value)
-    if (range[1] < value[1] || range[2] > value[2])
-      check_stop("the values in column ", column_name, " in ", substituted_data, " must lie between ", value[1], " and ", value[2])
+check_vector_values_nulls <- function(vector, values, column_name, substituted_data) {
+  nulls <- vapply(values, is.null, logical(1))
+  if (all(nulls)) {
+    if (!is.null(vector))
+      check_stop(substituted_data, " must not include column ", column_name)
     return(TRUE)
   }
-  if (!all(vector %in% value))
-    check_stop("column ", column_name, " in ", substituted_data, " includes non-permitted values")
-  TRUE
+  if (any(nulls) && is.null(vector))
+    return(TRUE)
+  values[!nulls]
 }
 
-check_vector_values.logical <- function(vector, value, column_name, substituted_data) {
-  value <- unique(value)
-  if (length(value) == 2)
-    return(TRUE)
-  if (!all(vector == value))
-    check_stop("column ", column_name, " in ", substituted_data, " can only include ",
-              value, " values")
-  TRUE
-}
+check_vector_values_class <- function(vector, values, column_name, substituted_data) {
+  classes <- get_classes(values)
 
-check_vector_values.character <- function(vector, value, column_name, substituted_data) {
-  if (length(value) == 2) {
-    if (!all(grepl(value[1], vector) & grepl(value[2], vector)))
-      check_stop("column ", column_name, " in ", substituted_data, " contains strings that do not match both regular expressions ", punctuate(value, qualifier = "and"))
-    return(TRUE)
+  logical_vector <- inherits(vector, classes, which = TRUE) == 1
+  if (!any(logical_vector)) {
+    check_stop("column ", column_name, " in ", substituted_data, " must be of class ",
+              punctuate(classes))
   }
-  value <- paste0("(", paste(value, collapse = ")|(") , ")")
-  if (!all(grepl(value, vector)))
-    check_stop("column ", column_name, " in ", substituted_data, " includes non-permitted strings")
-  TRUE
+  stopifnot(sum(logical_vector) == 1)
+  values[[logical_vector]]
 }
-

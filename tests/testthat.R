@@ -1,4 +1,4 @@
 library(testthat)
-library(deckr)
+library(datacheckr)
 
-test_check("deckr")
+test_check("datacheckr")

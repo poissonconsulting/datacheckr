@@ -1,12 +1,19 @@
-Package: deckr
+Package: datacheckr
 Title: Data Frame Column Name, Class and Value Checking
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: The primary function check_data() checks a data frame for
+    column presence, column class and column values.
+    If the user-defined conditions are met the function
+    returns the original data frame,
+    otherwise the function throws an informative error. The package was written
+    to provide a simple method for checking data frame
+    inputs to functions that quickly allows users to identify and correct any
+    problems with the data.
 Depends:
     R (>= 3.2.3)
 License: MIT + file LICENSE
-URL: https://github.com/poissonconsulting/deckr
+URL: https://github.com/poissonconsulting/datacheckr
 LazyData: true
 Suggests:
     testthat

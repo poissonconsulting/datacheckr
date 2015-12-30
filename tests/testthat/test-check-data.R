@@ -137,6 +137,21 @@ test_that("check_data works with factor", {
                    x)
 })
 
+test_that("check_data works with POSIXct", {
+  d <- data.frame(T2 = ISOdate(2000, 1, 1))
+
+  expect_identical(check_data(d, values = list(T2 = Sys.time())), d)
+  expect_identical(check_data(d, values = list(T2 = ISOdate(2000, 1, c(1,2)))), d)
+  expect_identical(check_data(d, values = list(T2 = ISOdate(2000, 1, c(1,2,3)))), d)
+
+  d <- data.frame(T2 = ISOdate(2000, 1, 2))
+  expect_identical(check_data(d, values = list(T2 = ISOdate(2000, 1, c(1,3)))), d)
+  expect_error(check_data(d, values = list(T2 = ISOdate(2000, 1, c(3,4)))),
+               "the values in column T2 in d must lie between 2000-01-03 12:00:00 and 2000-01-04 12:00:00")
+  expect_error(check_data(d, values = list(T2 = ISOdate(2000, 1, c(1, 3,4)))),
+               "column T2 in d includes non-permitted values")
+})
+
 test_that("check_data works", {
   values <- list("Count" = c(0L, .Machine$integer.max),
                  "Comments" = NULL,

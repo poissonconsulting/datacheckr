@@ -11,7 +11,7 @@ punctuate <- function(x, qualifier = "or", speech = "'") {
 }
 
 classes <- function() {
-  c("NULL", "logical", "integer", "numeric", "character", "factor", "Date")
+  c("NULL", "logical", "integer", "numeric", "character", "factor", "Date", "POSIXct")
 }
 
 get_class <- function(x) {

@@ -63,4 +63,3 @@ check_vector_value.factor <- function(vector, value, column_name, substituted_da
     check_stop("column ", column_name, " in ", substituted_data, " has incompatible factor levels")
   TRUE
 }
-

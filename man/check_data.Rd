@@ -24,5 +24,7 @@ Otherwise data_check throws an informative error.
 }
 \details{
 If values is unspecified data_check simply checks that data is a data frame.
+The regular expression checking of character strings is performed using
+grepl with perl = TRUE.
 }
 

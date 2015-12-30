@@ -8,8 +8,8 @@ Description: The primary function check_data() checks a data frame for
     returns the original data frame,
     otherwise the function throws an informative error. The package was written
     to provide a simple method for checking data frame
-    inputs to functions that quickly allows users to identify and correct any
-    problems with the data.
+    inputs to functions that provides errors which allow end users
+    to hopefully quickly identify and correct any problems with the data.
 Depends:
     R (>= 3.2.3)
 License: MIT + file LICENSE

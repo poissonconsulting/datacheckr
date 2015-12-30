@@ -70,34 +70,6 @@ test_that("check_data tests for specific values", {
   expect_identical(check_data(x, values = list(Count2 = c(1, 4, 5))), x)
 })
 
-
-test_that("check_data works", {
-  values <- list("Count" = c(0L, .Machine$integer.max),
-                 "Comments" = NULL,
-                 "LocationX" = c(NA, 2345, 1012),
-                 "LocationX" = NULL)
-
-  data <- data.frame(Count = c(0L,3L,2L,10L), LocationX = c(2000, NA, 2345, 1012))
-  expect_identical(data, check_data(data))
-  expect_identical(data, check_data(data, values))
-
-  data <- data.frame(Count = c(0L,3L,2L,10L), Location = c(2000, NA, 2345, 1012))
-  expect_identical(data, check_data(data))
-  expect_identical(data, check_data(data, values))
-  expect_identical(data, check_data(data, values = list(Count = integer())))
-
-  data <- data.frame(Count = rep(NA, 3))
-  expect_identical(data, check_data(data, values = list(Count = NA)))
-
-  data <- data.frame(Count = as.integer(rep(NA, 3)))
-  expect_identical(data, check_data(data, values = list(Count = as.integer(NA))))
-
-  expect_error(check_data(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
-
-  data <- data.frame(Count = c(NA, NA))
-  expect_identical(data, check_data(data, values = list(Count = NA)))
-})
-
 test_that("check_data works with logical vectors", {
   data <- data.frame(Count = TRUE)
   expect_identical(check_data(data, values = list(Count = c(TRUE, TRUE))), data)
@@ -163,5 +135,21 @@ test_that("check_data works with factor", {
   expect_identical(check_data(x, values = list(
     z3 = factor(c("x1", "x1", "x1"), levels = c("x1", "3", "char")))),
                    x)
+})
+
+test_that("check_data works", {
+  values <- list("Count" = c(0L, .Machine$integer.max),
+                 "Comments" = NULL,
+                 "LocationX" = c(NA, 2345, 1012),
+                 "LocationX" = NULL)
+
+  data <- data.frame(Count = c(0L,3L,2L,10L), LocationX = c(2000, NA, 2345, 1012))
+  expect_identical(data, check_data(data))
+  expect_identical(data, check_data(data, values))
+
+  data <- data.frame(Count = c(0L,3L,2L,10L), Location = c(2000, NA, 2345, 1012))
+  expect_identical(data, check_data(data))
+  expect_identical(data, check_data(data, values))
+  expect_identical(data, check_data(data, values = list(Count = integer())))
 })
 

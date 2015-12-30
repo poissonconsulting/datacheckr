@@ -29,6 +29,8 @@ check_values <- function(values) {
 #' Otherwise data_check throws an informative error.
 #'
 #' If values is unspecified data_check simply checks that data is a data frame.
+#' The regular expression checking of character strings is performed using
+#' grepl with perl = TRUE.
 #'
 #' @param data The data frame to check.
 #' @param values A named list specifying the columns and their associated values.

@@ -19,5 +19,5 @@ check_vector_values_class <- function(vector, values, column_name, substituted_d
               punctuate(classes))
   }
   stopifnot(sum(logical_vector) == 1)
-  values[[logical_vector]]
+  values[logical_vector][[1]]
 }

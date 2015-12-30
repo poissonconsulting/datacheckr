@@ -44,7 +44,7 @@ check_vector_value.logical <- function(vector, value, column_name, substituted_d
 check_vector_value.character <- function(vector, value, column_name, substituted_data) {
   if (length(value) == 2) {
     if (!all(grepl(value[1], vector) & grepl(value[2], vector)))
-      check_stop("column ", column_name, " in ", substituted_data, " contains strings that do not match both regular expressions ", punctuate(value, qualifier = "and"))
+      check_stop("column ", column_name, " in ", substituted_data, " contains strings that do not match both regular expressions ", punctuate(sort(value), qualifier = "and"))
     return(TRUE)
   }
   value <- paste0("(", paste(value, collapse = ")|(") , ")")

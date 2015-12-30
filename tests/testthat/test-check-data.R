@@ -28,10 +28,8 @@ test_that("check_data tests for classes", {
 
   expect_error(check_data(x, values = list(Count = 1)),
                "column Count in x must be of class 'numeric'")
-
   expect_error(check_data(x, values = list(Count = 1, Count = TRUE)),
                "column Count in x must be of class 'numeric' or 'logical'")
-
   expect_identical(check_data(x, values = list(Count = 1, Count = integer())), x)
 })
 
@@ -58,6 +56,21 @@ test_that("check_data tests for missing values", {
   expect_identical(check_data(z, values = list(Count = as.numeric(NA))), z)
 })
 
+test_that("check_data tests for range", {
+  x <- data.frame(Count2 = 1)
+  expect_error(check_data(x, values = list(Count2 = c(4, 1.01))), "the values in column Count2 in x must lie between 1.01 and 4")
+
+  y <- data.frame(Count2 = 2)
+  expect_identical(check_data(y, values = list(Count2 = c(4, 1.01))), y)
+})
+
+test_that("check_data tests for specific values", {
+  x <- data.frame(Count2 = 1)
+  expect_error(check_data(x, values = list(Count2 = c(0, 4, 5))), "column Count2 in x includes non-permitted values")
+  expect_identical(check_data(x, values = list(Count2 = c(1, 4, 5))), x)
+})
+
+
 test_that("check_data works", {
   values <- list("Count" = c(0L, .Machine$integer.max),
                  "Comments" = NULL,
@@ -73,12 +86,6 @@ test_that("check_data works", {
   expect_identical(data, check_data(data, values))
   expect_identical(data, check_data(data, values = list(Count = integer())))
 
-  expect_error(check_data(data, values = list(Count = 1)),
-               "column Count in data must be of class 'numeric'")
-
-  expect_error(check_data(data, values = list(Count = 1, Count = TRUE)),
-               "column Count in data must be of class 'numeric' or 'logical'")
-
   data <- data.frame(Count = rep(NA, 3))
   expect_identical(data, check_data(data, values = list(Count = NA)))
 
@@ -89,19 +96,9 @@ test_that("check_data works", {
 
   data <- data.frame(Count = c(NA, NA))
   expect_identical(data, check_data(data, values = list(Count = NA)))
+})
 
-  data <- data.frame(Count = c(TRUE, NA))
-  expect_error(check_data(data, values = list(Count = NA)), "column Count in data can only include missing values")
-
-  data <- data.frame(Count = NA)
-  expect_error(check_data(data, values = list(Count = TRUE)), "column Count in data cannot include missing values")
-
-  data <- data.frame(Count = 1)
-  expect_error(check_data(data, values = list(Count = c(4, 1.01))), "the values in column Count in data must lie between 1.01 and 4")
-
-  data <- data.frame(Count = 2)
-  expect_identical(check_data(data, values = list(Count = c(4, 1.01))), data)
-
+test_that("check_data works with logical vectors", {
   data <- data.frame(Count = TRUE)
   expect_identical(check_data(data, values = list(Count = c(TRUE, TRUE))), data)
 
@@ -110,8 +107,6 @@ test_that("check_data works", {
 
   data <- data.frame(Count = TRUE)
   expect_error(check_data(data, values = list(Count = c(FALSE, FALSE))), "column Count in data can only include FALSE values")
-
-  #    expect_error(check_data(data, values = list(Count = NA)), "column Count in data must be of class 'logical'")
 })
 
 test_that("check_data works with Dates", {
@@ -127,4 +122,15 @@ test_that("check_data works with Dates", {
   expect_error(check_data(data, values), "column Date1 in data includes non-permitted values")
   values <- list(Date1 = as.Date(c("2000-01-03", "2000-01-03", "2000-01-03")))
   expect_error(check_data(data, values), "column Date1 in data includes non-permitted values")
+})
+
+test_that("check_data works with character", {
+  x <- data.frame(c1 = "char", stringsAsFactors = FALSE)
+  expect_identical(check_data(x, values = list(c1 = character())), x)
+  expect_identical(check_data(x, values = list(c1 = "char2")), x)
+  expect_error(check_data(x, values = list(c1 = c("char2", "ee"))), "column c1 in x contains strings that do not match both regular expressions 'char2' and 'ee'")
+  expect_error(check_data(x, values = list(c1 = c("ee", "char"))), "column c1 in x contains strings that do not match both regular expressions 'char' and 'ee'")
+  expect_identical(check_data(x, values = list(c1 = c("char", "ch"))), x)
+  expect_error(check_data(x, values = list(c1 = c("ee", "eu", "oeu"))), "column c1 in x includes non-permitted strings")
+  expect_identical(check_data(x, values = list(c1 = c("oeu", "eu", "ch"))), x)
 })

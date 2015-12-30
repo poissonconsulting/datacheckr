@@ -20,19 +20,19 @@ deck_vector_values.logical <- function(vector, value, column_name, substituted_d
     return(TRUE)
   if (!all(vector == value))
     deck_stop("column ", column_name, " in ", substituted_data, " can only include ",
-value, " values")
+              value, " values")
   TRUE
 }
 
-deck_vector_values.logical <- function(vector, value, column_name, substituted_data) {
-  value <- unique(value)
-  if (length(value) == 2)
+deck_vector_values.character <- function(vector, value, column_name, substituted_data) {
+  if (length(value) == 2) {
+    if (!all(grepl(value[1], vector) & grepl(value[2], vector)))
+      deck_stop("column ", column_name, " in ", substituted_data, " contains strings that do not match both regular expressions " punctuate(value, qualifier = "and"))
     return(TRUE)
-  if (!all(vector == value))
-    deck_stop("column ", column_name, " in ", substituted_data, " can only include ",
-value, " values")
+  }
+  value <- paste0("(", paste(value, collapse = ")|(") , ")")
+  if (!all(grepl(value, vector)))
+    deck_stop("column ", column_name, " in ", substituted_data, " includes non-permitted strings")
   TRUE
 }
-
-
 

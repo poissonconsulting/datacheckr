@@ -39,18 +39,20 @@ produces an error message which is more likely to allow the end user to diagnose
 Consider the data frame `data1`
 
 ``` r
-data1 <- data.frame(Count = c(0L, 3L, 3L, 0L), 
-                    LocationX = c(2000, NA, 2001, NA), 
-                    Extra = TRUE)
+data1 <- data.frame(
+  Count = c(0L, 3L, 3L, 0L), 
+  LocationX = c(2000, NA, 2001, NA), 
+  Extra = TRUE)
 ```
 
 The following `data_checkr` code states that `data1` should have a column `Count` of non-missing integers with values of 0, 1 or 3, should not have a column `Comments` and can include a column `LocationX` with missing values between 1012 and 2345.
 
 ``` r
-check_data(data1, list(Count = c(0L, 1L, 3L), 
+check_data(data1, list(
+  Count = c(0L, 1L, 3L), 
   Comments = NULL, 
-   LocationX = c(NA, 2345, 1012),
-   LocationX = NULL))
+  LocationX = c(NA, 2345, 1012),
+  LocationX = NULL))
 ```
 
 To produce similar functionality with `assertr` would require something like (please file an issue if the code below can be improved)
@@ -75,10 +77,11 @@ To repeat the above checks on several data frames can be achieved very efficient
 ``` r
 data3 <- data2 <- data1
 
-values <- list(Count = c(0L, 1L, 3L), 
+values <- list(
+  Count = c(0L, 1L, 3L), 
   Comments = NULL, 
-   LocationX = c(NA, 2345, 1012),
-   LocationX = NULL)
+  LocationX = c(NA, 2345, 1012),
+  LocationX = NULL)
 
 check_data(data1, values)
 check_data(data2, values)
@@ -113,9 +116,10 @@ check_data(mtcars, list(mpg = NULL))
 and to specify that it can contain a column `col1` that can be integer or numeric values the call would be
 
 ``` r
-check_data(mtcars, list(col1 = integer(), 
-                  col1 = NULL, 
-                  col1 = numeric()))
+check_data(mtcars, list(
+  col1 = integer(), 
+  col1 = NULL, 
+  col1 = numeric()))
 ```
 
 If a column is not named in the list then no checks are performed on it.

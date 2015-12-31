@@ -29,5 +29,6 @@ get_classes <- function(values) {
 #' which defines the maximum integer value for the machine.
 #'
 #' @return A count of the maximum integer value.
+#' @seealso \code{\link{datacheckr}}
 #' @export
 max_integer <- function() { .Machine$integer.max }

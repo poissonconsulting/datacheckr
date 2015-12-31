@@ -13,4 +13,7 @@ A count of the maximum integer value.
 A wrapper for \code{.Machine$integer.max}
 which defines the maximum integer value for the machine.
 }
+\seealso{
+\code{\link{datacheckr}}
+}
 

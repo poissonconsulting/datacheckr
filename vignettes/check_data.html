@@ -12,7 +12,7 @@
 
 <meta name="date" content="2015-12-31" />
 
-<title>Checking Data using datacheckr</title>
+<title>Checking Data</title>
 
 
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div id="header">
-<h1 class="title">Checking Data using datacheckr</h1>
+<h1 class="title">Checking Data</h1>
 <h4 class="author"><em>Joe Thorley</em></h4>
 <h4 class="date"><em>2015-12-31</em></h4>
 </div>
@@ -81,7 +81,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Checking Columns and Classes</h2>
 <p>The names of the list elements specify the columns that need to appear in the data frame while the classes of the vectors specify the classes of the columns.</p>
 <p>Thus, to specify that x <em>must</em> contain a column called <code>col1</code> of class integer the call would be as follows.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="kw">integer</span>()))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datacheckr)
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="kw">integer</span>()))</code></pre></div>
 <pre><code>## Error: column col1 in mtcars must be of class 'integer'</code></pre>
 <p>To specify that x <em>can not</em> contain a column called <code>mpg</code> the call is just</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="ot">NULL</span>))</code></pre></div>

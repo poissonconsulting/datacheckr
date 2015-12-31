@@ -9,19 +9,17 @@ check_data(data, values = NULL)
 \arguments{
 \item{data}{The data frame to check.}
 
-\item{values}{A named list specifying the columns and their associated values.}
+\item{values}{A named list specifying the columns and
+their associated classes and values.}
 }
 \value{
 Throws an informative error or returns an invisible copy of
 the original data frame.
 }
 \description{
-Checks data based on a named
+Checks a data frame based on a named
 list of vectors that specifies the possible columns and their associated classes
 and values.
-If data passes all the conditions set by values then data_check returns the original
-data frame (which allows the function to be inserted in piping chains).
-Otherwise data_check throws an informative error.
 }
 \examples{
 \dontrun{
@@ -30,11 +28,14 @@ Otherwise data_check throws an informative error.
 check_data(1)
 check_data(mtcars)
 
-# column names and classes are specified by the names and classes of values
+# column names and classes are specified by
+# the names and classes of the elements of values
 check_data(mtcars, list(mpg = NULL))
 check_data(mtcars, list(mpg = integer()))
 check_data(mtcars, list(mpg = integer(), mpg = logical()))
-check_data(mtcars, list(mpg = integer(), mpg = logical(), mpg = numeric()))
+check_data(mtcars, list(mpg = integer(),
+                        mpg = logical(),
+                        mpg = numeric()))
 check_data(mtcars, list(mpg = numeric()))
 check_data(mtcars, list(mpg = 2L))
 check_data(mtcars, list(mpg = 35))
@@ -50,7 +51,8 @@ check_data(mtcars, list(mpg = c(10, 35), gear = c(3, 4, 5)))
 # order is unimportant
 check_data(mtcars, list(gear = c(4, 3, 5), mpg = c(35, 10)))
 
-# to permit missing values simply include an NA (with a non-missing value)
+# to permit missing values simply include an NA
+# (with a non-missing value)
 is.na(mtcars$gear[2]) <- TRUE
 check_data(mtcars, list(gear = numeric()))
 check_data(mtcars, list(gear = -3))
@@ -58,5 +60,8 @@ check_data(mtcars, list(gear = c(-3, NA)))
 check_data(mtcars, list(gear = NA))
 check_data(mtcars, list(gear = as.numeric(NA)))
 }
+}
+\seealso{
+\code{\link{datacheckr}}
 }
 

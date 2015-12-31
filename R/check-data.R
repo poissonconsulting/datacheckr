@@ -21,18 +21,17 @@ check_values <- function(values) {
 
 #' Check Data
 #'
-#' Checks data based on a named
+#' Checks a data frame based on a named
 #' list of vectors that specifies the possible columns and their associated classes
 #' and values.
-#' If data passes all the conditions set by values then data_check returns the original
-#' data frame (which allows the function to be inserted in piping chains).
-#' Otherwise data_check throws an informative error.
 #'
 #' @param data The data frame to check.
-#' @param values A named list specifying the columns and their associated values.
+#' @param values A named list specifying the columns and
+#' their associated classes and values.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the original data frame.
+#' @seealso \code{\link{datacheckr}}
 #' @export
 #' @examples
 #' \dontrun{
@@ -41,11 +40,14 @@ check_values <- function(values) {
 #' check_data(1)
 #' check_data(mtcars)
 #'
-#' # column names and classes are specified by the names and classes of values
+#' # column names and classes are specified by
+#' # the names and classes of the elements of values
 #' check_data(mtcars, list(mpg = NULL))
 #' check_data(mtcars, list(mpg = integer()))
 #' check_data(mtcars, list(mpg = integer(), mpg = logical()))
-#' check_data(mtcars, list(mpg = integer(), mpg = logical(), mpg = numeric()))
+#' check_data(mtcars, list(mpg = integer(),
+#'                         mpg = logical(),
+#'                         mpg = numeric()))
 #' check_data(mtcars, list(mpg = numeric()))
 #' check_data(mtcars, list(mpg = 2L))
 #' check_data(mtcars, list(mpg = 35))
@@ -61,7 +63,8 @@ check_values <- function(values) {
 #' # order is unimportant
 #' check_data(mtcars, list(gear = c(4, 3, 5), mpg = c(35, 10)))
 #'
-#' # to permit missing values simply include an NA (with a non-missing value)
+#' # to permit missing values simply include an NA
+#' # (with a non-missing value)
 #' is.na(mtcars$gear[2]) <- TRUE
 #' check_data(mtcars, list(gear = numeric()))
 #' check_data(mtcars, list(gear = -3))

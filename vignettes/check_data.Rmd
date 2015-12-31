@@ -22,6 +22,7 @@ of the vectors specify the classes of the columns.
 Thus, to specify that x *must* contain a column called `col1` of class integer
 the call would be as follows.
 ```{r, error = TRUE}
+library(datacheckr)
 check_data(mtcars, list(col1 = integer()))
 ```
 To specify that x *can not* contain a column called `mpg`

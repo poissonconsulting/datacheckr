@@ -22,3 +22,12 @@ get_class <- function(x) {
 get_classes <- function(values) {
   vapply(values, get_class, character(1))
 }
+
+#' Maximum Integer Value
+#'
+#' A wrapper for \code{.Machine$integer.max}
+#' which defines the maximum integer value for the machine.
+#'
+#' @return A count of the maximum integer value.
+#' @export
+max_integer <- function() { .Machine$integer.max }

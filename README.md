@@ -4,16 +4,16 @@
 datacheckr
 ==========
 
-`datacheckr` is an R package to check the names, classes and values of columns in objects inheriting from class `data.frame`.
+`datacheckr` is an R package to check the names, classes and values of columns in data frames.
 
 Why Another Data Checking Package?
 ----------------------------------
 
-There are several existing R packages for checking data including `assertr`, `assertive` and `datacheck`. They are great for checking data in scripts but they have several limitations when embedded in functions in packages.
+There are several existing R packages for checking data frames including `assertr`, `assertive` and `datacheck`. They are great for checking data in scripts but they have several limitations when embedded in functions in packages.
 
 ### Informative Error Messages
 
-Consider the following:
+Consider the following code.
 
 ``` r
 library(assertr)
@@ -22,17 +22,15 @@ assert(mtcars, within_bounds(0,1), mpg)
 #> Vector 'mpg' violates assertion 'within_bounds' 32 times (e.g. [21] at index 1)
 ```
 
-The error is not that helpful for a user who is not familiar with the internals of a function that has just thrown that error.
+The error message is not that helpful for a user who is not familiar with the internals of a function that has just thrown that error.
 
-The same test using `datacheckr` only exported function `check_data`
+The same test using the `datacheckr::check_data()` function produces an error message which is more likely to allow the end user to diagnose the problem.
 
 ``` r
 library(datacheckr)
 check_data(mtcars, list(mpg = c(0,1)))
 #> Error: the values in column mpg in mtcars must lie between 0 and 1
 ```
-
-produces an error message which is more likely to allow the end user to diagnose the problem.
 
 ### Intuitive Checks
 
@@ -45,7 +43,7 @@ data1 <- data.frame(
   Extra = TRUE)
 ```
 
-The following `data_checkr` code states that `data1` should have a column `Count` of non-missing integers with values of 0, 1 or 3, should not have a column `Comments` and can include a column `LocationX` with missing values between 1012 and 2345.
+The following `datacheckr` code states that `data1` should have a column `Count` of non-missing integers with values of 0, 1 or 3, should not have a column `Comments` and *can* include a column `LocationX` with missing values between 1012 and 2345.
 
 ``` r
 check_data(data1, list(
@@ -55,7 +53,7 @@ check_data(data1, list(
   LocationX = NULL))
 ```
 
-To produce similar functionality with `assertr` would require something like (please file an issue if the code below can be improved)
+To produce similar functionality with `assertr` would require something like (please file an [issue](https://github.com/poissonconsulting/datacheckr/issues) if the code below can be improved)
 
 ``` r
 library(magrittr) # for the piping operator
@@ -68,11 +66,11 @@ if ("LocationX" %in% colnames(data1))
 
 which is in my opinion less intuitive.
 
-For more explanation of the `datacheck` syntax see below.
+For more explanation of the `datacheckr` syntax see below.
 
 ### A Single Function Call
 
-To repeat the above checks on several data frames can be achieved very efficiently using `check_data`
+The above checks can be performed on several data frames by simply repeatedly calling `check_data()`
 
 ``` r
 data3 <- data2 <- data1
@@ -88,32 +86,32 @@ check_data(data2, values)
 check_data(data3, values)
 ```
 
-The same tests using `assertr` would require the `assertr` code above to be copied and pasted three times which is tedious to produce and read and as a result error prone.
+The same tests using `assertr` would require the `assertr` code above to be copied and pasted three times which is tedious to produce and read; and as a result error prone.
 
-data\_check
------------
+check\_data()
+-------------
 
-The `datacheckr` package exports a single function `data_check` which takes two arguments: the data frame to check and a named list specifying the various conditions.
+The `datacheckr::check_data()` function takes two arguments: the data frame to check and a named list specifying the various conditions.
 
 ### Checking Columns and Classes
 
 The names of the list elements specify the columns that need to appear in the data frame while the classes of the vectors specify the classes of the columns.
 
-Thus, to specify that x should contain a column called `col1` of class integer the call would be as follows.
+Thus, to specify that x *must* contain a column called `col1` of class integer the call would be as follows.
 
 ``` r
 check_data(mtcars, list(col1 = integer()))
 #> Error: column col1 in mtcars must be of class 'integer'
 ```
 
-To specify that x should *not* contain a column called `mpg` the call is just
+To specify that x *can not* contain a column called `mpg` the call is just
 
 ``` r
 check_data(mtcars, list(mpg = NULL))
 #> Error: mtcars must not include column mpg
 ```
 
-and to specify that it can contain a column `col1` that can be integer or numeric values the call would be
+and to specify that it *can* contain a column `col1` that can be integer or numeric values the call would be
 
 ``` r
 check_data(mtcars, list(
@@ -152,6 +150,12 @@ To indicate that the non-missing values must fall within a range use two non-mis
 
 ``` r
 check_data(data1, list(Count = c(0L, .Machine$integer.max)))
+```
+
+As `.Machine$integer.max` is difficult to remember the `max_integer()` wrapper function is provided so that the above code can be written as.
+
+``` r
+check_data(data1, list(Count = c(0L, max_integer())))
 ```
 
 ### Checking Specific Values

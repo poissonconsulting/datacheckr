@@ -27,16 +27,21 @@ check_values <- function(values) {
 #' If data passes all the conditions set by values then data_check returns the original
 #' data frame (which allows the function to be inserted in piping chains).
 #' Otherwise data_check throws an informative error.
-#'
 #' If values is unspecified data_check simply checks that data is a data frame.
-#' The regular expression checking of character strings is performed using
-#' grepl with perl = TRUE.
 #'
 #' @param data The data frame to check.
 #' @param values A named list specifying the columns and their associated values.
 #'
-#' @return Throws an informative error or returns the original data object.
+#' @return Throws an informative error or returns an invisible copy of
+#' the original data frame.
 #' @export
+#' @examples
+#' \dontrun{
+#' check_data(1)
+#' check_data(mtcars, list(mpg = integer()))
+#' check_data(mtcars, list(mpg = integer(), mpg = logical()))
+#' check_data(mtcars, list(mpg = numeric(), mpg = logical()))
+#' }
 check_data <- function(data, values = NULL) {
   substituted_data <- substitute(data)
 
@@ -45,5 +50,5 @@ check_data <- function(data, values = NULL) {
     check_values(values)
     check_data_values(data, values, substituted_data)
   }
-  data
+  invisible(data)
 }

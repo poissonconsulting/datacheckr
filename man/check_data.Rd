@@ -12,7 +12,8 @@ check_data(data, values = NULL)
 \item{values}{A named list specifying the columns and their associated values.}
 }
 \value{
-Throws an informative error or returns the original data object.
+Throws an informative error or returns an invisible copy of
+the original data frame.
 }
 \description{
 Checks data based on a named
@@ -21,10 +22,14 @@ and values.
 If data passes all the conditions set by values then data_check returns the original
 data frame (which allows the function to be inserted in piping chains).
 Otherwise data_check throws an informative error.
-}
-\details{
 If values is unspecified data_check simply checks that data is a data frame.
-The regular expression checking of character strings is performed using
-grepl with perl = TRUE.
+}
+\examples{
+\dontrun{
+check_data(1)
+check_data(mtcars, list(mpg = integer()))
+check_data(mtcars, list(mpg = integer(), mpg = logical()))
+check_data(mtcars, list(mpg = numeric(), mpg = logical()))
+}
 }
 

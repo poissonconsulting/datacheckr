@@ -22,14 +22,41 @@ and values.
 If data passes all the conditions set by values then data_check returns the original
 data frame (which allows the function to be inserted in piping chains).
 Otherwise data_check throws an informative error.
-If values is unspecified data_check simply checks that data is a data frame.
 }
 \examples{
 \dontrun{
+
+# if values is unspecified it simply checks that data is a data frame
 check_data(1)
+check_data(mtcars)
+
+# column names and classes are specified by the names and classes of values
+check_data(mtcars, list(mpg = NULL))
 check_data(mtcars, list(mpg = integer()))
 check_data(mtcars, list(mpg = integer(), mpg = logical()))
-check_data(mtcars, list(mpg = numeric(), mpg = logical()))
+check_data(mtcars, list(mpg = integer(), mpg = logical(), mpg = numeric()))
+check_data(mtcars, list(mpg = numeric()))
+check_data(mtcars, list(mpg = 2L))
+check_data(mtcars, list(mpg = 35))
+
+# two non-missing values indicate a range
+check_data(mtcars, list(mpg = c(20, 35)))
+check_data(mtcars, list(mpg = c(10, 35)))
+check_data(mtcars, list(mpg = c(10, 35), gear = c(3, 5)))
+
+# three or more non-missing values indicate specific values
+check_data(mtcars, list(mpg = c(10, 35), gear = c(3, 5, 6)))
+check_data(mtcars, list(mpg = c(10, 35), gear = c(3, 4, 5)))
+# order is unimportant
+check_data(mtcars, list(gear = c(4, 3, 5), mpg = c(35, 10)))
+
+# to permit missing values simply include an NA (with a non-missing value)
+is.na(mtcars$gear[2]) <- TRUE
+check_data(mtcars, list(gear = numeric()))
+check_data(mtcars, list(gear = -3))
+check_data(mtcars, list(gear = c(-3, NA)))
+check_data(mtcars, list(gear = NA))
+check_data(mtcars, list(gear = as.numeric(NA)))
 }
 }
 

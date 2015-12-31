@@ -1,10 +1,10 @@
 ---
-title: "Checking Data using datacheckr"
+title: "Checking Data"
 author: "Joe Thorley"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Checking Data using datacheckr}
+  %\VignetteIndexEntry{Checking Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

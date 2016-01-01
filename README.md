@@ -168,7 +168,7 @@ check_data(data1, list(Count = c(0L, 1L, 3L)))
 
 ``` r
 check_data(data1, list(Count = c(1L, 2L, 2L)))
-#> Error: column Count in data1 must only include the permitted values '1' and '2'
+#> Error: column Count in data1 must only include the permitted values 1 and 2
 ```
 
 The order is unimportant.

@@ -2,10 +2,13 @@ check_stop <- function(...) stop(..., call. = FALSE)
 
 is_named <- function(x) !is.null(names(x))
 
+is_POSIXct <- function (x) inherits(x, "POSIXct")
+
 plural <- function(x, n = 1, end = "") paste0(x, ifelse(n > 1, "s", ""), end)
 
-punctuate <- function(x, qualifier = "or", speech = "'") {
-  x <- paste0(speech, x, speech)
+punctuate <- function(x, qualifier = "or") {
+  if (!(is.logical(x) || is.integer(x) || is.numeric(x)))
+    x <- paste0("'", as.character(x), "'")
   if (length(x) == 1)
     return(x)
   n <- length(x)

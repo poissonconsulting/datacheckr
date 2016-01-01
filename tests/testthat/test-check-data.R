@@ -66,8 +66,8 @@ test_that("check_data tests for range", {
 
 test_that("check_data tests for specific values", {
   x <- data.frame(Count2 = 1)
-  expect_error(check_data(x, values = list(Count2 = c(0, 4, 5))), "column Count2 in x must only include the permitted values '0', '4' and '5'")
-  expect_error(check_data(x, values = list(Count2 = c(5, 5, 5))), "column Count2 in x must only include the permitted value '5'")
+  expect_error(check_data(x, values = list(Count2 = c(0, 4, 5))), "column Count2 in x must only include the permitted values 0, 4 and 5")
+  expect_error(check_data(x, values = list(Count2 = c(5, 5, 5))), "column Count2 in x must only include the permitted value 5")
   expect_error(check_data(x, values = list(Count2 = c(0, 2, 3, 4, 5, 6))), "column Count2 in x includes non-permitted values")
   expect_identical(check_data(x, values = list(Count2 = c(1, 4, 5))), x)
 })

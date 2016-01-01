@@ -66,7 +66,9 @@ test_that("check_data tests for range", {
 
 test_that("check_data tests for specific values", {
   x <- data.frame(Count2 = 1)
-  expect_error(check_data(x, values = list(Count2 = c(0, 4, 5))), "column Count2 in x includes non-permitted values")
+  expect_error(check_data(x, values = list(Count2 = c(0, 4, 5))), "column Count2 in x must only include the permitted values '0', '4' and '5'")
+  expect_error(check_data(x, values = list(Count2 = c(5, 5, 5))), "column Count2 in x must only include the permitted value '5'")
+  expect_error(check_data(x, values = list(Count2 = c(0, 2, 3, 4, 5, 6))), "column Count2 in x includes non-permitted values")
   expect_identical(check_data(x, values = list(Count2 = c(1, 4, 5))), x)
 })
 
@@ -89,11 +91,11 @@ test_that("check_data works with Dates", {
   values <- list(Date1 = as.Date(c("1999-01-01", "2000-01-03")))
   expect_identical(check_data(data, values), data)
   values <- list(Date1 = as.Date(c("1999-01-01", "2000-01-03", "2000-02-01")))
-  expect_error(check_data(data, values), "column Date1 in data includes non-permitted values")
+  expect_error(check_data(data, values), "column Date1 in data must only include the permitted values '1999-01-01', '2000-01-03' and '2000-02-01'")
   values <- list(Date1 = as.Date(c("1999-01-01", "2000-01-03", "2000-01-03")))
-  expect_error(check_data(data, values), "column Date1 in data includes non-permitted values")
+  expect_error(check_data(data, values), "column Date1 in data must only include the permitted values '1999-01-01' and '2000-01-03'")
   values <- list(Date1 = as.Date(c("2000-01-03", "2000-01-03", "2000-01-03")))
-  expect_error(check_data(data, values), "column Date1 in data includes non-permitted values")
+  expect_error(check_data(data, values), "column Date1 in data must only include the permitted value '2000-01-03'")
 })
 
 test_that("check_data works with character", {
@@ -103,7 +105,7 @@ test_that("check_data works with character", {
   expect_error(check_data(x, values = list(c1 = c("char2", "ee"))), "column c1 in x contains strings that do not match both regular expressions 'char2' and 'ee'")
   expect_error(check_data(x, values = list(c1 = c("ee", "char"))), "column c1 in x contains strings that do not match both regular expressions 'char' and 'ee'")
   expect_identical(check_data(x, values = list(c1 = c("char", "ch"))), x)
-  expect_error(check_data(x, values = list(c1 = c("ee", "eu", "oeu"))), "column c1 in x includes non-permitted strings")
+  expect_error(check_data(x, values = list(c1 = c("ee", "eu", "oeu"))), "column c1 in x must only include values which match the regular expressions 'ee', 'eu' or 'oeu'")
   expect_identical(check_data(x, values = list(c1 = c("oeu", "eu", "ch"))), x)
 })
 
@@ -126,7 +128,7 @@ test_that("check_data works with factor", {
                "column z3 in x lacks factor levels 'char' and 'x'")
 
   expect_error(check_data(x, values = list(z3 = factor(c("x1", "char", "3")))),
-               "column z3 in x has incompatible factor levels")
+               "column z3 in x must be a factor with the levels '3', 'char' and 'x1'")
 
   expect_identical(check_data(x, values = list(
     z3 = factor(c("x1", "char", "3"), levels = c("x1", "3", "char")))),
@@ -149,7 +151,7 @@ test_that("check_data works with POSIXct", {
   expect_error(check_data(d, values = list(T2 = ISOdate(2000, 1, c(3,4)))),
                "the values in column T2 in d must lie between 2000-01-03 12:00:00 and 2000-01-04 12:00:00")
   expect_error(check_data(d, values = list(T2 = ISOdate(2000, 1, c(1, 3,4)))),
-               "column T2 in d includes non-permitted values")
+               "column T2 in d must only include the permitted values '2000-01-01 12:00:00', '2000-01-03 12:00:00' and '2000-01-04 12:00:00'")
 })
 
 test_that("check_data works", {

@@ -2,6 +2,8 @@ check_stop <- function(...) stop(..., call. = FALSE)
 
 is_named <- function(x) !is.null(names(x))
 
+plural <- function(x, n = 1, end = "") paste0(x, ifelse(n > 1, "s", ""), end)
+
 punctuate <- function(x, qualifier = "or", speech = "'") {
   x <- paste0(speech, x, speech)
   if (length(x) == 1)

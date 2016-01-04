@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
 ```
 
 [![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/datacheckr.svg?branch=master)](https://travis-ci.org/poissonconsulting/datacheckr)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/datacheckr)](http://cran.r-project.org/package=datacheckr)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datacheckr)](https://hadley.shinyapps.io/cran-downloads)
 
 # datacheckr
 
@@ -104,10 +106,9 @@ which is tedious to produce and read; and as a result error prone.
 
 ## Installation
 
-To install the latest release version from GitHub
+To install the latest release version from CRAN
 ``` r
-# install.packages("devtools")
-devtools::install_github("poissonconsulting/datacheckr@v0.0.1")
+install.packages("datacheckr")
 ```
 
 To install the development version from GitHub

@@ -66,8 +66,6 @@ if ("LocationX" %in% colnames(data1))
 
 which is in my opinion less intuitive.
 
-For more explanation of the `datacheckr` syntax see below.
-
 ### A Single Function Call
 
 The above checks can be performed on several data frames by simply repeatedly calling `check_data()`
@@ -88,161 +86,35 @@ check_data(data3, values)
 
 The same tests using `assertr` would require the `assertr` code above to be copied and pasted three times which is tedious to produce and read; and as a result error prone.
 
-check\_data()
--------------
-
-The `datacheckr::check_data()` function takes two arguments: the data frame to check and a named list specifying the various conditions.
-
-### Checking Columns and Classes
-
-The names of the list elements specify the columns that need to appear in the data frame while the classes of the vectors specify the classes of the columns.
-
-Thus, to specify that x *must* contain a column called `col1` of class integer the call would be as follows.
-
-``` r
-check_data(mtcars, list(col1 = integer()))
-#> Error: column col1 in mtcars must be of class 'integer'
-```
-
-To specify that x *can not* contain a column called `mpg` the call is just
-
-``` r
-check_data(mtcars, list(mpg = NULL))
-#> Error: mtcars must not include column mpg
-```
-
-and to specify that it *can* contain a column `col1` that can be integer or numeric values the call would be
-
-``` r
-check_data(mtcars, list(
-  col1 = integer(), 
-  col1 = NULL, 
-  col1 = numeric()))
-```
-
-If a column is not named in the list then no checks are performed on it.
-
-### Checking Missing Values
-
-To specify that a column cannot include missing values pass a single non-missing value.
-
-``` r
-check_data(mtcars, list(mpg = 3))
-check_data(mtcars, list(mpg = -1))
-```
-
-To specify that it can include missing values include an NA in the vector
-
-``` r
-check_data(mtcars, list(mpg = c(NA, 9)))
-```
-
-and to specify that it can only include missing values use
-
-``` r
-check_data(mtcars, list(mpg = as.numeric(NA)))
-#> Error: column mpg in mtcars can only include missing values
-```
-
-### Checking Ranges
-
-To indicate that the non-missing values must fall within a range use two non-missing values (the following code tests for counts).
-
-``` r
-check_data(data1, list(Count = c(0L, .Machine$integer.max)))
-```
-
-As `.Machine$integer.max` is difficult to remember the `max_integer()` wrapper function is provided so that the above code can be written as.
-
-``` r
-check_data(data1, list(Count = c(0L, max_integer())))
-```
-
-### Checking Specific Values
-
-If particular values are required then specify them as a vector of three or more non-missing values
-
-``` r
-check_data(data1, list(Count = c(0L, 1L, 3L)))
-```
-
-``` r
-check_data(data1, list(Count = c(1L, 2L, 2L)))
-#> Error: column Count in data1 must only include the permitted values 1 and 2
-```
-
-The order is unimportant.
-
-### Checking Numeric, Date and POSIXct Vectors
-
-Numeric, Date and POSIXct vectors have exactly the same behaviour regarding ranges and specific values as illustrated above using integers.
-
-### Checking Logical Vectors
-
-With logical values two non-missing values produce the same behaviour as three or more non-missing values. For example to test for only `TRUE` values use
-
-``` r
-check_data(data1, list(Extra = c(TRUE, TRUE)))
-```
-
-### Checking Character Vectors
-
-To specify that `col1` must be a character vector use
-
-``` r
-check_data(x, list(col1 = "b"))
-```
-
-while the following requires that the values match both character elements which are treated as regular expressions
-
-``` r
-check_data(x, list(col1 = c("^//d", ".*")))
-```
-
-with three or more non-missing character elements each value in `col1` must match at least one of the elements which are treated as regular expressions. Regular expressions are matched using `grepl` with `perl=TRUE`.
-
-### Checking Factors
-
-To indicate that `supp` should be a factor use either of the following
-
-``` r
-check_data(ToothGrowth, list(supp = factor()))
-check_data(ToothGrowth, list(supp = factor("blahblah")))
-```
-
-To specify that `supp` should be a factor that includes the factor levels `OJ` and `VC` (in any order) just pass two non-missing values
-
-``` r
-check_data(ToothGrowth, list(supp = factor(c("VC", "OJ"))))
-```
-
-And to specify the actual factor levels that `supp` must have pass three or more non-missing values
-
-``` r
-check_data(ToothGrowth, list(supp = factor(c("VC", "OJ", "OJ"))))
-```
-
 Installation
 ------------
 
 To install the latest release version from GitHub
 
 ``` r
-library(devtools)
-install_github("poissonconsulting/datacheckr@v0.0.1")
+# install.packages("devtools")
+devtools::install_github("poissonconsulting/datacheckr@v0.0.1")
 ```
 
 To install the development version from GitHub
 
 ``` r
-library(devtools)
-install_github("poissonconsulting/datacheckr")
+# install.packages("devtools")
+devtools::install_github("poissonconsulting/datacheckr")
 ```
+
+More Information
+----------------
+
+To view the vignette *An Introduction to checkdatar* install the release version of `datacheckr` from CRAN and then execute the following code:
+
+    library(datacheckr)
+    vignette("datacheckr")
 
 Contact
 -------
 
 You are welcome to:
 
--   submit suggestions and bug reports at: <https://github.com/poissonconsulting/datacheckr/issues>
--   send a pull request on: <https://github.com/poissonconsulting/datacheckr>
+-   submit suggestions and bug reports at <https://github.com/poissonconsulting/datacheckr/issues>
+-   send a pull request on <https://github.com/poissonconsulting/datacheckr>

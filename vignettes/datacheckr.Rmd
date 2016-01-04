@@ -1,10 +1,10 @@
 ---
-title: "Checking Data"
+title: "An Introduction to datacheckr"
 author: "Joe Thorley"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Checking Data}
+  %\VignetteIndexEntry{An Introduction to datacheckr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -85,6 +85,10 @@ as a vector of three or more non-missing values
 ```{r}
 check_data(data1, list(Count = c(0L, 1L, 3L)))
 ```
+```{r, error=TRUE}
+check_data(data1, list(Count = c(1L, 2L, 2L)))
+```
+
 The order is unimportant.
 
 ## Checking Numeric, Date and POSIXct Vectors

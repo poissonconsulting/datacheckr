@@ -1,6 +1,6 @@
 Package: datacheckr
 Title: Data Frame Column Name, Class and Value Checking
-Version: 0.0.1.9000
+Version: 0.0.2
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
 Description: The primary function check_data() checks a data frame for
     column presence, column class and column values.

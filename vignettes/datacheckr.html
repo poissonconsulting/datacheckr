@@ -10,9 +10,9 @@
 
 <meta name="author" content="Joe Thorley" />
 
-<meta name="date" content="2015-12-31" />
+<meta name="date" content="2016-01-04" />
 
-<title>Checking Data</title>
+<title>An Introduction to datacheckr</title>
 
 
 
@@ -70,9 +70,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <div id="header">
-<h1 class="title">Checking Data</h1>
+<h1 class="title">An Introduction to datacheckr</h1>
 <h4 class="author"><em>Joe Thorley</em></h4>
-<h4 class="date"><em>2015-12-31</em></h4>
+<h4 class="date"><em>2016-01-04</em></h4>
 </div>
 
 
@@ -121,6 +121,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Checking Specific Values</h2>
 <p>If particular values are required then specify them as a vector of three or more non-missing values</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(0L, 1L, 3L)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(1L, 2L, 2L)))</code></pre></div>
+<pre><code>## Error: column Count in data1 must only include the permitted values 1 and 2</code></pre>
 <p>The order is unimportant.</p>
 </div>
 <div id="checking-numeric-date-and-posixct-vectors" class="section level2">

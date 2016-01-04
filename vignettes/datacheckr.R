@@ -35,6 +35,9 @@ check_data(data1, list(Count = c(0L, max_integer())))
 ## ------------------------------------------------------------------------
 check_data(data1, list(Count = c(0L, 1L, 3L)))
 
+## ---- error=TRUE---------------------------------------------------------
+check_data(data1, list(Count = c(1L, 2L, 2L)))
+
 ## ------------------------------------------------------------------------
 check_data(data1, list(Extra = c(TRUE, TRUE)))
 

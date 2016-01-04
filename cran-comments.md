@@ -6,9 +6,11 @@
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs or NOTEs.
+There were no ERRORs or WARNINGs.
+
+There was one NOTE as new submission CRAN.
 
 ## Downstream dependencies
 
 There are currently no downstream dependencies
-as this is the initial release to CRAN.
+as this is a new submission to CRAN.

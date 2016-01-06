@@ -13,7 +13,7 @@ check_data_values_column <- function(column_name, data, values, substituted_data
 
 check_data_values <- function(data, values, substituted_data) {
   column_names <- sort(unique(names(values)))
-  sapply(column_names, FUN = check_data_values_column, data = data, values = values,
+  vapply(column_names, FUN = check_data_values_column, logical(1), data = data, values = values,
          substituted_data = substituted_data)
   TRUE
 }

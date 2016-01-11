@@ -4,7 +4,7 @@
 \alias{check_data}
 \title{Check Data}
 \usage{
-check_data(data, values = NULL, min_row = 0, max_row = 1048576)
+check_data(data, values = NULL, min_row = 0, max_row = max_nrow())
 }
 \arguments{
 \item{data}{The data frame to check.}

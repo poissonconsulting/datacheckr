@@ -36,4 +36,15 @@ get_classes <- function(values) {
 #' @return A count of the maximum integer value.
 #' @seealso \code{\link{datacheckr}}
 #' @export
-max_integer <- function() { .Machine$integer.max }
+max_integer <- function() .Machine$integer.max
+
+#' Maximum Number of Rows
+#'
+#' A wrapper for \code{2^31 - 1}
+#' which defines the \emph{theoretical}
+#' maximum number of rows in a data.frame.
+#'
+#' @return A count of the maximum number of possible rows.
+#' @seealso \code{\link{datacheckr}}
+#' @export
+max_nrow <- function() as.integer(2 ^ 31 - 1)

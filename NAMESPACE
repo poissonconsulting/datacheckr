@@ -2,3 +2,4 @@
 
 export(check_data)
 export(max_integer)
+export(max_nrow)

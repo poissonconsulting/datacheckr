@@ -1,4 +1,5 @@
-- Added `min_row` and `max_row` arguments to `data_check` for checking nrow in data
+- Added function `max_nrow()` a wrapper on the theoretical maximum number of rows.
+- Added `min_row` and `max_row` arguments to `data_check` for checking nrow in data.
 
 # datacheckr v0.0.2
 

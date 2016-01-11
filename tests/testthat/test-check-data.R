@@ -163,8 +163,8 @@ test_that("check_data works with factor", {
   #  x <- data.frame(z3 = ordered("char"))
   #  expect_identical(check_data(x, values = list(znotsame = factor())), x)
 
- #   x <- data.frame(z3 = ordered("char"))
-#    expect_identical(check_data(x, values = list(z3 = factor())), x)
+    x <- data.frame(z3 = ordered("char"))
+    expect_identical(check_data(x, values = list(z3 = factor())), x)
 
   x <- data.frame(z2 = c("char", "x"), stringsAsFactors = TRUE)
   expect_identical(check_data(x, values = list(z2 = factor(c("x", "char")))), x)

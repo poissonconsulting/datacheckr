@@ -1,3 +1,6 @@
+# development version
+
+- `check_data` now works with columns inheriting from base classes.
 - Added function `max_nrow()` a wrapper on the theoretical maximum number of rows.
 - Added `min_row` and `max_row` arguments to `data_check` for checking nrow in data.
 

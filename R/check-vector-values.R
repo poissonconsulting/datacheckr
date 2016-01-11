@@ -13,11 +13,9 @@ check_vector_values_nulls <- function(vector, values, column_name, substituted_d
 check_vector_values_class <- function(vector, values, column_name, substituted_data) {
   classes <- get_classes(values)
 
-  logical_vector <- inherits(vector, classes, which = TRUE) == 1
-  if (!any(logical_vector)) {
+  if (!inherits(vector, classes)) {
     check_stop("column ", column_name, " in ", substituted_data, " must be of class ",
               punctuate(classes))
   }
-  stopifnot(sum(logical_vector) == 1)
-  values[logical_vector][[1]]
+  values[[1]]
 }

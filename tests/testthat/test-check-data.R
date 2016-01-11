@@ -22,6 +22,32 @@ test_that("check_data works no rows", {
                "column y in x must be of class 'integer'")
 })
 
+test_that("check_data min_row and max_row", {
+  x <- data.frame(y = c(2,4))
+
+  expect_identical(x, check_data(x))
+  expect_identical(x, check_data(x, min_row = 2, max_row = 2))
+  expect_error(check_data(x, min_row = 3), "x must have at least 3 rows")
+  expect_error(check_data(x, max_row = 1), "x must have no more than 1 row")
+
+    expect_error(check_data(x, min_row = -1), "min_row must not be less than 0")
+  expect_error(check_data(x, min_row = ""), "min_row must be a number")
+
+  expect_error(check_data(x, max_row = -1), "max_row must not be less than min_row")
+  expect_error(check_data(x, max_row = ""), "max_row must be a number")})
+
+test_that("check_data requires data frame", {
+  w <- 3
+  expect_error(check_data(w), "w must be a data frame")
+})
+
+test_that("check_data requires unique column names", {
+  data <- data.frame("A" = 1, "b" = 2L, "c" = 4L)
+  colnames(data) <- c("A", "b", "A")
+  expect_error(check_data(data),
+               "data must be a data frame with unique column names")
+})
+
 test_that("check_data substitutes names correctly", {
   wrapper_function <- function(z) check_data(z)
   expect_error(wrapper_function(z = 3), "z must be a data frame")
@@ -134,6 +160,12 @@ test_that("check_data works with factor", {
   expect_error(check_data(x, values = list(z2 = factor(c("x", "char")))),
                "column z2 in x lacks factor levels 'char' and 'x'")
 
+  #  x <- data.frame(z3 = ordered("char"))
+  #  expect_identical(check_data(x, values = list(znotsame = factor())), x)
+
+  #  x <- data.frame(z3 = ordered("char"))
+  #  expect_identical(check_data(x, values = list(z3 = factor())), x)
+
   x <- data.frame(z2 = c("char", "x"), stringsAsFactors = TRUE)
   expect_identical(check_data(x, values = list(z2 = factor(c("x", "char")))), x)
 
@@ -149,11 +181,11 @@ test_that("check_data works with factor", {
 
   expect_identical(check_data(x, values = list(
     z3 = factor(c("x1", "char", "3"), levels = c("x1", "3", "char")))),
-                   x)
+    x)
 
   expect_identical(check_data(x, values = list(
     z3 = factor(c("x1", "x1", "x1"), levels = c("x1", "3", "char")))),
-                   x)
+    x)
 })
 
 test_that("check_data works with POSIXct", {

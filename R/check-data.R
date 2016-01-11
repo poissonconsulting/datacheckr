@@ -1,7 +1,22 @@
-check_data_frame <- function(data, substituted_data) {
+check_data_frame <- function(data, substituted_data, min_row, max_row) {
   if (!is.data.frame(data)) check_stop(substituted_data, " must be a data frame")
   if (anyDuplicated(colnames(data)))
     check_stop(substituted_data, " must be a data frame with unique column names")
+
+  if (!(is.integer(min_row) | is.numeric(min_row))) check_stop("min_row must be a number")
+  if (!(is.integer(max_row) | is.numeric(max_row))) check_stop("max_row must be a number")
+
+  if (min_row < 0) check_stop("min_row must not be less than 0")
+  if (max_row < min_row)
+    check_stop("max_row must not be less than min_row")
+
+  min_row <- floor(min_row)
+  max_row <- floor(max_row)
+
+  if (nrow(data) < min_row)
+    check_stop(substituted_data, " must have at least ", min_row, plural(" row", min_row))
+  if (nrow(data) > max_row)
+    check_stop(substituted_data, " must have no more than ", max_row, plural(" row", min_row))
   TRUE
 }
 
@@ -28,6 +43,8 @@ check_values <- function(values) {
 #' @param data The data frame to check.
 #' @param values A named list specifying the columns and
 #' their associated classes and values.
+#' @param min_row A count of the minimum number of rows in data.
+#' @param max_row A count of the maximum number of rows in data.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the original data frame.
@@ -72,10 +89,10 @@ check_values <- function(values) {
 #' check_data(mtcars, list(gear = NA))
 #' check_data(mtcars, list(gear = as.numeric(NA)))
 #' }
-check_data <- function(data, values = NULL) {
+check_data <- function(data, values = NULL, min_row = 0, max_row = 1048576) {
   substituted_data <- substitute(data)
 
-  check_data_frame(data, substituted_data)
+  check_data_frame(data, substituted_data, min_row = min_row, max_row = max_row)
   if (!is.null(values)) {
     check_values(values)
     check_data_values(data, values, substituted_data)

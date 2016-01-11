@@ -1,3 +1,5 @@
+- Added `min_row` and `max_row` arguments to `data_check` for checking nrow in data
+
 # datacheckr v0.0.2
 
 - Added vignette datacheckr.

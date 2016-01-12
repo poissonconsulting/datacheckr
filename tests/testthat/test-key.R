@@ -1,0 +1,35 @@
+context("check-key")
+
+test_that("check_key checks colnames", {
+  x <- data.frame(y = 2)
+  expect_identical(check_key(x), x)
+  expect_identical(check_key(x, "y"), x)
+  expect_identical(check_key(x, factor("y")), x)
+  expect_error(check_key(x, 1), "colnames must be a character vector")
+  expect_error(check_key(x, character()), "colnames must a non-zero length character vector")
+})
+
+test_that("check_key checks unique", {
+  x <- data.frame(y = c(2,2))
+  expect_error(check_key(x), "columns colnames in x are not a unique key")
+  x <- data.frame(y = c(2,2), z = c(1,2))
+  expect_identical(check_key(x), x)
+  expect_error(check_key(x, "y"), "columns colnames in x are not a unique key")
+  expect_identical(check_key(x, c("z")), x)
+  expect_identical(check_key(x, c("y", "z")), x)
+})
+
+test_that("check_key checks unique with missing values", {
+  x <- data.frame(y = c(2, 2))
+  expect_error(check_key(x), "columns colnames in x are not a unique key")
+  x <- data.frame(y = c(2, NA))
+  expect_identical(check_key(x), x)
+  x <- data.frame(y = c(2, NA), z = c(NA,2))
+  expect_identical(check_key(x), x)
+  x <- data.frame(y = c(NA))
+  expect_identical(check_key(x), x)
+  x1 <- data.frame(y = c(NA, NA))
+  expect_error(check_key(x1), "columns colnames in x1 are not a unique key")
+  x1 <- data.frame(y = c(NA, NA), z = c(NA, 1))
+  expect_identical(check_key(x1), x1)
+})

@@ -4,13 +4,12 @@
 \alias{check_key}
 \title{Check Key}
 \usage{
-check_key(data, values = NULL)
+check_key(data, colnames = NULL)
 }
 \arguments{
 \item{data}{The data frame to check.}
 
-\item{values}{A named list specifying the columns of the key and
-their associated classes and values.}
+\item{colnames}{A character vector specifying the columns of the key.}
 }
 \value{
 Throws an informative error or returns an invisible copy of
@@ -18,6 +17,7 @@ the original data frame.
 }
 \description{
 Checks that the columns in a data frame represent a unique key.
+To check the classes and values of the key columns use \code{\link{check_data}}.
 }
 \seealso{
 \code{\link{datacheckr}}

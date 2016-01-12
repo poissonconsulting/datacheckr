@@ -1,8 +1,10 @@
 check_stop <- function(...) stop(..., call. = FALSE)
 
+is_flag <- function(x)  is.logical(x) && length(x) == 1 && !is.na(x)
+is_string <- function(x)  (is.character(x) || is.factor(x)) && length(x) == 1 && !is.na(x)
 is_named <- function(x) !is.null(names(x))
 
-is_POSIXct <- function (x) inherits(x, "POSIXct")
+is_POSIXct <- function(x) inherits(x, "POSIXct")
 
 plural <- function(x, n = 1, end = "") paste0(x, ifelse(n > 1, "s", ""), end)
 

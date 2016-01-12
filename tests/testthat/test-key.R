@@ -9,6 +9,12 @@ test_that("check_key checks colnames", {
   expect_error(check_key(x, character()), "colnames must a non-zero length character vector")
 })
 
+test_that("check_key works no rows", {
+  x <- data.frame(y = 2)
+  x <- x[FALSE, ,drop = FALSE]
+  expect_identical(check_key(x), x)
+})
+
 test_that("check_key checks unique", {
   x <- data.frame(y = c(2,2))
   expect_error(check_key(x), "columns colnames in x are not a unique key")

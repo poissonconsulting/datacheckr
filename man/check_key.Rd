@@ -4,7 +4,7 @@
 \alias{check_key}
 \title{Check Key}
 \usage{
-check_key(data, colnames = NULL)
+check_key(data, colnames = NULL, data_name = substitute(data))
 }
 \arguments{
 \item{data}{The data frame to check.}

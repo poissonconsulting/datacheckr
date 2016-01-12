@@ -5,7 +5,7 @@
 \title{Check Data}
 \usage{
 check_data(data, values = NULL, min_row = 0, max_row = max_nrow(),
-  unique = FALSE)
+  unique = FALSE, data_name = substitute(data))
 }
 \arguments{
 \item{data}{The data frame to check.}
@@ -19,6 +19,8 @@ their associated classes and values.}
 
 \item{unique}{A flag indicating whether columns must be uniquely
 defined in data.}
+
+\item{data_name}{A string of the name of data.}
 }
 \value{
 Throws an informative error or returns an invisible copy of

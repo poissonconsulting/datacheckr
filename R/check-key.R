@@ -1,16 +1,3 @@
-check_colnames <- function(data, substituted_data, colnames) {
-  if (!(is.character(colnames) | is.factor(colnames)))
-    check_stop("colnames must be a character vector")
-  if (!length(colnames))
-    check_stop("colnames must a non-zero length character vector")
-  if (anyDuplicated(colnames))
-    check_stop("colnames must be unique")
-  if (!any(colnames %in% colnames(data))) {
-    check_stop("colnames must be in ", substituted_data)
-  }
-  TRUE
-}
-
 #' Check Key
 #'
 #' Checks that the columns in a data frame represent a unique key.
@@ -23,17 +10,18 @@ check_colnames <- function(data, substituted_data, colnames) {
 #' the original data frame.
 #' @seealso \code{\link{datacheckr}}
 #' @export
-check_key <- function(data, colnames = NULL) {
-  substituted_data <- substitute(data)
+check_key <- function(data, colnames = NULL, data_name = substitute(data)) {
+  data_name <- as.character(data_name)
+  if (!is_string(data_name)) check_stop("data_name must be a string")
 
-  check_data_frame(data, substituted_data, min_row = 0, max_row = max_nrow())
+  check_data_frame(data, data_name)
   if (!is.null(colnames)) {
-    check_colnames(data, substituted_data, colnames)
+    check_colnames(data, data_name, colnames)
   } else
     colnames <- colnames(data)
   key <- data[as.character(colnames)]
   if (anyDuplicated(key)) {
-    check_stop("columns colnames in ", substituted_data, " are not a unique key")
+    check_stop("columns colnames in ", data_name, " are not a unique key")
   }
   invisible(data)
 }

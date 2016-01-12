@@ -11,6 +11,7 @@
 #' @param max_row A count of the maximum number of rows in data.
 #' @param unique A flag indicating whether columns must be uniquely
 #' defined in data.
+#' @param data_name A string of the name of data.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the original data frame.
@@ -56,16 +57,17 @@
 #' check_data(mtcars, list(gear = as.numeric(NA)))
 #' }
 check_data <- function(data, values = NULL, min_row = 0, max_row = max_nrow(),
-                       unique = FALSE) {
-  if (!is.logical(unique) && length(unique) == 1 && !is.na(unique))
-    check_stop("unique must be TRUE or FALSE")
+                       unique = FALSE, data_name = substitute(data)) {
 
-  substituted_data <- substitute(data)
+  data_name <- as.character(data_name)
 
-  check_data_frame(data, substituted_data, min_row = min_row, max_row = max_row)
+  if (!is_flag(unique)) check_stop("unique must be TRUE or FALSE")
+  if (!is_string(data_name)) check_stop("data_name must be a string")
+
+  check_data_frame(data, data_name, min_row = min_row, max_row = max_row)
   if (!is.null(values)) {
     check_values(values, unique = unique)
-    check_data_values(data, values, substituted_data)
+    check_data_values(data, values, data_name)
   }
   invisible(data)
 }

@@ -1,19 +1,19 @@
-check_data_values_column <- function(column_name, data, values, substituted_data) {
+check_data_values_column <- function(column_name, data, values, data_name) {
   vector <- data[[column_name]]
   values <- values[names(values) == column_name]
 
-  values <- check_vector_values_nulls(vector, values, column_name, substituted_data)
+  values <- check_vector_values_nulls(vector, values, column_name, data_name)
   if (identical(values, TRUE)) return(TRUE)
-  value <- check_vector_values_class(vector, values, column_name, substituted_data)
+  value <- check_vector_values_class(vector, values, column_name, data_name)
 
-  value <- check_vector_value_missing(vector, value, column_name, substituted_data)
+  value <- check_vector_value_missing(vector, value, column_name, data_name)
   if (length(value) == 1) return(TRUE)
-  check_vector_value(vector, value, column_name, substituted_data)
+  check_vector_value(vector, value, column_name, data_name)
 }
 
-check_data_values <- function(data, values, substituted_data) {
+check_data_values <- function(data, values, data_name) {
   column_names <- sort(unique(names(values)))
   vapply(column_names, FUN = check_data_values_column, logical(1), data = data, values = values,
-         substituted_data = substituted_data)
+         data_name = data_name)
   TRUE
 }

@@ -1,7 +1,7 @@
 check_colnames <- function(data, colnames, exclusive, ordered, data_name) {
   colname_name <- substitute(colnames)
 
-  if (is.null(colnames)) invisible(data)
+  if (is.null(colnames)) return(invisible(data))
 
   if (!is_flag(exclusive)) check_stop("exclusive must be a flag")
   if (!is_flag(ordered)) check_stop("ordered must be a flag")
@@ -14,13 +14,23 @@ check_colnames <- function(data, colnames, exclusive, ordered, data_name) {
   colnames <- as.character(colnames)
   data_colnames <- colnames(data)
 
-  if (!ordered) {
-    colnames <- sort(colnames)
-    data_colnames <- sort(colnames)
+  if (exclusive) {
+    if (ordered) {
+      if (!equal(data_colnames, colnames))
+        check_stop("column names in ", data_name, " must be identical to ", punctuate(colnames, "and"))
+    } else {
+      if (!equal(sort(data_colnames), sort(colnames)))
+        check_stop("column names in ", data_name, " must include and only include ", punctuate(colnames, "and"))
+    }
+  } else {
+    data_colnames <- data_colnames[data_colnames %in% colnames]
+    if (ordered) {
+      if (!equal(data_colnames, colnames))
+        check_stop("column names in ", data_name, " must include in the following order ", punctuate(colnames, "and"))
+    } else {
+      if (!equal(sort(data_colnames), sort(colnames)))
+        check_stop("column names in ", data_name, " must include ", punctuate(colnames, "and"))
+    }
   }
-  if (!exclusive) data_colnames <- data_colnames[data_colnames %in% colnames]
-
-  if (!equal(data_colnames, colnames))
-    check_stop("column names in ", data_name, "do not match names in ", colname_name)
   invisible(data)
 }

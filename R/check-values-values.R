@@ -1,5 +1,5 @@
 check_values_values <- function(values, unique, nulls) {
-  if (is.null(values)) invisible(values)
+  if (is.null(values)) return(invisible(values))
 
   if (!is_flag(unique)) check_stop("unique must be a flag")
   if (!is_flag(nulls)) check_stop("nulls must be a flag")

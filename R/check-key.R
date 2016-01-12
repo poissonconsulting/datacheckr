@@ -15,7 +15,7 @@ check_key <- function(data, key = NULL, data_name = substitute(data)) {
   data <- check_data_frame(data, data_name)
   data <- check_colnames(data, colnames = key, exclusive = FALSE,
                          ordered = FALSE, data_name = data_name)
-  if (is.null(key)) invisible(data)
+  if (is.null(key)) return(invisible(data))
 
   key <- as.character(key)
   if (anyDuplicated(data[key])) {

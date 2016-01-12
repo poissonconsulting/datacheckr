@@ -4,7 +4,7 @@
 \alias{check_cols}
 \title{Check Cols}
 \usage{
-check_cols(data, colnames = NULL, exclusive = TRUE, ordered = TRUE,
+check_cols(data, colnames = NULL, exclusive = FALSE, ordered = FALSE,
   data_name = substitute(data))
 }
 \arguments{

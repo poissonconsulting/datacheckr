@@ -5,6 +5,7 @@
 #'
 #' @param data The data frame to check.
 #' @param colnames A character vector specifying the columns of the key.
+#' @param data_name A string of the name of data.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the original data frame.

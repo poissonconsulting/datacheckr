@@ -10,6 +10,8 @@ check_key(data, colnames = NULL, data_name = substitute(data))
 \item{data}{The data frame to check.}
 
 \item{colnames}{A character vector specifying the columns of the key.}
+
+\item{data_name}{A string of the name of data.}
 }
 \value{
 Throws an informative error or returns an invisible copy of

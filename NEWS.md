@@ -1,8 +1,13 @@
 # development version
 
-- `check_data` now works with columns inheriting from base classes.
+- Added function `check_key` to check that particular columns represent unique keys.
+
+- `check_data` now has argument `unique = FALSE` to enforce that columns can only have
+one class (useful with lots of columns to check not misspecified names).
+- `check_data` now works with columns inheriting from base classes i.e. ordered factors.
+- Added `min_row` and `max_row` arguments to `data_check` for checking number of rows in data.
+
 - Added function `max_nrow()` a wrapper on the theoretical maximum number of rows.
-- Added `min_row` and `max_row` arguments to `data_check` for checking nrow in data.
 
 # datacheckr v0.0.2
 

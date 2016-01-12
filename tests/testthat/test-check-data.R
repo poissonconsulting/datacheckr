@@ -41,7 +41,7 @@ test_that("check_data requires data frame", {
   expect_error(check_data(w), "w must be a data frame")
 })
 
-test_that("check_data requires unique column names", {
+test_that("check_data requires unique column names in data", {
   data <- data.frame("A" = 1, "b" = 2L, "c" = 4L)
   colnames(data) <- c("A", "b", "A")
   expect_error(check_data(data),
@@ -74,6 +74,26 @@ test_that("check_data tests for classes", {
   expect_error(check_data(x, values = list(Count = 1, Count = TRUE)),
                "column Count in x must be of class 'numeric' or 'logical'")
   expect_identical(check_data(x, values = list(Count = 1, Count = integer())), x)
+})
+
+test_that("check_data tests for classes with and without unique", {
+  x <- data.frame(Count = 1L)
+
+  expect_error(check_data(x, values = list(Count = 1), unique = FALSE),
+               "column Count in x must be of class 'numeric'")
+  expect_error(check_data(x, values = list(Count = 1), unique = TRUE),
+               "column Count in x must be of class 'numeric'")
+
+  expect_error(check_data(x, values = list(Count = 1, Count = TRUE), unique = FALSE),
+               "column Count in x must be of class 'numeric' or 'logical'")
+  expect_identical(check_data(x, values = list(Count = 1, Count = integer()), unique = FALSE), x)
+
+  expect_error(check_data(x, values = list(Count = 1, Count = TRUE), unique = TRUE),
+               "column names in values must be unique")
+  expect_error(check_data(x, values = list(Count = 1, Count = integer()), unique = TRUE),
+               "column names in values must be unique")
+  expect_error(check_data(x, values = list(Count = 1, Count = NULL), unique = TRUE),
+               "column names in values must be unique")
 })
 
 test_that("check_data tests for missing values", {

@@ -4,7 +4,8 @@
 \alias{check_data}
 \title{Check Data}
 \usage{
-check_data(data, values = NULL, min_row = 0, max_row = max_nrow())
+check_data(data, values = NULL, min_row = 0, max_row = max_nrow(),
+  unique = FALSE)
 }
 \arguments{
 \item{data}{The data frame to check.}
@@ -15,6 +16,9 @@ their associated classes and values.}
 \item{min_row}{A count of the minimum number of rows in data.}
 
 \item{max_row}{A count of the maximum number of rows in data.}
+
+\item{unique}{A flag indicating whether columns must be uniquely
+defined in data.}
 }
 \value{
 Throws an informative error or returns an invisible copy of

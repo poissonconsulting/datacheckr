@@ -9,6 +9,8 @@
 #' their associated classes and values.
 #' @param min_row A count of the minimum number of rows in data.
 #' @param max_row A count of the maximum number of rows in data.
+#' @param unique A flag indicating whether columns must be uniquely
+#' defined in data.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the original data frame.
@@ -53,12 +55,16 @@
 #' check_data(mtcars, list(gear = NA))
 #' check_data(mtcars, list(gear = as.numeric(NA)))
 #' }
-check_data <- function(data, values = NULL, min_row = 0, max_row = max_nrow()) {
+check_data <- function(data, values = NULL, min_row = 0, max_row = max_nrow(),
+                       unique = FALSE) {
+  if (!is.logical(unique) && length(unique) == 1 && !is.na(unique))
+    check_stop("unique must be TRUE or FALSE")
+
   substituted_data <- substitute(data)
 
   check_data_frame(data, substituted_data, min_row = min_row, max_row = max_row)
   if (!is.null(values)) {
-    check_values(values)
+    check_values(values, unique = unique)
     check_data_values(data, values, substituted_data)
   }
   invisible(data)

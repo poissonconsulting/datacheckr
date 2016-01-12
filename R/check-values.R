@@ -5,14 +5,16 @@
 #' @inheritParams check_data_frame
 #' @param values A named list specifying the columns and
 #' their associated classes and values.
+#' @param unique A string indicating if columns must only be defined in values.
+#' @param null A string indicating if values can be NULL.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the data.
 #' @seealso \code{\link{datacheckr}}
 #' @export
-check_values <- function(data, values = NULL, unique = TRUE, nulls = FALSE,
+check_values <- function(data, values = NULL, unique = FALSE, nulls = TRUE,
                          data_name = substitute(data)) {
-  data_name <- as.character()
+  data_name <- as.character(data_name)
   data <- check_data_frame(data, data_name = data_name)
 
   values <- check_values_values(values, unique = unique, nulls = nulls)

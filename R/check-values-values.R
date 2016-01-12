@@ -1,8 +1,8 @@
 check_values_values <- function(values, unique, nulls) {
-  if (is.null(values)) return(invisible(values))
-
   if (!is_flag(unique)) check_stop("unique must be a flag")
   if (!is_flag(nulls)) check_stop("nulls must be a flag")
+
+  if (is.null(values)) return(invisible(values))
 
   if (!is.list(values)) check_stop("values must be a list")
   if (!is_named(values)) check_stop("values must be a named list")

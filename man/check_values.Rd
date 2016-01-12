@@ -4,7 +4,7 @@
 \alias{check_values}
 \title{Check Values}
 \usage{
-check_values(data, values = NULL, unique = TRUE, nulls = FALSE,
+check_values(data, values = NULL, unique = FALSE, nulls = TRUE,
   data_name = substitute(data))
 }
 \arguments{
@@ -13,7 +13,11 @@ check_values(data, values = NULL, unique = TRUE, nulls = FALSE,
 \item{values}{A named list specifying the columns and
 their associated classes and values.}
 
+\item{unique}{A string indicating if columns must only be defined in values.}
+
 \item{data_name}{A string of the name of data.}
+
+\item{null}{A string indicating if values can be NULL.}
 }
 \value{
 Throws an informative error or returns an invisible copy of

@@ -1,6 +1,6 @@
 #' datacheckr
 #'
-#' Use \code{vignette(package = "datacheckr")} to list the available vignettes.
+#' Run \code{vignette("datacheckr")} for \emph{An Introduction to datacheckr}.
 #'
 #' @docType package
 #' @name datacheckr

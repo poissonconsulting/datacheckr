@@ -1,20 +1,21 @@
-check_values <- function(values, unique = FALSE, nulls = TRUE) {
-  if (!is.list(values)) check_stop("values must be a list")
-  if (!is_named(values)) check_stop("values must be a named list")
+#' Check Values
+#'
+#' Checks the class and values of columns in data.
+#'
+#' @inheritParams check_data_frame
+#' @param values A named list specifying the columns and
+#' their associated classes and values.
+#'
+#' @return Throws an informative error or returns an invisible copy of
+#' the data.
+#' @seealso \code{\link{datacheckr}}
+#' @export
+check_values <- function(data, values = NULL, unique = TRUE, nulls = FALSE,
+                         data_name = substitute(data)) {
+  data_name <- as.character()
+  data <- check_data_frame(data, data_name = data_name)
 
-  if (unique && anyDuplicated(names(values)))
-    check_stop("column names in values must be unique")
-
-  if (!nulls && any(vapply(values, is.null, logical(1))))
-      check_stop("values cannot be NULL")
-
-  implemented <- vapply(values, inherits, logical(1), classes())
-  if (any(!implemented))
-    check_stop("values must be a named list of vectors of class ",
-               punctuate(classes()))
-
-  classes <- get_classes(values)
-  if (anyDuplicated(paste(names(values), classes)))
-    check_stop("values cannot have multiple vectors with the same name and class")
-  TRUE
+  values <- check_values_values(values, unique = unique, nulls = nulls)
+  data <- check_data_values(data, values, data_name)
+  invisible(data)
 }

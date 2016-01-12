@@ -1,27 +1,16 @@
-# context("check-data")
-#
-# test_that("check_data does nothing with NULL values", {
-#   x <- data.frame(y = 2)
-#   expect_identical(x, check_data(x))
-# })
-#
-# test_that("check_data works no rows", {
-#   x <- data.frame(y = 2)
-#   x <- x[FALSE,,drop = FALSE]
-#   expect_identical(x, check_data(x))
-#   expect_identical(x, check_data(x, list(y = 1)))
-#   expect_identical(x, check_data(x, list(y = as.numeric(NA))))
-#   expect_identical(x, check_data(x, list(y = c(1,NA))))
-#   expect_identical(x, check_data(x, list(y = c(4,3))))
-#   expect_identical(x, check_data(x, list(y = c(4,3,5))))
-#   expect_identical(x, check_data(x, list(y = c(4,3,5, NA))))
-#
-#   expect_error(check_data(x, list(y = 1L)),
-#                "column y in x must be of class 'integer'")
-#   expect_error(check_data(x, list(y = c(1L,2L))),
-#                "column y in x must be of class 'integer'")
-# })
-#
+context("check-data-frame")
+
+test_that("check_data_frame works no rows", {
+  x <- data.frame(y = 2)
+  expect_identical(check_data_frame(x), x)
+  x <- x[FALSE,,drop = FALSE]
+  expect_identical(check_data_frame(x), x)
+  x <- 1
+  expect_error(check_data_frame(x), "x must be a data frame")
+  y <- NULL
+  expect_error(check_data_frame(y), "y must be a data frame")
+})
+
 # test_that("check_data min_row and max_row", {
 #   x <- data.frame(y = c(2,4))
 #

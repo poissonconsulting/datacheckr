@@ -12,8 +12,10 @@ check_data_values_column <- function(column_name, data, values, data_name) {
 }
 
 check_data_values <- function(data, values, data_name) {
-  column_names <- sort(unique(names(values)))
+  if(is.null(values))
+    invisible(data)
+  column_names <- unique(names(values))
   vapply(column_names, FUN = check_data_values_column, logical(1), data = data, values = values,
          data_name = data_name)
-  TRUE
+  invisible(data)
 }

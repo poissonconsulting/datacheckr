@@ -1,28 +1,29 @@
 #' Check Key
 #'
-#' Checks that the columns in a data frame represent a unique key.
-#' To check the classes and values of the key columns use \code{\link{check_data}}.
+#' Checks that columns in a data frame represent a unique key.
 #'
-#' @param data The data frame to check.
-#' @param colnames A character vector specifying the columns of the key.
-#' @param data_name A string of the name of data.
+#' @inheritParams check_data_frame
+#' @param key A character vector of the column names representing the key.
 #'
 #' @return Throws an informative error or returns an invisible copy of
-#' the original data frame.
+#' the data.
 #' @seealso \code{\link{datacheckr}}
 #' @export
-check_key <- function(data, colnames = NULL, data_name = substitute(data)) {
+#'
+check_key <- function(data, key = NULL, data_name = substitute(data)) {
   data_name <- as.character(data_name)
-  if (!is_string(data_name)) check_stop("data_name must be a string")
+  data <- check_data_frame(data, data_name)
+  data <- check_colnames(data, colnames = key, exclusive = FALSE,
+                         ordered = FALSE, data_name = data_name)
+  if (is.null(key)) invisible(data)
 
-  check_data_frame(data, data_name)
-  if (!is.null(colnames)) {
-    check_colnames(data, data_name, colnames)
-  } else
-    colnames <- colnames(data)
-  key <- data[as.character(colnames)]
-  if (anyDuplicated(key)) {
-    check_stop("columns colnames in ", data_name, " are not a unique key")
+  key <- as.character(key)
+  if (anyDuplicated(data[key])) {
+    if (length(key) <= 5) {
+      check_stop(plural("column", length(key), " "),
+                 punctuate(colnames, "and"), " in ", data_name, " must be a unique key")
+    }
+    check_stop("columns key in ", data_name, "must be a unique key")
   }
   invisible(data)
 }

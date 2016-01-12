@@ -13,7 +13,7 @@ check_stop <- function(...) stop(..., call. = FALSE)
 check_data_name <- function(data_name)
   if (!is_string(data_name)) check_stop("data_name must be a string")
 
-plural <- function(x, n = 1, end = "") paste0(x, ifelse(n > 1, "s", ""), end)
+plural <- function(x, n = 1, end = "") paste0(x, ifelse(n != 1, "s", ""), end)
 isare <- function(n) ifelse(n > 1, "are", "is")
 
 punctuate <- function(x, qualifier = "or") {

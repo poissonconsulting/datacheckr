@@ -11,7 +11,7 @@
 #' @seealso \code{\link{datacheckr}}
 #' @export
 check_rows <- function(data, min_row = 0, max_row = max_nrow(), data_name = substitute(data)) {
-  data_name <- as.character()
+  data_name <- as.character(data_name)
   data <- check_data_frame(data, data_name = data_name)
 
   if (!is_count(min_row)) check_stop("min_row must be a count")
@@ -19,6 +19,8 @@ check_rows <- function(data, min_row = 0, max_row = max_nrow(), data_name = subs
 
   if (min_row < 0) check_stop("min_row must not be less than 0")
   if (max_row < min_row) check_stop("max_row must not be less than min_row")
+
+  nrow <- nrow(data)
 
   if (nrow < min_row)
     check_stop(data_name, " must have at least ", min_row, plural(" row", min_row))

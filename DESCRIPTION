@@ -1,6 +1,6 @@
 Package: datacheckr
 Title: Data Frame Checking
-Version: 0.0.2.9004
+Version: 0.0.2.9005
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
 Description: A family of functions to check data frame's rows, column names,
     column classes, values, unique keys and joins.

@@ -21,7 +21,7 @@
 #' @export
 check_data2 <- function(data, values = NULL, min_row = 1, max_row = max_nrow(),
                        key = character(0), data_name = substitute(data)) {
-  data_name <- as.character(data_name)
+  if (!is.character(data_name)) data_name <- deparse(data_name)
   data <- check_data_frame(data, data_name = data_name)
   data <- check_rows(data, min_row = min_row, max_row = max_row, data_name = data_name)
   data <- check_values(data, values = values, unique = TRUE, nulls = FALSE, data_name = data_name)

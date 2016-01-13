@@ -13,7 +13,7 @@
 #' @export
 #'
 check_key <- function(data, key = NULL, data_name = substitute(data)) {
-  data_name <- as.character(data_name)
+  if (!is.character(data_name)) data_name <- deparse(data_name)
   data <- check_data_frame(data, data_name)
   data <- check_colnames(data, colnames = key, exclusive = FALSE,
                          ordered = FALSE, data_name = data_name)

@@ -13,7 +13,7 @@
 #' @seealso \code{\link{datacheckr}}
 #' @export
 check_rows <- function(data, min_row = 1, max_row = max_nrow(), data_name = substitute(data)) {
-  data_name <- as.character(data_name)
+  if (!is.character(data_name)) data_name <- deparse(data_name)
   data <- check_data_frame(data, data_name = data_name)
 
   check_count(min_row)

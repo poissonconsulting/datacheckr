@@ -36,8 +36,8 @@ check_join <- function(data, parent, key = NULL, referential = TRUE,
                        extra = FALSE,
                        data_name = substitute(data),
                        parent_name = substitute(parent)) {
-  data_name <- as.character(data_name)
-  parent_name <- as.character(parent_name)
+  if (!is.character(data_name)) data_name <- deparse(data_name)
+  if (!is.character(parent_name)) parent_name <- deparse(parent_name)
 
   check_flag(referential)
   check_flag(extra)

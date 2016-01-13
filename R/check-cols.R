@@ -16,7 +16,7 @@
 #' @export
 check_cols <- function(data, colnames = NULL, exclusive = FALSE, ordered = FALSE,
                        data_name = substitute(data)) {
-  data_name <- as.character(data_name)
+  if (!is.character(data_name)) data_name <- deparse(data_name)
   data <- check_data_frame(data, data_name = data_name)
   data <- check_colnames(data, colnames = colnames, exclusive = exclusive,
                          ordered = ordered, data_name = data_name)

@@ -4,7 +4,7 @@
 \alias{check_rows}
 \title{Check Rows}
 \usage{
-check_rows(data, min_row = 0, max_row = max_nrow(),
+check_rows(data, min_row = 1, max_row = max_nrow(),
   data_name = substitute(data))
 }
 \arguments{
@@ -22,6 +22,9 @@ data.
 }
 \description{
 Checks the number of rows in data.
+}
+\details{
+By default (\code{min_row = 1}) data must include at least one row.
 }
 \seealso{
 \code{\link{datacheckr}}

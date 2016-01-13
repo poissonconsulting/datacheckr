@@ -2,6 +2,9 @@
 #'
 #' Checks the names and order of columns in data.
 #'
+#' By default (\code{colnames = NULL}) data must include at least one column.
+#' To check for no columns set \code{colnames = character(0)}.
+#'
 #' @inheritParams check_data_frame
 #' @param colnames A character vector of the column names.
 #'

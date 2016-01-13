@@ -4,29 +4,44 @@
 \alias{check_join}
 \title{Check Joins}
 \usage{
-check_join(data, key, colnames = NULL, data_name = substitute(data),
-  key_name = substitute(key))
+check_join(data, parent, key = NULL, referential = TRUE, extra = FALSE,
+  data_name = substitute(data), parent_name = substitute(parent))
 }
 \arguments{
 \item{data}{The data frame to check.}
 
+\item{parent}{A data frame of the parent table.}
+
 \item{key}{A data.frame representing the key.}
 
-\item{colnames}{A character vector specifying the columns of the key.}
+\item{referential}{A flag indicating whether to check for referential integrity.}
+
+\item{extra}{A flag indicating whether to allow additional matching columns.}
 
 \item{data_name}{A string of the name of data.}
 
+\item{parent_name}{A string of the name of parent.}
+
+\item{colnames}{A character vector specifying the columns of the key.}
+
 \item{key_name}{A string of the name of key.}
+
+\item{key}{A character vector of the key columns.}
 }
 \value{
 Throws an informative error or returns an invisible copy of
 the original data frame.
+
+Throws an informative error or returns an invisible copy of
+data.
 }
 \description{
 Checks that the columns in a data frame form a many-to-one
 join with correponding columns in the key.
 }
 \seealso{
+\code{\link{datacheckr}}
+
 \code{\link{datacheckr}}
 }
 

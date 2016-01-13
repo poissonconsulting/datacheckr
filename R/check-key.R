@@ -2,6 +2,8 @@
 #'
 #' Checks that columns in a data frame represent a unique key.
 #'
+#' By default (\code{key = NULL}) all the columns are checked.
+#'
 #' @inheritParams check_data_frame
 #' @param key A character vector of the column names representing the key.
 #'
@@ -15,15 +17,13 @@ check_key <- function(data, key = NULL, data_name = substitute(data)) {
   data <- check_data_frame(data, data_name)
   data <- check_colnames(data, colnames = key, exclusive = FALSE,
                          ordered = FALSE, data_name = data_name)
-  if (is.null(key)) return(invisible(data))
+
+  if (is.null(key)) key <- colnames(data)
 
   key <- as.character(key)
   if (anyDuplicated(data[key])) {
-    if (length(key) <= 5) {
       check_stop(plural("column", length(key), " "),
-                 punctuate(colnames, "and"), " in ", data_name, " must be a unique key")
-    }
-    check_stop("columns key in ", data_name, "must be a unique key")
+                 punctuate(key, "and"), " in ", data_name, " must be a unique key")
   }
   invisible(data)
 }

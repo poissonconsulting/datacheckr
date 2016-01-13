@@ -25,4 +25,9 @@ test_that("check_cols matches colnames", {
   expect_error(check_cols(x, "z", exclusive = TRUE), "column names in x must include and only include 'z'")
 })
 
-
+test_that("check_cols requires a column", {
+  x <- data.frame()
+  expect_identical(check_cols(x, character(0)), x)
+  expect_error(check_cols(x), "x must include at least one column")
+  expect_error(check_cols(x, "e"), "column names in x must include 'e'")
+})

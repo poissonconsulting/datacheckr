@@ -1,10 +1,14 @@
 check_colnames <- function(data, colnames, exclusive, ordered, data_name) {
   colname_name <- substitute(colnames)
 
-  if (is.null(colnames)) return(invisible(data))
+  if (is.null(colnames)) {
+    if (!length(colnames(data)))
+       check_stop(data_name, " must include at least one column")
+    return(invisible(data))
+  }
 
-  if (!is_flag(exclusive)) check_stop("exclusive must be a flag")
-  if (!is_flag(ordered)) check_stop("ordered must be a flag")
+  check_flag(exclusive)
+  check_flag(ordered)
 
   if (!(is.character(colnames) || is.factor(colnames)))
     check_stop("colnames must be a character vector")

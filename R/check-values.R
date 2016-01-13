@@ -12,7 +12,7 @@
 #' the data.
 #' @seealso \code{\link{datacheckr}}
 #' @export
-check_values <- function(data, values = NULL, unique = FALSE, nulls = TRUE,
+check_values <- function(data, values = NULL, unique = TRUE, nulls = FALSE,
                          data_name = substitute(data)) {
   data_name <- as.character(data_name)
   data <- check_data_frame(data, data_name = data_name)

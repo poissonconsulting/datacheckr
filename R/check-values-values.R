@@ -1,6 +1,6 @@
 check_values_values <- function(values, unique, nulls) {
-  if (!is_flag(unique)) check_stop("unique must be a flag")
-  if (!is_flag(nulls)) check_stop("nulls must be a flag")
+  check_flag(unique)
+  check_flag(nulls)
 
   if (is.null(values)) return(invisible(values))
 
@@ -11,7 +11,7 @@ check_values_values <- function(values, unique, nulls) {
     check_stop("column names in values must be unique")
 
   if (!nulls && any(vapply(values, is.null, logical(1))))
-    check_stop("values cannot be NULL")
+    check_stop("values cannot include NULLs")
 
   implemented <- vapply(values, inherits, logical(1), classes())
   if (any(!implemented))

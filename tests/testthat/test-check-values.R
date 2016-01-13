@@ -37,14 +37,14 @@ test_that("check_values substitutes names correctly", {
 
 test_that("check_values tests for column names", {
   x <- data.frame(Count = c(1,2))
-  expect_error(check_values(x, values = list(Count = NULL)),
+  expect_error(check_values(x, values = list(Count = NULL), nulls = TRUE),
                "x must not include column Count")
 
   expect_identical(check_values(x, values = list(Count = 3)), x)
-  expect_identical(check_values(x, values = list(Count = 3, Count = NULL)), x)
+  expect_identical(check_values(x, values = list(Count = 3, Count = NULL), unique = FALSE, nulls = TRUE), x)
 
   y <- data.frame(Count2 = c(1,2))
-  expect_identical(check_values(y, values = list(Count = NULL)), y)
+  expect_identical(check_values(y, values = list(Count = NULL), nulls = TRUE), y)
 })
 
 test_that("check_values tests for classes", {
@@ -52,9 +52,9 @@ test_that("check_values tests for classes", {
 
   expect_error(check_values(x, values = list(Count = 1)),
                "column Count in x must be of class 'numeric'")
-  expect_error(check_values(x, values = list(Count = 1, Count = TRUE)),
+  expect_error(check_values(x, values = list(Count = 1, Count = TRUE), unique = FALSE),
                "column Count in x must be of class 'numeric' or 'logical'")
-  expect_identical(check_values(x, values = list(Count = 1, Count = integer())), x)
+  expect_identical(check_values(x, values = list(Count = 1, Count = integer()), unique = FALSE), x)
 })
 
 test_that("check_values tests for classes with and without unique", {
@@ -212,11 +212,11 @@ test_that("check_values works", {
 
   data <- data.frame(Count = c(0L,3L,2L,10L), LocationX = c(2000, NA, 2345, 1012))
   expect_identical(data, check_values(data))
-  expect_identical(data, check_values(data, values))
+  expect_identical(data, check_values(data, values, unique = FALSE, nulls = TRUE))
 
   data <- data.frame(Count = c(0L,3L,2L,10L), Location = c(2000, NA, 2345, 1012))
   expect_identical(data, check_values(data))
-  expect_identical(data, check_values(data, values))
+  expect_identical(data, check_values(data, values, unique = FALSE, nulls = TRUE))
   expect_identical(data, check_values(data, values = list(Count = integer())))
 })
 
@@ -226,11 +226,11 @@ test_that("check_values fails informatively", {
   expect_error(check_values(data, 1), "values must be a list")
   expect_error(check_values(data, list(1)), "values must be a named list")
   expect_error(check_values(data, list(a = as.POSIXlt(Sys.time()))), "values must be a named list of vectors of class 'NULL', 'logical', 'integer', 'numeric', 'character', 'factor', 'Date' or 'POSIXct'")
-  expect_error(check_values(data, list(Count = 1L, Count = 2L)),
+  expect_error(check_values(data, list(Count = 1L, Count = 2L), unique = FALSE),
                "values cannot have multiple vectors with the same name and class")
   expect_error(check_values(data, unique = 1), "unique must be a flag")
-  expect_identical(check_values(data, list(x = NULL)), data)
-  expect_error(check_values(data, list(x = NULL), nulls = FALSE), "values cannot be NULL")
-  expect_identical(check_values(data, list(y = NULL, y = 1)), data)
-  expect_error(check_values(data, list(y = NULL, y = 1), unique = TRUE), "column names in values must be unique")
+  expect_identical(check_values(data, list(x = NULL), nulls = TRUE), data)
+  expect_error(check_values(data, list(x = NULL), nulls = FALSE), "values cannot include NULLs")
+  expect_identical(check_values(data, list(y = NULL, y = 1), nulls = TRUE, unique = FALSE), data)
+  expect_error(check_values(data, list(y = NULL, y = 1), nulls = TRUE), "column names in values must be unique")
 })

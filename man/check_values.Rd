@@ -4,7 +4,7 @@
 \alias{check_values}
 \title{Check Values}
 \usage{
-check_values(data, values = NULL, unique = FALSE, nulls = TRUE,
+check_values(data, values = NULL, unique = TRUE, nulls = FALSE,
   data_name = substitute(data))
 }
 \arguments{

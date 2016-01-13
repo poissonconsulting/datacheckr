@@ -21,6 +21,10 @@ the data.
 \description{
 Checks the names and order of columns in data.
 }
+\details{
+By default (\code{colnames = NULL}) data must include at least one column.
+To check for no columns set \code{colnames = character(0)}.
+}
 \seealso{
 \code{\link{datacheckr}}
 }

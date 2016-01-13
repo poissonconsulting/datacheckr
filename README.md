@@ -4,7 +4,7 @@
 datacheckr
 ==========
 
-`datacheckr` is an R package to check the names, classes and values of columns in data frames.
+`datacheckr` is an R package to check data frame's rows, column names, column classes, values, unique keys and joins.
 
 Why Another Data Checking Package?
 ----------------------------------

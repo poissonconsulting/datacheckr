@@ -10,7 +10,7 @@
 
 <meta name="author" content="Joe Thorley" />
 
-<meta name="date" content="2016-01-04" />
+<meta name="date" content="2016-01-12" />
 
 <title>An Introduction to datacheckr</title>
 
@@ -72,7 +72,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">An Introduction to datacheckr</h1>
 <h4 class="author"><em>Joe Thorley</em></h4>
-<h4 class="date"><em>2016-01-04</em></h4>
+<h4 class="date"><em>2016-01-12</em></h4>
 </div>
 
 
@@ -151,6 +151,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;VC&quot;</span>, <span class="st">&quot;OJ&quot;</span>))))</code></pre></div>
 <p>And to specify the actual factor levels that <code>supp</code> must have pass three or more non-missing values</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;VC&quot;</span>, <span class="st">&quot;OJ&quot;</span>, <span class="st">&quot;OJ&quot;</span>))))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if values is unspecified it simply checks that data is a data frame</span>
+<span class="kw">check_data</span>(<span class="dv">1</span>)</code></pre></div>
+<pre><code>## Error: 1 must be a data frame</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars)
+
+<span class="co"># column names and classes are specified by</span>
+<span class="co"># the names and classes of the elements of values</span>
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="ot">NULL</span>))</code></pre></div>
+<pre><code>## Error: mtcars must not include column mpg</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">integer</span>()))</code></pre></div>
+<pre><code>## Error: column mpg in mtcars must be of class 'integer'</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">integer</span>(), <span class="dt">mpg =</span> <span class="kw">logical</span>()))</code></pre></div>
+<pre><code>## Error: column mpg in mtcars must be of class 'integer' or 'logical'</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">integer</span>(),
+                        <span class="dt">mpg =</span> <span class="kw">logical</span>(),
+                        <span class="dt">mpg =</span> <span class="kw">numeric</span>()))
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">numeric</span>()))
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> 2L))</code></pre></div>
+<pre><code>## Error: column mpg in mtcars must be of class 'integer'</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="dv">35</span>))
+
+<span class="co"># two non-missing values indicate a range</span>
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">c</span>(<span class="dv">20</span>, <span class="dv">35</span>)))</code></pre></div>
+<pre><code>## Error: the values in column mpg in mtcars must lie between 20 and 35</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">35</span>)))
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">35</span>), <span class="dt">gear =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>)))
+
+<span class="co"># three or more non-missing values indicate specific values</span>
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">35</span>), <span class="dt">gear =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>)))</code></pre></div>
+<pre><code>## Error: column gear in mtcars must only include the permitted values 3, 5 and 6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">35</span>), <span class="dt">gear =</span> <span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)))
+<span class="co"># order is unimportant</span>
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">gear =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>), <span class="dt">mpg =</span> <span class="kw">c</span>(<span class="dv">35</span>, <span class="dv">10</span>)))
+
+<span class="co"># to permit missing values simply include an NA</span>
+<span class="co"># (with a non-missing value)</span>
+<span class="kw">is.na</span>(mtcars$gear[<span class="dv">2</span>]) &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">gear =</span> <span class="kw">numeric</span>()))
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">gear =</span> -<span class="dv">3</span>))</code></pre></div>
+<pre><code>## Error: column gear in mtcars cannot include missing values</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">gear =</span> <span class="kw">c</span>(-<span class="dv">3</span>, <span class="ot">NA</span>)))
+<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">gear =</span> <span class="ot">NA</span>))</code></pre></div>
+<pre><code>## Error: column gear in mtcars must be of class 'logical'</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">gear =</span> <span class="kw">as.numeric</span>(<span class="ot">NA</span>)))</code></pre></div>
+<pre><code>## Error: column gear in mtcars can only include missing values</code></pre>
 </div>
 
 

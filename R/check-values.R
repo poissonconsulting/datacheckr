@@ -6,7 +6,7 @@
 #' @param values A named list specifying the columns and
 #' their associated classes and values.
 #' @param unique A string indicating if columns must only be defined in values.
-#' @param null A string indicating if values can be NULL.
+#' @param nulls A string indicating if values can be NULL.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the data.

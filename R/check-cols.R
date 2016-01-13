@@ -7,6 +7,8 @@
 #'
 #' @inheritParams check_data_frame
 #' @param colnames A character vector of the column names.
+#' @param exclusive A flag indicating whether data can include additional columns.
+#' @param ordered A flag indicating whether the order of the columns has to match.
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the data.

@@ -5,10 +5,17 @@
 \title{Check Data}
 \usage{
 check_data(data, values = NULL, min_row = 0, max_row = max_nrow(),
-  key = NULL, data_name = substitute(data))
+  key = character(0), data_name = substitute(data))
 }
 \arguments{
 \item{data}{The data frame to check.}
+
+\item{values}{A named list specifying the columns and
+their associated classes and values.}
+
+\item{min_row}{A count of the minimum number of rows.}
+
+\item{max_row}{A count of the maximum number of rows.}
 
 \item{key}{A character vector of the column names representing the key.}
 
@@ -19,7 +26,7 @@ Throws an informative error or returns an invisible copy of
 data.
 }
 \description{
-Checks a data frame's rows columns, classes, values, and key.
+Checks a data frame's rows, columns, classes and values and key.
 }
 \seealso{
 \code{\link{datacheckr}}

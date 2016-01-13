@@ -12,6 +12,10 @@ check_cols(data, colnames = NULL, exclusive = FALSE, ordered = FALSE,
 
 \item{colnames}{A character vector of the column names.}
 
+\item{exclusive}{A flag indicating whether data can include additional columns.}
+
+\item{ordered}{A flag indicating whether the order of the columns has to match.}
+
 \item{data_name}{A string of the name of data.}
 }
 \value{

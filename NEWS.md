@@ -1,6 +1,5 @@
 # development version
 
-
 - Added function `check_data_frame` to check if an object is a data frame.
 - Added function `check_rows` to check the number of rows in a data frame.
 - Added function `check_cols` to check the names of columns in a data frame.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/check-join.R
 \name{check_join}
 \alias{check_join}
-\title{Check Joins}
+\title{Check Join}
 \usage{
 check_join(data, parent, key = NULL, referential = TRUE, extra = FALSE,
   data_name = substitute(data), parent_name = substitute(parent))
@@ -12,7 +12,7 @@ check_join(data, parent, key = NULL, referential = TRUE, extra = FALSE,
 
 \item{parent}{A data frame of the parent table.}
 
-\item{key}{A data.frame representing the key.}
+\item{key}{A character vector of the key columns.}
 
 \item{referential}{A flag indicating whether to check for referential integrity.}
 
@@ -21,27 +21,19 @@ check_join(data, parent, key = NULL, referential = TRUE, extra = FALSE,
 \item{data_name}{A string of the name of data.}
 
 \item{parent_name}{A string of the name of parent.}
-
-\item{colnames}{A character vector specifying the columns of the key.}
-
-\item{key_name}{A string of the name of key.}
-
-\item{key}{A character vector of the key columns.}
 }
 \value{
-Throws an informative error or returns an invisible copy of
-the original data frame.
-
 Throws an informative error or returns an invisible copy of
 data.
 }
 \description{
 Checks that the columns in a data frame form a many-to-one
-join with correponding columns in the key.
+join with correponding columns in parent.
+}
+\details{
+By default (\code{key = NULL}) all the columns in parent represent the key.
 }
 \seealso{
-\code{\link{datacheckr}}
-
 \code{\link{datacheckr}}
 }
 

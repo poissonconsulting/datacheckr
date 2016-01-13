@@ -2,9 +2,6 @@
 
 export(check_cols)
 export(check_data)
-export(check_data2)
-export(check_data3)
-export(check_data4)
 export(check_data_frame)
 export(check_join)
 export(check_key)

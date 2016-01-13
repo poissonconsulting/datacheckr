@@ -15,9 +15,9 @@ their associated classes and values.}
 
 \item{unique}{A string indicating if columns must only be defined in values.}
 
-\item{data_name}{A string of the name of data.}
+\item{nulls}{A string indicating if values can be NULL.}
 
-\item{null}{A string indicating if values can be NULL.}
+\item{data_name}{A string of the name of data.}
 }
 \value{
 Throws an informative error or returns an invisible copy of

@@ -14,21 +14,6 @@ check_referential_integrity <- function(data, parent, key, data_name, parent_nam
   invisible(data)
 }
 
-#' Check Joins
-#'
-#' Checks that the columns in a data frame form a many-to-one
-#' join with correponding columns in the key.
-#'
-#' @param data The data frame to check.
-#' @param key A data.frame representing the key.
-#' @param colnames A character vector specifying the columns of the key.
-#' @param data_name A string of the name of data.
-#' @param key_name A string of the name of key.
-#'
-#' @return Throws an informative error or returns an invisible copy of
-#' the original data frame.
-#' @seealso \code{\link{datacheckr}}
-#' @export
 #' Check Join
 #'
 #' Checks that the columns in a data frame form a many-to-one

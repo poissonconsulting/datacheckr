@@ -4,7 +4,7 @@
 \alias{check_join}
 \title{Check Join}
 \usage{
-check_join(data, parent, key = NULL, referential = TRUE, extra = FALSE,
+check_join(data, parent, join = NULL, referential = TRUE, extra = FALSE,
   data_name = substitute(data), parent_name = substitute(parent))
 }
 \arguments{
@@ -12,7 +12,7 @@ check_join(data, parent, key = NULL, referential = TRUE, extra = FALSE,
 
 \item{parent}{A data frame of the parent table.}
 
-\item{key}{A character vector of the key columns.}
+\item{join}{A character vector of the join columns.}
 
 \item{referential}{A flag indicating whether to check for referential integrity.}
 
@@ -31,7 +31,7 @@ Checks that the columns in a data frame form a many-to-one
 join with correponding columns in parent.
 }
 \details{
-By default (\code{key = NULL}) all the columns in parent represent the key.
+By default (\code{join = NULL}) all the columns in parent represent the join key.
 }
 \seealso{
 \code{\link{datacheckr}}

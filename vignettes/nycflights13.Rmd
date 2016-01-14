@@ -16,19 +16,21 @@ vignette: >
 
 This vignette demonstrates the use of the `datacheckr` R package in
 the context of relational data. It is a companion text to 
-Grolemund and Wickham's excellent discussion of
-Relation data
-and assumes that the reader is familiar with the concepts and examples
-presented [therein](http://r4ds.had.co.nz/relational-data.html#nycflights13-relational).
+[Grolemund and Wickham](http://r4ds.had.co.nz/relational-data.html#nycflights13-relational)'s 
+excellent in depth discussion of
+relational data.
 
 ```{r, message = FALSE}
 # the examples use the development version of datacheckr
 # devtools::install_github("poissonconsulting/datacheckr") 
 
 library(dplyr) # so data prints nicely :)
-library(datacheckr) # for the check_data, check_key and check_join functions
+library(magrittr) # cos I love piping
+library(datacheckr) # check_data2, check_data3, check_key & check_join functions
 library(nycflights13) # for the data frames we are going to work with
 ```
+
+## Check Data and Keys
 
 ```{r, error = TRUE}
 # the following code uses the check_data3 function to confirm that airlines
@@ -39,9 +41,9 @@ check_data3(airlines, list(carrier = factor(""),
                            name = factor("")),
             key = "carrier")
 
-# checks that airports has the listed columns in that order and that
-# faa is a vector of strings (character vector) 
-# of three 'word characters', name is a character vector,
+# the following checks that airports has the listed columns in that order and that
+# faa is a vector of strings (character vector) of three 'word characters', 
+# name is a character vector,
 # lat is a number between 0 and 90, lon is between -180 and 180,
 # alt is an int between -100 and 10,000, tz should be obvious (by now)
 # and dst is a character vector with the possible values A, N or U.
@@ -53,7 +55,7 @@ check_data3(airports, list(faa = rep("^\\w{3,3}$",2),
                            tz = c(-11, 11),
                            dst = rep("A|N|U", 2)))
 
-# woops airports$faa is not unique!
+# woops this error means airports$faa is not unique!
 check_key(airports, key = "faa")
 
 # checks that planes *includes* tailnum, engines and year 
@@ -67,21 +69,21 @@ check_data2(planes, list(tailnum = rep("^\\w{5,6}$",2),
                          year = c(1956L, 2013L, NA)),
             key = "tailnum")
 
-# weather has lots of columns. by selecting just 
-# the ones we are interested we can use
-# the stricter check_data3 (as opposed to check_data2)
-weather <- select(weather, year, month, day, hour, origin)
-# interesting! year is only 2013, and like month is a number
+# weather has lots of columns. by setting select = TRUE in check_data3
+# we drop non-named columns and order to match values.
+# the checks indicate that year is only 2013, and like month is a number
 # but day and hour are ints (as expected)
 # also looks like someone forgot to record the date and time
 # for at least one observation but at least all the columns
-# form a unique key
-check_data3(weather,list(year = c(2013,2013),
+# form a unique key (key = NULL)
+weather %<>% check_data3(list(year = c(2013,2013),
                               month = c(1, 12, NA),
                               day = c(1L, 31L, NA),
                               hour = c(0L, 23L, NA),
                               origin = rep("^\\w{3,3}$",2)),
-                 key = NULL)
+                 key = NULL, select = TRUE)
+
+print(weather)
 
 # we just have flights for 2013 and hour includes
 # the impossible value of 24 as well as missing values.
@@ -94,18 +96,37 @@ check_data2(flights, list(year = c(2013L,2013L),
                           dest = rep("^\\w{3,3}$",2),
                           tailnum = rep("^(\\w{5,6}|)$",2),
                           carrier = rep("^\\w{2,2}$",2)))
+```
 
-# and the supposed key is not unique
-check_key(flights, c("year", "month", "day", "hour", "origin"))
+## Check Joins
 
-# darn we can't join flights and airlines in an many-to-one relationship
+```{r, error = TRUE}
+# we can't simply join flights and airlines
 # as carrier is a different classes in the two data sets
 check_join(flights, airlines, join = "carrier")
-# and flights doesn't have faa (its called origin)
-check_join(flights, airports, join = "faa")
-# we can join flights and planes using tailnum if we ignore the fact that
-# the many-to-one relationship violates referential integrity (flights without planes)
-# and there are extra matching columns
-check_join(flights, planes, join = "tailnum", referential = FALSE, extra = TRUE)
+# easy to fix though
+airlines$carrier %<>% as.character()
+check_join(flights, airlines, join = "carrier")
+
+# we also have to be careful joining flights and airport by faa and origin
+# as the fact that faa is not a unique key
+# raises its ugly head
+check_join(flights, airports, join = c(origin = "faa"))
+
+# we also can't simply join flights and planes using tailnum as there are
+# extra matching columns (which will be renamed) and more worringly
+# the (many-to-one) relationship violates referential integrity (flights without planes)
+check_join(flights, planes, join = "tailnum", extra = TRUE)
 ```
+
+## The Future?
+
+### coerce = TRUE
+
+An [obvious enhancement](https://github.com/poissonconsulting/datacheckr/issues/6) 
+would be an argument `coerce = FALSE` in the `check_data2`, `check_data3` and
+`check_join` functions to allow class coercion to be switched on. If
+`coerce = TRUE` then provided no information is lost,
+vectors could automatically coerced to match the class in values for data checking 
+and the class in parent for join checking and the altered data frame returned.
 

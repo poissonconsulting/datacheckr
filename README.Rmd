@@ -119,13 +119,8 @@ devtools::install_github("poissonconsulting/datacheckr")
 
 ## More Information
 
-To view the vignette *An Introduction to checkdatar*
-install the release version of 
-`datacheckr` from CRAN and then execute the following code:
-```
-library(datacheckr)
-vignette("datacheckr")
-```
+For more information view `vignette("datacheckr")` for 
+*An Introduction to checkdatar*.
 
 ## Contact
 

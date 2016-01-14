@@ -32,3 +32,13 @@ test_that("check_join checks colnames", {
   expect_identical(check_join(x, y), x)
   expect_error(check_join(y, x), "column 'y' in x must be a unique key")
 })
+
+test_that("check_join checks colnames diff names", {
+  x <- data.frame(x = 2)
+  y <- data.frame(y = 2)
+  expect_error(check_join(x, y), "x and y must have matching columns")
+  expect_error(check_join(x, y, "y"), "column names in x must include 'y'")
+  expect_error(check_join(x, y, "x"), "column names in y must include 'x'")
+  expect_identical(check_join(x, y, c("x" = "y")), x)
+  expect_error(check_join(x, y, c("y" = "x")), "column names in x must include 'y'")
+})

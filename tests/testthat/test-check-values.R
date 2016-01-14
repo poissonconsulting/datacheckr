@@ -47,6 +47,12 @@ test_that("check_values tests for column names", {
   expect_identical(check_values(y, values = list(Count = NULL), nulls = TRUE), y)
 })
 
+test_that("check_values gives informative message when absent", {
+  x <- data.frame(z3 = 1)
+  expect_error(check_data(x, values = list(z4 = 1)), "x must have column 'z4'")
+})
+
+
 test_that("check_values tests for classes", {
   x <- data.frame(Count = 1L)
 

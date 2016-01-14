@@ -12,7 +12,8 @@ check_join(data, parent, join = NULL, referential = TRUE, extra = FALSE,
 
 \item{parent}{A data frame of the parent table.}
 
-\item{join}{A character vector of the join columns.}
+\item{join}{A character vector of the join columns. Use a named character vector
+if the names of the columns differ.}
 
 \item{referential}{A flag indicating whether to check for referential integrity.}
 

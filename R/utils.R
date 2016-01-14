@@ -4,6 +4,12 @@ is_count <- function(x)  (is.integer(x) || is.numeric(x)) && length(x) == 1 &&
   !is.na(x) && x >= 0 && identical(as.numeric(x), floor(x))
 is_named <- function(x) !is.null(names(x))
 
+if_names <- function(x) {
+  if (is_named(x))
+    return(names(x))
+  x
+}
+
 equal <- function(x, y) isTRUE(all.equal(x, y, check.names = FALSE))
 
 is_POSIXct <- function(x) inherits(x, "POSIXct")

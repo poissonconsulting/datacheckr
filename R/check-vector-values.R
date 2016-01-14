@@ -11,6 +11,9 @@ check_vector_values_nulls <- function(vector, values, column_name, data_name) {
 }
 
 check_vector_values_class <- function(vector, values, column_name, data_name) {
+  if(is.null(vector))
+    check_stop(data_name, " must have column '", column_name, "'")
+
   classes <- get_classes(values)
 
   if (!inherits(vector, classes)) {

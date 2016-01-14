@@ -10,7 +10,7 @@
 
 <meta name="author" content="Joe Thorley" />
 
-<meta name="date" content="2016-01-13" />
+<meta name="date" content="2016-01-14" />
 
 <title>Checking Relational Data: An Example with nycflights13</title>
 
@@ -72,34 +72,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Checking Relational Data: An Example with nycflights13</h1>
 <h4 class="author"><em>Joe Thorley</em></h4>
-<h4 class="date"><em>2016-01-13</em></h4>
+<h4 class="date"><em>2016-01-14</em></h4>
 </div>
 
 
 <blockquote>
-<p>“It’s rare that a data analysis involves only a single table of data.” (<a href="http://r4ds.had.co.nz/relational-data.html#nycflights13-relational">via</a>)</p>
+<p>“It’s rare that a data analysis involves only a single table of data.” (<a href="http://r4ds.had.co.nz/relational-data.html#nycflights13-relational">Grolemund &amp; Wickham</a>)</p>
 </blockquote>
 <div id="background" class="section level2">
 <h2>Background</h2>
-<p>This vignette demonstrates the use of the <code>datacheckr</code> package in the context of relational data. It is a companion text to Grolemund and Wickham’s excellent discussion of Relation data(<a href="http://r4ds.had.co.nz/relational-data.html#nycflights13-relational" class="uri">http://r4ds.had.co.nz/relational-data.html#nycflights13-relational</a>) and assumes that the reader is familiar with the concepts and examples presented <a href="http://r4ds.had.co.nz/relational-data.html#nycflights13-relational">therein</a>.</p>
+<p>This vignette demonstrates the use of the <code>datacheckr</code> R package in the context of relational data. It is a companion text to Grolemund and Wickham’s excellent discussion of Relation data and assumes that the reader is familiar with the concepts and examples presented <a href="http://r4ds.had.co.nz/relational-data.html#nycflights13-relational">therein</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the examples use the development version of datacheckr</span>
 <span class="co"># devtools::install_github(&quot;poissonconsulting/datacheckr&quot;) </span>
 
-<span class="kw">library</span>(dplyr) <span class="co"># so data prints nicely :)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: 'dplyr'
-## 
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datacheckr)
-<span class="kw">library</span>(nycflights13) <span class="co"># the data frames we are going to work with</span>
-
-<span class="co"># the following code uses the check_data3 function to check that airlines</span>
+<span class="kw">library</span>(dplyr) <span class="co"># so data prints nicely :)</span>
+<span class="kw">library</span>(datacheckr) <span class="co"># for the check_data, check_key and check_join functions</span>
+<span class="kw">library</span>(nycflights13) <span class="co"># for the data frames we are going to work with</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the following code uses the check_data3 function to confirm that airlines</span>
 <span class="co"># has just two columns carrier and name in that order</span>
 <span class="co"># which are both factors (with non-missing values)</span>
 <span class="co"># and that carrier is unique</span>
@@ -108,9 +97,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <span class="dt">key =</span> <span class="st">&quot;carrier&quot;</span>)
 
 <span class="co"># checks that airports has the listed columns in that order and that</span>
-<span class="co"># faa is a strings of three word characters, name is a character,</span>
+<span class="co"># faa is a vector of strings (character vector) </span>
+<span class="co"># of three 'word characters', name is a character vector,</span>
 <span class="co"># lat is a number between 0 and 90, lon is between -180 and 180,</span>
-<span class="co"># alt is an int between -100 and 10,000, tz should be obvious</span>
+<span class="co"># alt is an int between -100 and 10,000, tz should be obvious (by now)</span>
 <span class="co"># and dst is a character vector with the possible values A, N or U.</span>
 <span class="kw">check_data3</span>(airports, <span class="kw">list</span>(<span class="dt">faa =</span> <span class="kw">rep</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w{3,3}$&quot;</span>,<span class="dv">2</span>),
                            <span class="dt">name =</span> <span class="st">&quot;&quot;</span>,
@@ -128,15 +118,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co"># engines is 1, 2, 3 or 4, that</span>
 <span class="co"># year is an integer between 1956 and 2013 that can include</span>
 <span class="co"># missing values and tailnum (which consists of strings of</span>
-<span class="co"># 3 word characters) is the key</span>
-<span class="kw">check_data2</span>(planes, <span class="kw">list</span>(<span class="dt">tailnum =</span> <span class="kw">rep</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w{3,3}$&quot;</span>,<span class="dv">2</span>),
+<span class="co"># 5 to 6 'word characters') is the unique key.</span>
+<span class="kw">check_data2</span>(planes, <span class="kw">list</span>(<span class="dt">tailnum =</span> <span class="kw">rep</span>(<span class="st">&quot;^</span><span class="ch">\\</span><span class="st">w{5,6}$&quot;</span>,<span class="dv">2</span>),
                          <span class="dt">engines =</span> <span class="dv">1</span>:<span class="dv">4</span>,
                          <span class="dt">year =</span> <span class="kw">c</span>(1956L, 2013L, <span class="ot">NA</span>)),
-            <span class="dt">key =</span> <span class="st">&quot;tailnum&quot;</span>)</code></pre></div>
-<pre><code>## Error: column tailnum in planes contains strings that do not match both regular expressions '^\w{3,3}$' and '^\w{3,3}$'</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># weather has lots of columns by selecting just </span>
+            <span class="dt">key =</span> <span class="st">&quot;tailnum&quot;</span>)
+
+<span class="co"># weather has lots of columns. by selecting just </span>
 <span class="co"># the ones we are interested we can use</span>
-<span class="co"># the stricter check_data3</span>
+<span class="co"># the stricter check_data3 (as opposed to check_data2)</span>
 weather &lt;-<span class="st"> </span><span class="kw">select</span>(weather, year, month, day, hour, origin)
 <span class="co"># interesting! year is only 2013, and like month is a number</span>
 <span class="co"># but day and hour are ints (as expected)</span>
@@ -166,7 +156,7 @@ weather &lt;-<span class="st"> </span><span class="kw">select</span>(weather, ye
 <span class="kw">check_key</span>(flights, <span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour&quot;</span>, <span class="st">&quot;origin&quot;</span>))</code></pre></div>
 <pre><code>## Error: columns 'year', 'month', 'day', 'hour' and 'origin' in flights must be a unique key</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># darn we can't join flights and airlines in an many-to-one relationship</span>
-<span class="co"># as carrier is different classes</span>
+<span class="co"># as carrier is a different classes in the two data sets</span>
 <span class="kw">check_join</span>(flights, airlines, <span class="dt">join =</span> <span class="st">&quot;carrier&quot;</span>)</code></pre></div>
 <pre><code>## Error: columns in flights and airlines must have identical classes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># and flights doesn't have faa (its called origin)</span>
@@ -175,10 +165,7 @@ weather &lt;-<span class="st"> </span><span class="kw">select</span>(weather, ye
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we can join flights and planes using tailnum if we ignore the fact that</span>
 <span class="co"># the many-to-one relationship violates referential integrity (flights without planes)</span>
 <span class="co"># and there are extra matching columns</span>
-<span class="kw">check_join</span>(flights, planes, <span class="dt">join =</span> <span class="st">&quot;tailnum&quot;</span>, <span class="dt">referential =</span> <span class="ot">FALSE</span>, <span class="dt">extra =</span> <span class="ot">TRUE</span>)
-<span class="co"># different  classes strikes again</span>
-<span class="kw">check_join</span>(flights, weather)</code></pre></div>
-<pre><code>## Error: columns in flights and weather must have identical classes</code></pre>
+<span class="kw">check_join</span>(flights, planes, <span class="dt">join =</span> <span class="st">&quot;tailnum&quot;</span>, <span class="dt">referential =</span> <span class="ot">FALSE</span>, <span class="dt">extra =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 
 

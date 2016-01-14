@@ -5,7 +5,7 @@
 \title{Check Data3}
 \usage{
 check_data3(data, values = NULL, min_row = 1, max_row = max_nrow(),
-  key = character(0), data_name = substitute(data))
+  key = character(0), select = FALSE, data_name = substitute(data))
 }
 \arguments{
 \item{data}{The data frame to check.}
@@ -18,6 +18,10 @@ their associated classes and values.}
 \item{max_row}{A count of the maximum number of rows.}
 
 \item{key}{A character vector of the column names representing the key.}
+
+\item{select}{A flag indicating whether to if possible
+drop unnamed columns and reorder the remainder
+so that column names matches those in values.}
 
 \item{data_name}{A string of the name of data.}
 }

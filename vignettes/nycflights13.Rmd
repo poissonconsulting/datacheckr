@@ -10,7 +10,7 @@ vignette: >
 ---
 
 > "It’s rare that a data analysis involves only a single table of data."
-([via](http://r4ds.had.co.nz/relational-data.html#nycflights13-relational))
+([Grolemund & Wickham](http://r4ds.had.co.nz/relational-data.html#nycflights13-relational))
 
 ## Background
 
@@ -107,7 +107,5 @@ check_join(flights, airports, join = "faa")
 # the many-to-one relationship violates referential integrity (flights without planes)
 # and there are extra matching columns
 check_join(flights, planes, join = "tailnum", referential = FALSE, extra = TRUE)
-# different  classes strikes again
-check_join(flights, weather)
 ```
 

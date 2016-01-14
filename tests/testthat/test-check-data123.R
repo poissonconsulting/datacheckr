@@ -35,6 +35,10 @@ test_that("check_datas additional columns", {
   expect_error(check_data3(x, values = list(Count = 1)), "column names in x must be identical to 'Count'")
   expect_identical(check_data3(x, values = list(Count = 1, Extra = 1L)), x)
   expect_error(check_data3(x, values = list(Extra = 1L, Count = 1)), "column names in x must be identical to 'Extra' and 'Count'")
+  expect_identical(check_data3(x, values = list(Extra = 1L, Count = 1), select = TRUE),
+                   subset(x, select = c("Extra", "Count")))
+  expect_identical(check_data3(x, values = list(Count = 1), select = TRUE),
+                   subset(x, select = "Count"))
 })
 
 

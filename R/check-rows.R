@@ -19,7 +19,6 @@ check_rows <- function(data, min_row = 1, max_row = max_nrow(), data_name = subs
   check_count(min_row)
   check_count(max_row)
 
-  if (min_row < 0) check_stop("min_row must not be less than 0")
   if (max_row < min_row) check_stop("max_row must not be less than min_row")
 
   nrow <- nrow(data)

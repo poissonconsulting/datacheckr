@@ -8,24 +8,31 @@ test_that("check_vector errors if value undefined", {
 test_that("check_vector tests vector", {
   x <- 2
   expect_error(check_vector(x, NULL), "x must be of class 'NULL'")
-  expect_identical(check_vector(NULL, NULL), NULL)
+  expect_identical(check_vector(NULL, NULL, min_length = 0), NULL)
   expect_error(check_vector(list(x), 1), "list[(]x[)] must be a vector")
   expect_error(check_vector(1, list(x)), "value must be a vector")
 })
 
 test_that("check_vector works no rows", {
   x <- numeric()
-  expect_identical(x, check_vector(x, 1))
-  expect_identical(x, check_vector(x, as.numeric(NA)))
-  expect_identical(x, check_vector(x, c(1,NA)))
-  expect_identical(x, check_vector(x, c(4,3)))
-  expect_identical(x, check_vector(x, c(4,3,5)))
-  expect_identical(x, check_vector(x, c(4,3,5, NA)))
+  expect_identical(x, check_vector(x, 1, min_length = 0))
+  expect_identical(x, check_vector(x, as.numeric(NA), min_length = 0))
+  expect_identical(x, check_vector(x, c(1,NA), min_length = 0))
+  expect_identical(x, check_vector(x, c(4,3), min_length = 0))
+  expect_identical(x, check_vector(x, c(4,3,5), min_length = 0))
+  expect_identical(x, check_vector(x, c(4,3,5, NA), min_length = 0))
 
-  expect_error(check_vector(x, 1L),
+  expect_error(check_vector(x, 1L, min_length = 0),
                "x must be of class 'integer'")
-  expect_error(check_vector(x, c(1L,2L)),
+  expect_error(check_vector(x, c(1L,2L), min_length = 0),
                "x must be of class 'integer'")
+})
+
+test_that("check_vector tests rows", {
+  x <- 2
+  expect_identical(check_vector(x, 1), x)
+  expect_error(check_vector(x, 1, min_length = 3), "x must be at least of length 3")
+  expect_error(check_vector(x, 1, min_length = 0, max_length = 0), "x must not be longer than 0")
 })
 
 test_that("check_vector tests for classes", {

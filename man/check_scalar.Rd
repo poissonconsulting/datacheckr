@@ -7,17 +7,15 @@
 check_scalar(scalar, value, scalar_name = substitute(scalar))
 }
 \arguments{
-\item{value}{A vector specifying the class and values.}
+\item{scalar}{The scalar to check.}
 
-\item{vector}{The vector to check.}
+\item{value}{A vector specifying the class and value.}
 
-\item{key}{A flag indicating whether the values must be unique.}
-
-\item{data_name}{A string of the name of vector.}
+\item{scalar_name}{A string of the name of vector.}
 }
 \value{
 Throws an informative error or returns an invisible copy of
-the vector.
+the scalar.
 }
 \description{
 Checks the class and values of a scalar

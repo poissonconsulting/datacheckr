@@ -4,14 +4,19 @@
 \alias{check_vector}
 \title{Check Vector}
 \usage{
-check_vector(vector, value, vector_name = substitute(vector))
+check_vector(vector, value, min_length = 1, max_length = max_nrow(),
+  vector_name = substitute(vector))
 }
 \arguments{
 \item{vector}{The vector to check.}
 
 \item{value}{A vector specifying the class and values.}
 
-\item{data_name}{A string of the name of vector.}
+\item{min_length}{A count of the minimum length.}
+
+\item{vector_name}{A string of the name of vector.}
+
+\item{min_length}{A count of the maximum length.}
 }
 \value{
 Throws an informative error or returns an invisible copy of

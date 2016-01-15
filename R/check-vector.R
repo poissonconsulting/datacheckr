@@ -5,7 +5,7 @@
 #' @param vector The vector to check.
 #' @param value A vector specifying the class and values.
 #' @param min_length A count of the minimum length.
-#' @param min_length A count of the maximum length.
+#' @param max_length A count of the maximum length.
 #' @param vector_name A string of the name of vector.
 #'
 #' @return Throws an informative error or returns an invisible copy of

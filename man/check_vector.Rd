@@ -14,9 +14,9 @@ check_vector(vector, value, min_length = 1, max_length = max_nrow(),
 
 \item{min_length}{A count of the minimum length.}
 
-\item{vector_name}{A string of the name of vector.}
+\item{max_length}{A count of the maximum length.}
 
-\item{min_length}{A count of the maximum length.}
+\item{vector_name}{A string of the name of vector.}
 }
 \value{
 Throws an informative error or returns an invisible copy of

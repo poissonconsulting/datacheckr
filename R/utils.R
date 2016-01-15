@@ -10,6 +10,9 @@ if_names <- function(x) {
   x
 }
 
+is_vector <- function(x) is.atomic(x)
+is_scalar <- function(x) is.atomic(x) && length(x) == 1
+
 equal <- function(x, y) isTRUE(all.equal(x, y, check.names = FALSE))
 
 is_POSIXct <- function(x) inherits(x, "POSIXct")
@@ -50,6 +53,11 @@ get_classes <- function(values) {
   vapply(values, get_class, character(1))
 }
 
+name_info <- function(column_name, data_name) {
+  if (!is.null(data_name))
+    return(paste("column", column_name, "in", data_name))
+  return(column_name)
+}
 #' Maximum Integer Value
 #'
 #' A wrapper for \code{.Machine$integer.max}

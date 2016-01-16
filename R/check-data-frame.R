@@ -11,7 +11,7 @@
 #' @export
 check_data_frame <- function(data, data_name = substitute(data)) {
   if (!is.character(data_name)) data_name <- deparse(data_name)
-  check_string(data_name)
+  check_string_internal(data_name)
 
   if (!is.data.frame(data)) check_stop(data_name, " must be a data frame")
   if (anyDuplicated(colnames(data)))

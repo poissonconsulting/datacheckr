@@ -27,7 +27,7 @@
 check_data3 <- function(data, values = NULL, min_row = 1, max_row = max_nrow(),
                         key = character(0), select = FALSE, data_name = substitute(data)) {
   if (!is.character(data_name)) data_name <- deparse(data_name)
-  check_flag(select)
+  check_flag_internal(select)
 
   data <- check_data_frame(data, data_name = data_name)
   data <- check_rows(data, min_row = min_row, max_row = max_row, data_name = data_name)

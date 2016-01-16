@@ -16,8 +16,8 @@ check_rows <- function(data, min_row = 1, max_row = max_nrow(), data_name = subs
   if (!is.character(data_name)) data_name <- deparse(data_name)
   data <- check_data_frame(data, data_name = data_name)
 
-  check_count(min_row)
-  check_count(max_row)
+  check_count_internal(min_row)
+  check_count_internal(max_row)
 
   if (max_row < min_row) check_stop("max_row must not be less than min_row")
 

@@ -7,8 +7,8 @@ check_colnames <- function(data, colnames, exclusive, ordered, data_name) {
     return(invisible(data))
   }
 
-  check_flag(exclusive)
-  check_flag(ordered)
+  check_flag_internal(exclusive)
+  check_flag_internal(ordered)
 
   if (!(is.character(colnames) || is.factor(colnames)))
     check_stop("colnames must be a character vector")

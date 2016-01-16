@@ -1,6 +1,6 @@
 check_values_values <- function(values, unique, nulls) {
-  check_flag(unique)
-  check_flag(nulls)
+  check_flag_internal(unique)
+  check_flag_internal(nulls)
 
   if (is.null(values)) return(invisible(values))
 

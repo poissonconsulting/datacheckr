@@ -19,13 +19,13 @@ is_POSIXct <- function(x) inherits(x, "POSIXct")
 
 check_stop <- function(...) stop(..., call. = FALSE)
 
-check_string <- function(x)
+check_string_internal <- function(x)
   if (!is_string(x)) check_stop(substitute(x), " must be a string")
 
-check_flag <- function(x)
+check_flag_internal <- function(x)
   if (!is_flag(x)) check_stop(substitute(x), " must be a flag")
 
-check_count <- function(x)
+check_count_internal <- function(x)
   if (!is_count(x)) check_stop(substitute(x), " must be a count")
 
 plural <- function(x, n = 1, end = "") paste0(x, ifelse(n != 1, "s", ""), end)

@@ -41,10 +41,10 @@ check_join <- function(data, parent, join = NULL, referential = TRUE,
   if (!is.character(data_name)) data_name <- deparse(data_name)
   if (!is.character(parent_name)) parent_name <- deparse(parent_name)
 
-  check_flag(referential)
-  check_flag(extra)
-  check_string(data_name)
-  check_string(parent_name)
+  check_flag_internal(referential)
+  check_flag_internal(extra)
+  check_string_internal(data_name)
+  check_string_internal(parent_name)
 
   data <- check_data_frame(data, data_name)
   parent <- check_data_frame(parent, parent_name)

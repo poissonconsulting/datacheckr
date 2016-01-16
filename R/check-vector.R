@@ -15,12 +15,12 @@
 check_vector <- function(vector, value, min_length = 1, max_length = max_nrow(),
                          vector_name = substitute(vector)) {
   if (!is.character(vector_name)) vector_name <- deparse(vector_name)
-  check_string(vector_name)
+  check_string_internal(vector_name)
 
   if (!is_vector(vector)) check_stop(vector_name, " must be a vector")
   if (!is_vector(value)) check_stop("value must be a vector")
-  check_count(min_length)
-  check_count(max_length)
+  check_count_internal(min_length)
+  check_count_internal(max_length)
   if (max_length < min_length) check_stop("max_length must not be less than min_length")
 
   if (length(vector) < min_length)

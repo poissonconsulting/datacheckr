@@ -81,3 +81,20 @@ check_number <- function(x, x_name = substitute(x)) {
 
   check_scalar(x, 1, scalar_name = x_name)
 }
+
+#' Checks Date
+#'
+#' @param x The Date to check.
+#' @param x_name A string of the name of x.
+#'
+#' @return Throws an informative error or returns an invisible copy of
+#' x.
+#' @seealso \code{\link{datacheckr}}
+#' @export
+check_date <- function(x, x_name = substitute(x)) {
+  if (!is.character(x_name)) x_name <- deparse(x_name)
+  check_string_internal(x_name)
+
+  check_scalar(x, as.Date("2000-01-01"), scalar_name = x_name)
+}
+

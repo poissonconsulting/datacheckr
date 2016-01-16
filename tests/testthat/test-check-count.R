@@ -1,6 +1,6 @@
 context("check-count")
 
-test_that("check_count errors if value undefined", {
+test_that("check_count errors", {
   y <- 2L
   expect_identical(check_count(y), y)
   y <- 2

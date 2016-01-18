@@ -12,6 +12,9 @@
 #' data.
 #' @seealso \code{\link{datacheckr}}
 #' @export
+#' @examples
+#' try(check_rows(data.frame()))
+#' try(check_rows(data.frame(x = 1), 2))
 check_rows <- function(data, min_row = 1, max_row = max_nrow(), data_name = substitute(data)) {
   if (!is.character(data_name)) data_name <- deparse(data_name)
   data <- check_data_frame(data, data_name = data_name)

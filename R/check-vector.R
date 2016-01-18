@@ -17,21 +17,21 @@ check_vector <- function(vector, value, min_length = 1, max_length = max_nrow(),
   if (!is.character(vector_name)) vector_name <- deparse(vector_name)
   check_string_internal(vector_name)
 
-  if (!is_vector(vector)) check_stop(vector_name, " must be a vector")
-  if (!is_vector(value)) check_stop("value must be a vector")
+  if (!is_vector(vector)) error(vector_name, " must be a vector")
+  if (!is_vector(value)) error("value must be a vector")
   check_count_internal(min_length)
   check_count_internal(max_length)
-  if (max_length < min_length) check_stop("max_length must not be less than min_length")
+  if (max_length < min_length) error("max_length must not be less than min_length")
 
   if (length(vector) < min_length)
-    check_stop(vector_name, " must be at least of length ", min_length)
+    error(vector_name, " must be at least of length ", min_length)
 
   if (length(vector) > max_length)
-    check_stop(vector_name, " must not be longer than ", max_length)
+    error(vector_name, " must not be longer than ", max_length)
 
   classes <- get_classes(list(value))
   if (!inherits(vector, classes))
-    check_stop(vector_name, " must be of class ", punctuate(classes))
+    error(vector_name, " must be of class ", punctuate(classes))
 
   value <- check_vector_value_missing(vector, value, column_name = vector_name)
   if (length(value) == 1) return(invisible(vector))

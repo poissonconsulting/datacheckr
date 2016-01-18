@@ -19,13 +19,13 @@ check_rows <- function(data, min_row = 1, max_row = max_nrow(), data_name = subs
   check_count_internal(min_row)
   check_count_internal(max_row)
 
-  if (max_row < min_row) check_stop("max_row must not be less than min_row")
+  if (max_row < min_row) error("max_row must not be less than min_row")
 
   nrow <- nrow(data)
 
   if (nrow < min_row)
-    check_stop(data_name, " must have at least ", min_row, plural(" row", min_row))
+    error(data_name, " must have at least ", min_row, plural(" row", min_row))
   if (nrow > max_row)
-    check_stop(data_name, " must have no more than ", max_row, plural(" row", min_row))
+    error(data_name, " must have no more than ", max_row, plural(" row", min_row))
   invisible(data)
 }

@@ -1,17 +1,17 @@
 check_class_matches <- function(data, parent, join, data_name, parent_name) {
   if (!equal(lapply(data[if_names(join)], class),
                  lapply(parent[join], class)))
-     check_stop("join columns in ", data_name, " and ", parent_name, " must have identical classes")
+     error("join columns in ", data_name, " and ", parent_name, " must have identical classes")
   invisible(data)
 }
 
 check_referential_integrity <- function(data, parent, join, data_name, parent_name) {
   if ("datacheckr_reserved_column_name" %in% colnames(data) || "datacheckr_reserved_column_name" %in% colnames(data))
-    check_stop("the column name 'datacheckr_reserved_column_name' is reserved!")
+    error("the column name 'datacheckr_reserved_column_name' is reserved!")
   parent$datacheckr_reserved_column_name <- TRUE
   merged <- merge(data, parent, by.x = if_names(join), by.y = join, all.x = TRUE)
   if (any(is.na(merged$datacheckr_reserved_column_name)))
-    check_stop("many-to-one join between ", data_name, " and ", parent_name, " violates referential integrity")
+    error("many-to-one join between ", data_name, " and ", parent_name, " violates referential integrity")
   invisible(data)
 }
 
@@ -52,14 +52,14 @@ check_join <- function(data, parent, join = NULL, referential = TRUE,
   matches <- intersect(colnames(data), colnames(parent))
   if (is.null(join)) {
     if (!length(matches))
-      check_stop(data_name, " and ", parent_name, " must have matching columns")
+      error(data_name, " and ", parent_name, " must have matching columns")
     join <- matches
   }
   data <- check_cols(data, colnames = if_names(join),
                      exclusive = FALSE, ordered = FALSE, data_name = data_name)
   parent <- check_key(parent, key = join, data_name = parent_name)
   if (!extra && length(setdiff(matches, join)))
-    check_stop(data_name, " and ", parent_name, " must not have additional matching columns")
+    error(data_name, " and ", parent_name, " must not have additional matching columns")
   data <- check_class_matches(data, parent, join, data_name, parent_name)
   if (referential)
     data <- check_referential_integrity(data, parent, join, data_name, parent_name)

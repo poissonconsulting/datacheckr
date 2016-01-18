@@ -17,16 +17,16 @@ equal <- function(x, y) isTRUE(all.equal(x, y, check.names = FALSE))
 
 is_POSIXct <- function(x) inherits(x, "POSIXct")
 
-check_stop <- function(...) stop(..., call. = FALSE)
+error <- function(...) stop(..., call. = FALSE)
 
 check_string_internal <- function(x)
-  if (!is_string(x)) check_stop(substitute(x), " must be a string")
+  if (!is_string(x)) error(substitute(x), " must be a string")
 
 check_flag_internal <- function(x)
-  if (!is_flag(x)) check_stop(substitute(x), " must be a flag")
+  if (!is_flag(x)) error(substitute(x), " must be a flag")
 
 check_count_internal <- function(x)
-  if (!is_count(x)) check_stop(substitute(x), " must be a count")
+  if (!is_count(x)) error(substitute(x), " must be a count")
 
 plural <- function(x, n = 1, end = "") paste0(x, ifelse(n != 1, "s", ""), end)
 isare <- function(n) ifelse(n > 1, "are", "is")

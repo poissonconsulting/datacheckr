@@ -22,7 +22,7 @@ check_key <- function(data, key = NULL, data_name = substitute(data)) {
 
   key <- as.character(key)
   if (anyDuplicated(data[key])) {
-      check_stop(plural("column", length(key), " "),
+      error(plural("column", length(key), " "),
                  punctuate(key, "and"), " in ", data_name, " must be a unique key")
   }
   invisible(data)

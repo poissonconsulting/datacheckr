@@ -14,6 +14,9 @@ A wrapper for \code{2^31 - 1}
 which defines the \emph{theoretical}
 maximum number of rows in a data.frame.
 }
+\examples{
+max_nrow()
+}
 \seealso{
 \code{\link{datacheckr}}
 }

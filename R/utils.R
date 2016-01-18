@@ -58,6 +58,7 @@ name_info <- function(column_name, data_name) {
     return(paste("column", column_name, "in", data_name))
   return(column_name)
 }
+
 #' Maximum Integer Value
 #'
 #' A wrapper for \code{.Machine$integer.max}
@@ -66,7 +67,21 @@ name_info <- function(column_name, data_name) {
 #' @return A count of the maximum integer value.
 #' @seealso \code{\link{datacheckr}}
 #' @export
+#' @examples
+#' max_integer()
 max_integer <- function() .Machine$integer.max
+
+#' Minimum Integer Value
+#'
+#' A wrapper for \code{-.Machine$integer.max}
+#' which defines the minimum integer value for the machine.
+#'
+#' @return A int of the minimum integer value.
+#' @seealso \code{\link{datacheckr}}
+#' @export
+#' @examples
+#' min_integer()
+min_integer <- function() -.Machine$integer.max
 
 #' Maximum Number of Rows
 #'
@@ -77,4 +92,6 @@ max_integer <- function() .Machine$integer.max
 #' @return A count of the maximum number of possible rows.
 #' @seealso \code{\link{datacheckr}}
 #' @export
+#' @examples
+#' max_nrow()
 max_nrow <- function() as.integer(2 ^ 31 - 1)

@@ -8,6 +8,8 @@ check_data_values_column <- function(column_name, data, values, data_name) {
 
   value <- check_vector_value_missing(vector, value, column_name, data_name)
   if (length(value) == 1) return(TRUE)
+  vector <- rm_nas(vector)
+  if (!length(vector)) return(TRUE)
   check_vector_value(vector, value, column_name, data_name)
 }
 

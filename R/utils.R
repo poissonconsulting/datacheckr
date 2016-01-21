@@ -40,6 +40,8 @@ punctuate <- function(x, qualifier = "or") {
   paste(paste(x[-n], collapse = ", "), qualifier, x[n])
 }
 
+rm_nas <- function(x) x[!is.na(x)]
+
 classes <- function() {
   c("NULL", "logical", "integer", "numeric", "character", "factor", "Date", "POSIXct")
 }

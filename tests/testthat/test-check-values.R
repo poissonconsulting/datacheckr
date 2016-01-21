@@ -120,6 +120,9 @@ test_that("check_values tests for specific values", {
   expect_error(check_values(x, values = list(Count2 = c(5, 5, 5))), "column Count2 in x must only include the permitted value 5")
   expect_error(check_values(x, values = list(Count2 = c(0, 2, 3, 4, 5, 6))), "column Count2 in x includes non-permitted values")
   expect_identical(check_values(x, values = list(Count2 = c(1, 4, 5))), x)
+  expect_identical(check_values(x, values = list(Count2 = c(1, 4, 5, NA))), x)
+  x <- data.frame(Count2 = c(1, NA))
+  expect_identical(check_values(x, values = list(Count2 = c(1, 4, 5, NA))), x)
 })
 
 test_that("check_values works with logical vectors", {

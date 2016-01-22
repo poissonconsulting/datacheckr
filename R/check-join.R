@@ -5,11 +5,15 @@ check_class_matches <- function(data, parent, join, data_name, parent_name) {
   invisible(data)
 }
 
-check_referential_integrity <- function(data, parent, join, data_name, parent_name) {
+check_referential_integrity <- function(data, parent, join, ignore_nas, data_name, parent_name) {
   if ("datacheckr_reserved_column_name" %in% colnames(data) || "datacheckr_reserved_column_name" %in% colnames(data))
     error("the column name 'datacheckr_reserved_column_name' is reserved!")
   parent$datacheckr_reserved_column_name <- TRUE
-  merged <- merge(data, parent, by.x = if_names(join), by.y = join, all.x = TRUE)
+  data2 <- data[if_names(join)]
+  if (ignore_nas) {
+    data2 <- data2[apply(!is.na(data2),1,any),,drop = FALSE]
+  }
+  merged <- merge(data2, parent, by.x = if_names(join), by.y = join, all.x = TRUE)
   if (any(is.na(merged$datacheckr_reserved_column_name)))
     error("many-to-one join between ", data_name, " and ", parent_name, " violates referential integrity")
   invisible(data)
@@ -28,6 +32,8 @@ check_referential_integrity <- function(data, parent, join, data_name, parent_na
 #' if the names of the columns differ.
 #' @param referential A flag indicating whether to check for referential integrity.
 #' @param extra A flag indicating whether to allow additional matching columns.
+#' @param ignore_nas A flag indicating whether to ignore missing values or
+#' treat them as values.
 #' @param parent_name A string of the name of parent.
 #'
 #' @return Throws an informative error or returns an invisible copy of
@@ -35,7 +41,7 @@ check_referential_integrity <- function(data, parent, join, data_name, parent_na
 #' @seealso \code{\link{datacheckr}}
 #' @export
 check_join <- function(data, parent, join = NULL, referential = TRUE,
-                       extra = FALSE,
+                       extra = FALSE, ignore_nas = FALSE,
                        data_name = substitute(data),
                        parent_name = substitute(parent)) {
   if (!is.character(data_name)) data_name <- deparse(data_name)
@@ -43,6 +49,7 @@ check_join <- function(data, parent, join = NULL, referential = TRUE,
 
   check_flag_internal(referential)
   check_flag_internal(extra)
+  check_flag_internal(ignore_nas)
   check_string_internal(data_name)
   check_string_internal(parent_name)
 
@@ -62,6 +69,6 @@ check_join <- function(data, parent, join = NULL, referential = TRUE,
     error(data_name, " and ", parent_name, " must not have additional matching columns")
   data <- check_class_matches(data, parent, join, data_name, parent_name)
   if (referential)
-    data <- check_referential_integrity(data, parent, join, data_name, parent_name)
+    data <- check_referential_integrity(data, parent, join, ignore_nas, data_name, parent_name)
   invisible(data)
 }

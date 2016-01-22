@@ -5,7 +5,8 @@
 \title{Check Join}
 \usage{
 check_join(data, parent, join = NULL, referential = TRUE, extra = FALSE,
-  data_name = substitute(data), parent_name = substitute(parent))
+  ignore_nas = FALSE, data_name = substitute(data),
+  parent_name = substitute(parent))
 }
 \arguments{
 \item{data}{The data frame to check.}
@@ -18,6 +19,9 @@ if the names of the columns differ.}
 \item{referential}{A flag indicating whether to check for referential integrity.}
 
 \item{extra}{A flag indicating whether to allow additional matching columns.}
+
+\item{ignore_nas}{A flag indicating whether to ignore missing values or
+treat them as values.}
 
 \item{data_name}{A string of the name of data.}
 

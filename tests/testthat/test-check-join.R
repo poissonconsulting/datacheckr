@@ -42,3 +42,19 @@ test_that("check_join checks colnames diff names", {
   expect_identical(check_join(x, y, c("x" = "y")), x)
   expect_error(check_join(x, y, c("y" = "x")), "column names in x must include 'y'")
 })
+
+test_that("check_join missing values", {
+  x <- data.frame(x = c(NA, 2))
+  y <- data.frame(x = 2)
+  expect_error(check_join(x, y), "many-to-one join between x and y violates referential integrity")
+  expect_identical(check_join(x, y, ignore_nas = TRUE), x)
+  y <- data.frame(x = c(2, NA))
+  expect_identical(check_join(x, y), x)
+  expect_identical(check_join(x, y, ignore_nas = TRUE), x)
+  x <- data.frame(x = c(NA, 2, NA))
+  expect_identical(check_join(x, y), x)
+  x <- data.frame(x = as.numeric(c(NA, NA)))
+  expect_identical(check_join(x, y), x)
+  expect_identical(check_join(x, y, ignore_nas = TRUE), x)
+})
+

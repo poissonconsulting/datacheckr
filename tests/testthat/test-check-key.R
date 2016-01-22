@@ -46,3 +46,8 @@ test_that("check_key works character(0)", {
   expect_identical(check_key(x, character(0)), x)
 })
 
+test_that("check_key works nas", {
+  x <- data.frame(y = c(NA,NA))
+  expect_error(check_key(x), "column 'y' in x must be a unique key")
+  expect_identical(check_key(x, character(0)), x)
+})

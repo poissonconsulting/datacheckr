@@ -1,6 +1,6 @@
 Package: datacheckr
 Title: Data Checking
-Version: 0.0.2.9013
+Version: 0.0.2.9014
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
 Description: Checks column names,
     column classes, values, keys, joins, vectors and scalars.
@@ -12,11 +12,12 @@ Depends:
 License: MIT + file LICENSE
 URL: https://github.com/poissonconsulting/datacheckr
 LazyData: true
+Imports:
+    dplyr,
+    magrittr
 Suggests:
     assertr,
-    dplyr,
     knitr,
-    magrittr,
     nycflights13,
     rmarkdown,
     testthat

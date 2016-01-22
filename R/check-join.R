@@ -6,15 +6,11 @@ check_class_matches <- function(data, parent, join, data_name, parent_name) {
 }
 
 check_referential_integrity <- function(data, parent, join, ignore_nas, data_name, parent_name) {
-  if ("datacheckr_reserved_column_name" %in% colnames(data) || "datacheckr_reserved_column_name" %in% colnames(data))
-    error("the column name 'datacheckr_reserved_column_name' is reserved!")
-  parent$datacheckr_reserved_column_name <- TRUE
   data2 <- data[if_names(join)]
-  if (ignore_nas) {
+  if (ignore_nas)
     data2 <- data2[apply(!is.na(data2),1,any),,drop = FALSE]
-  }
-  merged <- merge(data2, parent, by.x = if_names(join), by.y = join, all.x = TRUE)
-  if (any(is.na(merged$datacheckr_reserved_column_name)))
+  data2 <- dplyr::anti_join(data2, parent, by = join)
+  if (nrow(data2))
     error("many-to-one join between ", data_name, " and ", parent_name, " violates referential integrity")
   invisible(data)
 }

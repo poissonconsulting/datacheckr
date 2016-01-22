@@ -4,4 +4,5 @@
 #'
 #' @docType package
 #' @name datacheckr
+#' @importFrom magrittr %<>% %>%
 NULL

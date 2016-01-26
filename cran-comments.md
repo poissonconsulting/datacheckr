@@ -8,9 +8,22 @@
 
 There were no ERRORs or WARNINGs.
 
-There was one NOTE as new submission CRAN.
+There was one NOTE regarding the License components.
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
+
+License components with restrictions and base license permitting such:
+  MIT + file LICENSE
+File 'LICENSE':
+  YEAR: 2016
 
 ## Downstream dependencies
 
-There are currently no downstream dependencies
-as this is a new submission to CRAN.
+### Check results
+1 checked out of 1 dependencies 
+
+### rpdo (0.1.1)
+Maintainer: Joe Thorley <joe@poissonconsulting.ca>
+
+__OK__

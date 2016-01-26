@@ -10,7 +10,7 @@
 
 <meta name="author" content="Joe Thorley" />
 
-<meta name="date" content="2016-01-14" />
+<meta name="date" content="2016-01-26" />
 
 <title>An Introduction to datacheckr</title>
 
@@ -72,7 +72,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">An Introduction to datacheckr</h1>
 <h4 class="author"><em>Joe Thorley</em></h4>
-<h4 class="date"><em>2016-01-14</em></h4>
+<h4 class="date"><em>2016-01-26</em></h4>
 </div>
 
 
@@ -82,13 +82,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The names of the list elements specify the columns that need to appear in the data frame while the classes of the vectors specify the classes of the columns.</p>
 <p>Thus, to specify that x <em>must</em> contain a column called <code>col1</code> of class integer the call would be as follows.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(datacheckr)
-<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="kw">integer</span>()))</code></pre></div>
+<span class="kw">check_data2</span>(mtcars, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="kw">integer</span>()))</code></pre></div>
 <pre><code>## Error: mtcars must have column 'col1'</code></pre>
 <p>To specify that x <em>can not</em> contain a column called <code>mpg</code> the call is just</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="ot">NULL</span>))</code></pre></div>
-<pre><code>## Error: mtcars must not include column mpg</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="ot">NULL</span>))</code></pre></div>
+<pre><code>## Error: values cannot include NULLs</code></pre>
 <p>and to specify that it <em>can</em> contain a column <code>col1</code> that can be integer or numeric values the call would be</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data1</span>(mtcars, <span class="kw">list</span>(
   <span class="dt">col1 =</span> <span class="kw">integer</span>(), 
   <span class="dt">col1 =</span> <span class="ot">NULL</span>, 
   <span class="dt">col1 =</span> <span class="kw">numeric</span>()))</code></pre></div>
@@ -97,12 +97,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="checking-missing-values" class="section level2">
 <h2>Checking Missing Values</h2>
 <p>To specify that a column cannot include missing values pass a single non-missing value.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="dv">3</span>))
-<span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> -<span class="dv">1</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="dv">3</span>))
+<span class="kw">check_data2</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> -<span class="dv">1</span>))</code></pre></div>
 <p>To specify that it can include missing values include an NA in the vector</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">9</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">9</span>)))</code></pre></div>
 <p>and to specify that it can only include missing values use</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">as.numeric</span>(<span class="ot">NA</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(mtcars, <span class="kw">list</span>(<span class="dt">mpg =</span> <span class="kw">as.numeric</span>(<span class="ot">NA</span>)))</code></pre></div>
 <pre><code>## Error: column mpg in mtcars can only include missing values</code></pre>
 </div>
 <div id="checking-ranges" class="section level2">
@@ -113,15 +113,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <span class="dt">LocationX =</span> <span class="kw">c</span>(<span class="dv">2000</span>, <span class="ot">NA</span>, <span class="dv">2001</span>, <span class="ot">NA</span>), 
   <span class="dt">Extra =</span> <span class="ot">TRUE</span>)
 
-<span class="kw">check_data</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(0L, .Machine$integer.max)))</code></pre></div>
+<span class="kw">check_data2</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(0L, .Machine$integer.max)))</code></pre></div>
 <p>As <code>.Machine$integer.max</code> is difficult to remember the <code>max_integer()</code> wrapper function is provided so that the above code can be written as.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(0L, <span class="kw">max_integer</span>())))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(0L, <span class="kw">max_integer</span>())))</code></pre></div>
 </div>
 <div id="checking-specific-values" class="section level2">
 <h2>Checking Specific Values</h2>
 <p>If particular values are required then specify them as a vector of three or more non-missing values</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(0L, 1L, 3L)))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(1L, 2L, 2L)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(0L, 1L, 3L)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(data1, <span class="kw">list</span>(<span class="dt">Count =</span> <span class="kw">c</span>(1L, 2L, 2L)))</code></pre></div>
 <pre><code>## Error: column Count in data1 must only include the permitted values 1 and 2</code></pre>
 <p>The order of the values in an element is unimportant.</p>
 </div>
@@ -132,25 +132,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="checking-logical-vectors" class="section level2">
 <h2>Checking Logical Vectors</h2>
 <p>With logical values two non-missing values produce the same behaviour as three or more non-missing values. For example to test for only <code>TRUE</code> values use</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(data1, <span class="kw">list</span>(<span class="dt">Extra =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(data1, <span class="kw">list</span>(<span class="dt">Extra =</span> <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>)))</code></pre></div>
 </div>
 <div id="checking-character-vectors" class="section level2">
 <h2>Checking Character Vectors</h2>
 <p>To specify that <code>col1</code> must be a character vector use</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(x, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="st">&quot;b&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(x, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="st">&quot;b&quot;</span>))</code></pre></div>
 <p>while the following requires that the values match both character elements which are treated as regular expressions</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(x, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="kw">c</span>(<span class="st">&quot;^//d&quot;</span>, <span class="st">&quot;.*&quot;</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(x, <span class="kw">list</span>(<span class="dt">col1 =</span> <span class="kw">c</span>(<span class="st">&quot;^//d&quot;</span>, <span class="st">&quot;.*&quot;</span>)))</code></pre></div>
 <p>with three or more non-missing character elements each value in <code>col1</code> must match at least one of the elements which are treated as regular expressions. Regular expressions are matched using <code>grepl</code> with <code>perl=TRUE</code>.</p>
 </div>
 <div id="checking-factors" class="section level2">
 <h2>Checking Factors</h2>
 <p>To indicate that <code>supp</code> should be a factor use either of the following</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>()))
-<span class="kw">check_data</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="st">&quot;blahblah&quot;</span>)))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>()))
+<span class="kw">check_data2</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="st">&quot;blahblah&quot;</span>)))</code></pre></div>
 <p>To specify that <code>supp</code> should be a factor that includes the factor levels <code>OJ</code> and <code>VC</code> (in any order) just pass two non-missing values</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;VC&quot;</span>, <span class="st">&quot;OJ&quot;</span>))))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;VC&quot;</span>, <span class="st">&quot;OJ&quot;</span>))))</code></pre></div>
 <p>And to specify the actual factor levels that <code>supp</code> must have pass three or more non-missing values</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;VC&quot;</span>, <span class="st">&quot;OJ&quot;</span>, <span class="st">&quot;OJ&quot;</span>))))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check_data2</span>(ToothGrowth, <span class="kw">list</span>(<span class="dt">supp =</span> <span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;VC&quot;</span>, <span class="st">&quot;OJ&quot;</span>, <span class="st">&quot;OJ&quot;</span>))))</code></pre></div>
 </div>
 
 

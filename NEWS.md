@@ -5,7 +5,7 @@ to allow checking of the number of rows.
 - Added argument `key = character(0)` to `check_data` to allow checking of a unique key.
 
 - Added stricter variants of `check_data` called `check_data2` and `check_data3`
-as well as an alias `check_data1` for `check_data`.
+as well as an alias `check_data1` for `check_data` and deprecated `check_data`.
 
 - Added function `check_vector` to check the class and values of a vector.
 - Added function `check_scalar` to check the class and values of a scalar.

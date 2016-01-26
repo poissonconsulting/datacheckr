@@ -20,5 +20,5 @@ test_that("check_data_frame works no rows", {
 test_that("check_data_frame requires unique column names in data", {
   z <- data.frame("A" = 1, "b" = 2L, "c" = 4L)
   colnames(z) <- c("A", "b", "A")
-  expect_error(check_data(z), "z must have unique column names")
+  expect_error(check_data1(z), "z must have unique column names")
 })

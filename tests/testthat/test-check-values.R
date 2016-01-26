@@ -49,7 +49,7 @@ test_that("check_values tests for column names", {
 
 test_that("check_values gives informative message when absent", {
   x <- data.frame(z3 = 1)
-  expect_error(check_data(x, values = list(z4 = 1)), "x must have column 'z4'")
+  expect_error(check_data1(x, values = list(z4 = 1)), "x must have column 'z4'")
 })
 
 

@@ -1,4 +1,10 @@
-# development version
+# datacheckr NEWS
+
+## v0.1.1
+
+- Fixed tests so that compatible with testthat v0.11.0.9000
+
+## v0.1.0
 
 - Added arguments `min_row = 0` and `max_row = max_nrow()` to `check_data`
 to allow checking of the number of rows.
@@ -24,7 +30,7 @@ as well as an alias `check_data1` for `check_data` and deprecated `check_data`.
 - Added argument `data_name = substitute(data)` to all functions so users can overide
 the name of data.
 
-# datacheckr v0.0.2
+## v0.0.2
 
 - Added vignette datacheckr.
 - The copy of the original data frame returned by `check_data` is now invisible.
@@ -32,6 +38,6 @@ the name of data.
 - On fail `check_data` now lists specific permitted values if 5 or less 
 (if 3 or less for character)
 
-# datacheckr v0.0.1
+## v0.0.1
 
 - Initial Release

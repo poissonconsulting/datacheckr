@@ -26,7 +26,7 @@ test_that("check_values requires unique column names in data", {
   data <- data.frame("A" = 1, "b" = 2L, "c" = 4L)
   colnames(data) <- c("A", "b", "A")
   expect_error(check_values(data),
-               " data must have unique column names")
+               "data must have unique column names")
 })
 
 test_that("check_values substitutes names correctly", {

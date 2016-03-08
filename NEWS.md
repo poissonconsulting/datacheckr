@@ -1,4 +1,4 @@
-# datacheckr NEWS
+# NEWS datacheckr
 
 ## v0.1.1
 

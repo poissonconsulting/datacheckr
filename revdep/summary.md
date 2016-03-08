@@ -6,11 +6,11 @@
 |:--------|:----------------------------|
 |version  |R version 3.2.3 (2015-12-10) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.491)           |
+|ui       |RStudio (0.99.892)           |
 |language |(EN)                         |
 |collate  |en_CA.UTF-8                  |
 |tz       |America/Vancouver            |
-|date     |2016-01-26                   |
+|date     |2016-03-08                   |
 
 ## Packages
 

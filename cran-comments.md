@@ -6,7 +6,18 @@
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs or NOTES.
+There were no ERRORs or WARNINGs.
+
+There was one NOTE.
+
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
+
+License components with restrictions and base license permitting such:
+  MIT + file LICENSE
+File 'LICENSE':
+  YEAR: 2016
+  COPYRIGHT HOLDER: Poisson Consulting Ltd.
 
 ## Downstream dependencies
 

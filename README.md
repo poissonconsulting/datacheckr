@@ -4,14 +4,16 @@
 datacheckr
 ==========
 
+Introduction
+------------
+
 `datacheckr` is an R package to check data frame's rows, column names, column classes, values, unique keys and joins.
 
-Why Another Data Checking Package?
-----------------------------------
+### Why Another Data Checking Package?
 
 There are several existing R packages for checking data frames including `assertr`, `assertive` and `datacheck`. They are great for checking data in scripts but they have several limitations when embedded in functions in packages.
 
-### Informative Error Messages
+#### Informative Error Messages
 
 Consider the following code.
 
@@ -35,7 +37,7 @@ check_data(mtcars, list(mpg = c(0,1)))
 #> Error: the values in column mpg in mtcars must lie between 0 and 1
 ```
 
-### Intuitive Checks
+#### Intuitive Checks
 
 Consider the data frame `data1`
 
@@ -72,7 +74,7 @@ if ("LocationX" %in% colnames(data1))
 
 which is in my opinion less intuitive.
 
-### A Single Function Call
+#### A Single Function Call
 
 The above checks can be performed on several data frames by simply repeatedly calling `check_data()`
 
@@ -104,28 +106,18 @@ The same tests using `assertr` would require the `assertr` code above to be copi
 Installation
 ------------
 
-To install the latest release version from CRAN
+To install the release version from CRAN
 
-``` r
-install.packages("datacheckr")
-```
+    install.packages("datacheckr")
 
-To install the development version from GitHub
+Or the development version from GitHub
 
-``` r
-# install.packages("devtools")
-devtools::install_github("poissonconsulting/datacheckr")
-```
+    # install.packages("devtools")
+    devtools::install_github("poissonconsulting/datacheckr")
 
-More Information
-----------------
+Contribution
+------------
 
-For more information view `vignette("datacheckr")` for *An Introduction to checkdatar*.
+Please report any [issues](https://github.com/poissonconsulting/datacheckr/issues).
 
-Contact
--------
-
-You are welcome to:
-
--   submit suggestions and bug reports at <https://github.com/poissonconsulting/datacheckr/issues>
--   send a pull request on <https://github.com/poissonconsulting/datacheckr>
+[Pull requests](https://github.com/poissonconsulting/datacheckr/pulls) are always welcome.

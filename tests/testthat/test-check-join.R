@@ -11,6 +11,8 @@ test_that("check_join checks colnames", {
   x <- data.frame(y = 2, z = 3)
   expect_error(check_join(y, x, "z"), "y and x must not have additional matching columns")
   expect_identical(check_join(y, x, "z", extra = TRUE), y)
+  expect_error(check_join(y, x, "z", extra = "y2"))
+  expect_identical(check_join(y, x, "z", extra = "y"), y)
   expect_identical(check_join(y, x, c("z", "y")), y)
 
   y <- data.frame(y = c(1,2,3,4))

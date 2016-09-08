@@ -4,8 +4,8 @@
 \alias{check_join}
 \title{Check Join}
 \usage{
-check_join(data, parent, join = NULL, referential = TRUE, extra = FALSE,
-  ignore_nas = FALSE, data_name = substitute(data),
+check_join(data, parent, join = NULL, referential = TRUE,
+  extra = "Comments", ignore_nas = FALSE, data_name = substitute(data),
   parent_name = substitute(parent))
 }
 \arguments{
@@ -18,7 +18,8 @@ if the names of the columns differ.}
 
 \item{referential}{A flag indicating whether to check for referential integrity.}
 
-\item{extra}{A flag indicating whether to allow additional matching columns.}
+\item{extra}{A flag indicating whether to allow additional matching columns or
+a character vector of the names to allow.}
 
 \item{ignore_nas}{A flag indicating whether to ignore missing values or
 treat them as values.}

@@ -1,4 +1,4 @@
-context("check-data1")
+context("check-data")
 
 test_that("check_data does nothing with NULL values", {
   x <- data.frame(y = 2)

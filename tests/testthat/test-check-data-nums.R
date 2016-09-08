@@ -1,4 +1,4 @@
-context("check-data123")
+context("check-data-nums")
 
 test_that("check_datas no rows", {
   x <- data.frame()

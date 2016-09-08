@@ -27,7 +27,8 @@ check_referential_integrity <- function(data, parent, join, ignore_nas, data_nam
 #' @param join A character vector of the join columns. Use a named character vector
 #' if the names of the columns differ.
 #' @param referential A flag indicating whether to check for referential integrity.
-#' @param extra A flag indicating whether to allow additional matching columns.
+#' @param extra A flag indicating whether to allow additional matching columns or
+#' a character vector of the names to allow.
 #' @param ignore_nas A flag indicating whether to ignore missing values or
 #' treat them as values.
 #' @param parent_name A string of the name of parent.
@@ -37,14 +38,14 @@ check_referential_integrity <- function(data, parent, join, ignore_nas, data_nam
 #' @seealso \code{\link{datacheckr}}
 #' @export
 check_join <- function(data, parent, join = NULL, referential = TRUE,
-                       extra = FALSE, ignore_nas = FALSE,
+                       extra = "Comments", ignore_nas = FALSE,
                        data_name = substitute(data),
                        parent_name = substitute(parent)) {
   if (!is.character(data_name)) data_name <- deparse(data_name)
   if (!is.character(parent_name)) parent_name <- deparse(parent_name)
 
   check_flag_internal(referential)
-  check_flag_internal(extra)
+  if (!is_flag(extra) && !is.character(extra)) error("extra must be a flag or character vector")
   check_flag_internal(ignore_nas)
   check_string_internal(data_name)
   check_string_internal(parent_name)
@@ -61,8 +62,16 @@ check_join <- function(data, parent, join = NULL, referential = TRUE,
   data <- check_cols(data, colnames = if_names(join),
                      exclusive = FALSE, ordered = FALSE, data_name = data_name)
   parent <- check_key(parent, key = join, data_name = parent_name)
-  if (!extra && length(setdiff(matches, join)))
-    error(data_name, " and ", parent_name, " must not have additional matching columns")
+
+  if (is_flag(extra)) {
+    if (!extra && length(dplyr::setdiff(matches, join)))
+      error(data_name, " and ", parent_name, " must not have additional matching columns")
+  } else { # is.character(extra)
+    extra %<>% dplyr::intersect(matches)
+    if (length(dplyr::setdiff(matches, join)) && (!length(extra) || length(dplyr::setdiff(extra, dplyr::setdiff(matches, join)))))
+      error(data_name, " and ", parent_name, " must not have additional matching columns")
+  }
+
   data <- check_class_matches(data, parent, join, data_name, parent_name)
   if (referential)
     data <- check_referential_integrity(data, parent, join, ignore_nas, data_name, parent_name)

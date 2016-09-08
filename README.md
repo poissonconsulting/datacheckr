@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/datacheckr.svg?branch=master)](https://travis-ci.org/poissonconsulting/datacheckr) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/datacheckr)](http://cran.r-project.org/package=datacheckr) [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datacheckr)](https://hadley.shinyapps.io/cran-downloads)
+[![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/datacheckr.svg?branch=master)](https://travis-ci.org/poissonconsulting/datacheckr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/datacheckr?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/datacheckr) [![codecov](https://codecov.io/gh/poissonconsulting/datacheckr/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/datacheckr) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/datacheckr)](http://cran.r-project.org/package=datacheckr) [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datacheckr)](https://hadley.shinyapps.io/cran-downloads)
 
 datacheckr
 ==========
@@ -29,6 +29,9 @@ The same test using the `datacheckr::check_data()` function produces an error me
 ``` r
 library(datacheckr)
 check_data(mtcars, list(mpg = c(0,1)))
+#> Warning: 'check_data' is deprecated.
+#> Use 'check_data1' instead.
+#> See help("Deprecated")
 #> Error: the values in column mpg in mtcars must lie between 0 and 1
 ```
 
@@ -51,6 +54,9 @@ check_data(data1, list(
   Comments = NULL, 
   LocationX = c(NA, 2345, 1012),
   LocationX = NULL))
+#> Warning: 'check_data' is deprecated.
+#> Use 'check_data1' instead.
+#> See help("Deprecated")
 ```
 
 To produce similar functionality with `assertr` would require something like (please file an [issue](https://github.com/poissonconsulting/datacheckr/issues) if the code below can be improved)
@@ -80,8 +86,17 @@ values <- list(
   LocationX = NULL)
 
 check_data(data1, values)
+#> Warning: 'check_data' is deprecated.
+#> Use 'check_data1' instead.
+#> See help("Deprecated")
 check_data(data2, values)
+#> Warning: 'check_data' is deprecated.
+#> Use 'check_data1' instead.
+#> See help("Deprecated")
 check_data(data3, values)
+#> Warning: 'check_data' is deprecated.
+#> Use 'check_data1' instead.
+#> See help("Deprecated")
 ```
 
 The same tests using `assertr` would require the `assertr` code above to be copied and pasted three times which is tedious to produce and read; and as a result error prone.

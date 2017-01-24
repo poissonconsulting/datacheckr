@@ -1,7 +1,8 @@
 ## Test environments
 
-* local OSX install, R 3.2.3
+* local OSX install, R 3.3.2
 * ubuntu (on travis-ci)
+* windows (on appveyor)
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -22,9 +23,7 @@ File 'LICENSE':
 ## Downstream dependencies
 
 ### Check results
-1 checked out of 1 dependencies 
+2 checked out of 2 dependencies
 
-### rpdo (0.1.1)
-Maintainer: Joe Thorley <joe@poissonconsulting.ca>
-
-__OK__
+Checked rpdo : 0 errors | 0 warnings | 0 notes
+Checked rtide: 0 errors | 0 warnings | 0 notes

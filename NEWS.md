@@ -1,5 +1,11 @@
 # NEWS datacheckr
 
+## v0.2.0
+
+- Removed `check_data` which was deprecated in v0.1.0.
+- Removed all dependencies.
+- Moved vignettes into README
+
 ## v0.1.2
 
 - Add function `check_unique()` to confirm an object doesn't have any duplicated elements.

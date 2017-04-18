@@ -17,7 +17,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_data2 <- function(data, values = NULL, min_row = 1, max_row = max_nrow(),
                        key = character(0), data_name = substitute(data)) {

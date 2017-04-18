@@ -16,6 +16,3 @@ which defines the maximum integer value for the machine.
 \examples{
 max_integer()
 }
-\seealso{
-\code{\link{datacheckr}}
-}

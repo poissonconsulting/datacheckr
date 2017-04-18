@@ -9,7 +9,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 #'
 check_key <- function(data, key = NULL, data_name = substitute(data)) {

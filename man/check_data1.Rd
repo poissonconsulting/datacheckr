@@ -2,7 +2,6 @@
 % Please edit documentation in R/check-data1.R
 \name{check_data1}
 \alias{check_data1}
-\alias{check_data}
 \title{Check Data1}
 \usage{
 check_data1(data, values = NULL, min_row = 0, max_row = max_nrow(),
@@ -37,7 +36,4 @@ require column names in values to be unique.
 
 For stricter data checking see \code{\link{check_data2}}
 and \code{\link{check_data3}}.
-}
-\seealso{
-\code{\link{datacheckr}}
 }

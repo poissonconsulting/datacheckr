@@ -8,7 +8,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the object.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_unique <- function(x, x_name = substitute(x)) {
   if (!is.character(x_name)) x_name <- deparse(x_name)

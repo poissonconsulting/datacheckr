@@ -9,7 +9,7 @@
 #' In addition it also requires that data only includes the columns in values in
 #' the same order.
 #'
-#' For more permissive data checking see \code{\link{check_data}} and
+#' For more permissive data checking see \code{\link{check_data1}} and
 #' \code{\link{check_data2}}.
 #'
 #' @inheritParams check_data_frame
@@ -22,7 +22,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_data3 <- function(data, values = NULL, min_row = 1, max_row = max_nrow(),
                         key = character(0), select = FALSE, data_name = substitute(data)) {

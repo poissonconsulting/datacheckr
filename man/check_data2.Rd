@@ -37,6 +37,3 @@ However it does not require that data only includes the columns in value.
 
 For stricter data checking see \code{\link{check_data3}}.
 }
-\seealso{
-\code{\link{datacheckr}}
-}

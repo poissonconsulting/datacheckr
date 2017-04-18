@@ -40,9 +40,6 @@ requires column names in values to be unique.
 In addition it also requires that data only includes the columns in values in
 the same order.
 
-For more permissive data checking see \code{\link{check_data}} and
+For more permissive data checking see \code{\link{check_data1}} and
 \code{\link{check_data2}}.
-}
-\seealso{
-\code{\link{datacheckr}}
 }

@@ -26,6 +26,3 @@ the data.
 \description{
 Checks the class and values of columns in data.
 }
-\seealso{
-\code{\link{datacheckr}}
-}

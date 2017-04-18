@@ -18,6 +18,3 @@ x.
 \description{
 Checks String
 }
-\seealso{
-\code{\link{datacheckr}}
-}

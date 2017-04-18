@@ -21,6 +21,3 @@ Checks Int
 \examples{
 try(check_int(1))
 }
-\seealso{
-\code{\link{datacheckr}}
-}

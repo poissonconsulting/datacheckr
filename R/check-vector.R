@@ -10,7 +10,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the vector.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_vector <- function(vector, value, min_length = 1, max_length = max_nrow(),
                          vector_name = substitute(vector)) {

@@ -17,6 +17,3 @@ maximum number of rows in a data.frame.
 \examples{
 max_nrow()
 }
-\seealso{
-\code{\link{datacheckr}}
-}

@@ -11,11 +11,7 @@ Depends:
 License: MIT + file LICENSE
 URL: https://github.com/poissonconsulting/datacheckr
 LazyData: true
-Imports:
-    dplyr,
-    magrittr
 Suggests:
-    assertr,
     knitr,
     nycflights13,
     rmarkdown,

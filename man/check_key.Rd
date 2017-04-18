@@ -23,6 +23,3 @@ Checks that columns in a data frame represent a unique key.
 \details{
 By default (\code{key = NULL}) all the columns are checked.
 }
-\seealso{
-\code{\link{datacheckr}}
-}

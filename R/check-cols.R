@@ -12,7 +12,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_cols <- function(data, colnames = NULL, exclusive = FALSE, ordered = FALSE,
                        data_name = substitute(data)) {

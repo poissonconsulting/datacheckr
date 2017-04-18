@@ -5,12 +5,24 @@ check_class_matches <- function(data, parent, join, data_name, parent_name) {
   invisible(data)
 }
 
+is_anti_join <- function(x, y, by) {
+  by.x <- by
+  by.y <- by
+  if (!is.null(names(by))) by.x <- names(by)
+
+  x <- x[,by.x,drop = FALSE]
+  y <- y[,by.y,drop = FALSE]
+  y$..ID <- 1
+  x <- merge(x, y, by.x = by.x, by.y = by.y, all.x = TRUE)
+  any(is.na(x$..ID))
+}
+
 check_referential_integrity <- function(data, parent, join, ignore_nas, data_name, parent_name) {
   data2 <- data[if_names(join)]
   if (ignore_nas)
     data2 <- data2[apply(!is.na(data2),1,any),,drop = FALSE]
-  data2 <- dplyr::anti_join(data2, parent, by = join)
-  if (nrow(data2))
+
+  if (is_anti_join(data2, parent, by = join))
     error("many-to-one join between ", data_name, " and ", parent_name, " violates referential integrity")
   invisible(data)
 }
@@ -35,7 +47,6 @@ check_referential_integrity <- function(data, parent, join, ignore_nas, data_nam
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_join <- function(data, parent, join = NULL, referential = TRUE,
                        extra = "Comments", ignore_nas = FALSE,
@@ -64,11 +75,11 @@ check_join <- function(data, parent, join = NULL, referential = TRUE,
   parent <- check_key(parent, key = join, data_name = parent_name)
 
   if (is_flag(extra)) {
-    if (!extra && length(dplyr::setdiff(matches, join)))
+    if (!extra && length(setdiff(matches, join)))
       error(data_name, " and ", parent_name, " must not have additional matching columns")
   } else { # is.character(extra)
-    extra %<>% dplyr::intersect(matches)
-    if (length(dplyr::setdiff(matches, join)) && (!length(extra) || length(dplyr::setdiff(extra, dplyr::setdiff(matches, join)))))
+    extra <- intersect(extra, matches)
+    if (length(setdiff(matches, join)) && (!length(extra) || length(setdiff(extra, setdiff(matches, join)))))
       error(data_name, " and ", parent_name, " must not have additional matching columns")
   }
 

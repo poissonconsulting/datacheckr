@@ -10,7 +10,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 #' @examples
 #' try(check_rows(data.frame()))

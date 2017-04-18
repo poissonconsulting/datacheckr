@@ -8,7 +8,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the scalar.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_scalar <- function(scalar, value, scalar_name = substitute(scalar)) {
   if (!is.character(scalar_name)) scalar_name <- deparse(scalar_name)
@@ -25,7 +24,6 @@ check_scalar <- function(scalar, value, scalar_name = substitute(scalar)) {
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' x.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_flag <- function(x, x_name = substitute(x)) {
   if (!is.character(x_name)) x_name <- deparse(x_name)
@@ -41,7 +39,6 @@ check_flag <- function(x, x_name = substitute(x)) {
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' x.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 #' @examples
 #' try(check_int(1))
@@ -59,7 +56,6 @@ check_int <- function(x, x_name = substitute(x)) {
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' x.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_count <- function(x, x_name = substitute(x)) {
   if (!is.character(x_name)) x_name <- deparse(x_name)
@@ -75,7 +71,6 @@ check_count <- function(x, x_name = substitute(x)) {
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' x.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_string <- function(x, x_name = substitute(x)) {
   if (!is.character(x_name)) x_name <- deparse(x_name)
@@ -91,7 +86,6 @@ check_string <- function(x, x_name = substitute(x)) {
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' x.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_number <- function(x, x_name = substitute(x)) {
   if (!is.character(x_name)) x_name <- deparse(x_name)
@@ -107,7 +101,6 @@ check_number <- function(x, x_name = substitute(x)) {
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' x.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_date <- function(x, x_name = substitute(x)) {
   if (!is.character(x_name)) x_name <- deparse(x_name)
@@ -123,7 +116,6 @@ check_date <- function(x, x_name = substitute(x)) {
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' x.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 #' @examples
 #' try(check_time(Sys.Date()))

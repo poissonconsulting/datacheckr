@@ -16,6 +16,3 @@ which defines the minimum integer value for the machine.
 \examples{
 min_integer()
 }
-\seealso{
-\code{\link{datacheckr}}
-}

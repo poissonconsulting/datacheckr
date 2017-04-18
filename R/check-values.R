@@ -10,7 +10,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' the data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_values <- function(data, values = NULL, unique = TRUE, nulls = FALSE,
                          data_name = substitute(data)) {

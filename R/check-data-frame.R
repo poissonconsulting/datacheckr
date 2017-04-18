@@ -7,7 +7,6 @@
 #'
 #' @return Throws an informative error or returns an invisible copy of
 #' data.
-#' @seealso \code{\link{datacheckr}}
 #' @export
 check_data_frame <- function(data, data_name = substitute(data)) {
   if (!is.character(data_name)) data_name <- deparse(data_name)

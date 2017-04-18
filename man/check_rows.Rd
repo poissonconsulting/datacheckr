@@ -30,6 +30,3 @@ By default (\code{min_row = 1}) data must include at least one row.
 try(check_rows(data.frame()))
 try(check_rows(data.frame(x = 1), 2))
 }
-\seealso{
-\code{\link{datacheckr}}
-}

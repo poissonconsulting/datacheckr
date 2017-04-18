@@ -2,7 +2,6 @@
 
 export(check_cols)
 export(check_count)
-export(check_data)
 export(check_data1)
 export(check_data2)
 export(check_data3)

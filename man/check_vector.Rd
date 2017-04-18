@@ -28,4 +28,3 @@ Checks the class and values of a vector
 \seealso{
 \code{\link{datacheckr}}
 }
-

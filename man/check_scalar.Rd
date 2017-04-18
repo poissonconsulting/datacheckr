@@ -23,4 +23,3 @@ Checks the class and values of a scalar
 \seealso{
 \code{\link{datacheckr}}
 }
-

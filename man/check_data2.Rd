@@ -40,4 +40,3 @@ For stricter data checking see \code{\link{check_data3}}.
 \seealso{
 \code{\link{datacheckr}}
 }
-

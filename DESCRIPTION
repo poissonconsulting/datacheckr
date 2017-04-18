@@ -1,13 +1,11 @@
 Package: datacheckr
 Title: Data Checking
-Version: 0.1.2
-Date: 2016-11-06
+Version: 0.1.2.9000
+Date: 2016-04-18
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
-Description: Checks column names,
-    column classes, values, keys, joins, vectors and scalars.
-    If the user-defined conditions are met the function
-    returns an invisible copy of the data frame, vector or scalar.
-    Otherwise the function throws an informative error.
+Description: Checks column names, classes, values, keys and joins in data frames.
+    Also checks class and values of vectors and scalars.
+    Returns an informative error message if user-defined conditions are not met.
 Depends:
     R (>= 3.1.0)
 License: MIT + file LICENSE
@@ -22,5 +20,5 @@ Suggests:
     nycflights13,
     rmarkdown,
     testthat
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr

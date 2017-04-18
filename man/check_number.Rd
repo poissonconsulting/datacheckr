@@ -21,4 +21,3 @@ Checks Number
 \seealso{
 \code{\link{datacheckr}}
 }
-

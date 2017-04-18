@@ -19,4 +19,3 @@ min_integer()
 \seealso{
 \code{\link{datacheckr}}
 }
-

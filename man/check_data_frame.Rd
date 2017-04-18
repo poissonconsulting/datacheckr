@@ -21,4 +21,3 @@ Checks that data is a data frame.
 \seealso{
 \code{\link{datacheckr}}
 }
-

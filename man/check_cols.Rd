@@ -32,4 +32,3 @@ To check for no columns set \code{colnames = character(0)}.
 \seealso{
 \code{\link{datacheckr}}
 }
-

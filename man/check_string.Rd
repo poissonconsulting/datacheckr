@@ -21,4 +21,3 @@ Checks String
 \seealso{
 \code{\link{datacheckr}}
 }
-

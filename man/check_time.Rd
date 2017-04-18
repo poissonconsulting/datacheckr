@@ -24,4 +24,3 @@ try(check_time(Sys.Date()))
 \seealso{
 \code{\link{datacheckr}}
 }
-

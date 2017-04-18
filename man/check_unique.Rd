@@ -21,4 +21,3 @@ Checks whether an object in unique (i.e. doesn't contain any duplicated elements
 \seealso{
 \code{\link{datacheckr}}
 }
-

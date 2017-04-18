@@ -42,4 +42,3 @@ By default (\code{join = NULL}) all the columns in parent represent the join key
 \seealso{
 \code{\link{datacheckr}}
 }
-

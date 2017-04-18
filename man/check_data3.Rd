@@ -46,4 +46,3 @@ For more permissive data checking see \code{\link{check_data}} and
 \seealso{
 \code{\link{datacheckr}}
 }
-

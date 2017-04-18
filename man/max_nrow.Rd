@@ -20,4 +20,3 @@ max_nrow()
 \seealso{
 \code{\link{datacheckr}}
 }
-

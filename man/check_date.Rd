@@ -21,4 +21,3 @@ Checks Date
 \seealso{
 \code{\link{datacheckr}}
 }
-

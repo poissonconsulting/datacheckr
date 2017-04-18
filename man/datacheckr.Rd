@@ -8,4 +8,3 @@
 \description{
 Run \code{vignette("datacheckr")} for \emph{An Introduction to datacheckr}.
 }
-

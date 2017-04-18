@@ -33,4 +33,3 @@ try(check_rows(data.frame(x = 1), 2))
 \seealso{
 \code{\link{datacheckr}}
 }
-

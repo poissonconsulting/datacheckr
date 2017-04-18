@@ -26,4 +26,3 @@ By default (\code{key = NULL}) all the columns are checked.
 \seealso{
 \code{\link{datacheckr}}
 }
-

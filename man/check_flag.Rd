@@ -21,4 +21,3 @@ Checks Flag
 \seealso{
 \code{\link{datacheckr}}
 }
-

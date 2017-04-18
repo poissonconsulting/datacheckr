@@ -19,4 +19,3 @@ max_integer()
 \seealso{
 \code{\link{datacheckr}}
 }
-

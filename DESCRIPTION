@@ -1,7 +1,7 @@
 Package: datacheckr
 Title: Data Checking
 Version: 0.2.0
-Date: 2016-04-18
+Date: 2017-04-18
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
 Description: Checks column names, classes, values, keys and joins in data frames.
     Also checks length, class and values of vectors and scalars.
@@ -18,4 +18,3 @@ Suggests:
     tibble,
     testthat
 RoxygenNote: 6.0.1
-VignetteBuilder: knitr

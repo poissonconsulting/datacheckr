@@ -11,14 +11,14 @@ There were no ERRORs or WARNINGs.
 
 There was 1 NOTE:
 
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Joe Thorley <joe@poissonconsulting.ca>'
+ NOTE
+Maintainer: ‘Joe Thorley <joe@poissonconsulting.ca>’
 
-Possibly mis-spelled words in DESCRIPTION:
-  Decadal (3:16, 10:30)
-  PDO (10:51)
-  
-**Both words are correctly spelt.**
+License components with restrictions and base license permitting such:
+  MIT + file LICENSE
+File 'LICENSE':
+  YEAR: 2017
+  COPYRIGHT HOLDER: Poisson Consulting
 
 ## Downstream dependencies
 

@@ -12,6 +12,8 @@
 #' @export
 #'
 check_key <- function(data, key = NULL, data_name = substitute(data)) {
+  if (identical(key, character(0))) return(invisible(data))
+
   if (!is.character(data_name)) data_name <- deparse(data_name)
   data <- check_data_frame(data, data_name)
   data <- check_colnames(data, colnames = key, exclusive = FALSE,

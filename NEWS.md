@@ -1,6 +1,4 @@
-# datacheckr 0.2.0.9000
-
-# NEWS datacheckr
+### v0.2.0.9000
 
 ## v0.2.0
 
@@ -8,11 +6,11 @@
 - Removed all dependencies.
 - Moved vignettes into README
 
-## v0.1.2
+### v0.1.2
 
 - Add function `check_unique()` to confirm an object doesn't have any duplicated elements.
 
-## v0.1.1
+### v0.1.1
 
 - Fixed tests so that compatible with testthat v0.11.0.9000
 
@@ -42,7 +40,7 @@ as well as an alias `check_data1` for `check_data` and deprecated `check_data`.
 - Added argument `data_name = substitute(data)` to all functions so users can overide
 the name of data.
 
-## v0.0.2
+### v0.0.2
 
 - Added vignette datacheckr.
 - The copy of the original data frame returned by `check_data` is now invisible.

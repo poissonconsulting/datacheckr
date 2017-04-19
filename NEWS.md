@@ -1,5 +1,7 @@
 ### v0.2.0.9000
 
+- Fixed bug in check_key when checking sf data frames with key = character(0)
+
 ## v0.2.0
 
 - Removed `check_data` which was deprecated in v0.1.0.

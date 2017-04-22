@@ -16,7 +16,7 @@
 #' @inheritParams check_rows
 #' @inheritParams check_values
 #' @inheritParams check_key
-#' @param select A flag indicating whether to if possible
+#' @param select deprecated A flag indicating whether to if possible
 #' drop unnamed columns and reorder the remainder
 #' so that column names matches those in values.
 #'
@@ -27,6 +27,8 @@ check_data3 <- function(data, values = NULL, min_row = 1, max_row = max_nrow(),
                         key = character(0), select = FALSE, data_name = substitute(data)) {
   if (!is.character(data_name)) data_name <- deparse(data_name)
   check_flag_internal(select)
+
+  if (select) warning("argument select is deprecated")
 
   data <- check_data_frame(data, data_name = data_name)
   data <- check_rows(data, min_row = min_row, max_row = max_row, data_name = data_name)

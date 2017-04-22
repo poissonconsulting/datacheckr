@@ -19,7 +19,7 @@ their associated classes and values.}
 
 \item{key}{A character vector of the column names representing the key.}
 
-\item{select}{A flag indicating whether to if possible
+\item{select}{deprecated A flag indicating whether to if possible
 drop unnamed columns and reorder the remainder
 so that column names matches those in values.}
 

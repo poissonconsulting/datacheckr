@@ -1,5 +1,5 @@
 try_check <- function(expr) {
-  try <- try(eval(expr), silent = TRUE)
+  try <- try(eval(expr, envir = parent.frame(3)), silent = TRUE)
   try
 }
 

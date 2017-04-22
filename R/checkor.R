@@ -22,9 +22,11 @@ checkor <- function(...) {
 #  .NotYetImplemented()
   args <- substitute(list(...))
   args <- args[-1]
+  n <- length(args)
+  if (identical(n, 0L)) return(invisible(TRUE))
   args <- lapply(args, try_check)
   args <- args[vapply(args, is.try_error, TRUE)]
-  if(!length(args)) return(invisible(TRUE))
+  if (!identical(length(args), n)) return(invisible(TRUE))
   args <- lapply(args, try_message)
   args <- unlist(args)
   args <- args[!duplicated(args)]

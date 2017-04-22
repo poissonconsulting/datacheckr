@@ -1,7 +1,7 @@
 ### v0.2.0.9002
 
 - Added `checkor()` to check at least one check passed.
-- Deprecated `select` in `check_data3()`.
+- Added `check_null()` to check if NULL.
 
 ### v0.2.0.9001
 

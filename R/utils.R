@@ -13,6 +13,8 @@ if_names <- function(x) {
 is_vector <- function(x) is.atomic(x)
 is_scalar <- function(x) is.atomic(x) && length(x) == 1
 
+is.try_error <- function(x) inherits(x, "try-error")
+
 equal <- function(x, y) isTRUE(all.equal(x, y, check.names = FALSE))
 
 is_POSIXct <- function(x) inherits(x, "POSIXct")

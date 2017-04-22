@@ -1,10 +1,14 @@
-### v0.2.0.9000
+### v0.2.0.9002
+
+- Added `checkor()` to check at least one check passed.
+
+### v0.2.0.9001
 
 - Fixed bug in check_key when checking sf data frames with key = character(0)
 
 ## v0.2.0
 
-- Removed `check_data` which was deprecated in v0.1.0.
+- Removed `check_data()` which was deprecated in v0.1.0.
 - Removed all dependencies.
 - Moved vignettes into README
 

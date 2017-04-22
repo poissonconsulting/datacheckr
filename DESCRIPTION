@@ -1,7 +1,7 @@
 Package: datacheckr
 Title: Data Checking
-Version: 0.2.0.9001
-Date: 2017-04-19
+Version: 0.2.0.9002
+Date: 2017-04-21
 Authors@R: person("Joe", "Thorley", email = "joe@poissonconsulting.ca", role = c("aut", "cre"))
 Description: Checks column names, classes, values, keys and joins in data frames.
     Also checks length, class and values of vectors and scalars.

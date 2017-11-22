@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-![stability-stable](https://img.shields.io/badge/stability-stable-green.svg) [![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/datacheckr.svg?branch=master)](https://travis-ci.org/poissonconsulting/datacheckr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/datacheckr?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/datacheckr) [![codecov](https://codecov.io/gh/poissonconsulting/datacheckr/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/datacheckr) [![License: CC0](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/datacheckr)](https://cran.r-project.org/package=datacheckr) [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datacheckr)](http://www.r-pkg.org/pkg/cranlogs)
+[![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/joethorley/stability-badges#stable) [![Travis-CI Build Status](https://travis-ci.org/poissonconsulting/datacheckr.svg?branch=master)](https://travis-ci.org/poissonconsulting/datacheckr) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/poissonconsulting/datacheckr?branch=master&svg=true)](https://ci.appveyor.com/project/poissonconsulting/datacheckr) [![codecov](https://codecov.io/gh/poissonconsulting/datacheckr/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/datacheckr) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/datacheckr)](https://cran.r-project.org/package=datacheckr) [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datacheckr)](http://www.r-pkg.org/pkg/cranlogs)
 
 datacheckr
 ==========
@@ -8,7 +8,7 @@ datacheckr
 Introduction
 ------------
 
-`datacheckr` is an R package to check the column names, classes, values, keys and joins in data frames. It provides an informative error message if a user-defined condition fails to be met otherwise it returns the object (so it can be used in pipes).
+`datacheckr` is an R package to check the classes and values of scalars and vectors and the column names, classes, values, keys and joins in data frames. It provides an informative error message if a user-defined condition fails to be met otherwise it returns the object (so it can be used in pipes).
 
 Demonstration
 -------------
@@ -27,7 +27,7 @@ my_data <- data_frame(
   Comments = c("In Greenwich", "Somewhere else", "I'm lost", "I didn't see any", "Help"))
 
 my_data
-#> # A tibble: 5 × 6
+#> # A tibble: 5 x 6
 #>   Count Longitude Latitude   Type Extra         Comments
 #>   <int>     <dbl>    <dbl> <fctr> <lgl>            <chr>
 #> 1     0         0      0.0   Good  TRUE     In Greenwich
@@ -240,18 +240,18 @@ weather %<>% check_data3(list(year = c(2013,2013),
                               origin = rep("^\\w{3,3}$",2)),
                  select = TRUE)
 weather
-#> # A tibble: 26,130 × 5
+#> # A tibble: 26,130 x 5
 #>     year month   day  hour origin
 #>    <dbl> <dbl> <int> <int>  <chr>
-#> 1   2013     1     1     0    EWR
-#> 2   2013     1     1     1    EWR
-#> 3   2013     1     1     2    EWR
-#> 4   2013     1     1     3    EWR
-#> 5   2013     1     1     4    EWR
-#> 6   2013     1     1     6    EWR
-#> 7   2013     1     1     7    EWR
-#> 8   2013     1     1     8    EWR
-#> 9   2013     1     1     9    EWR
+#>  1  2013     1     1     0    EWR
+#>  2  2013     1     1     1    EWR
+#>  3  2013     1     1     2    EWR
+#>  4  2013     1     1     3    EWR
+#>  5  2013     1     1     4    EWR
+#>  6  2013     1     1     6    EWR
+#>  7  2013     1     1     7    EWR
+#>  8  2013     1     1     8    EWR
+#>  9  2013     1     1     9    EWR
 #> 10  2013     1     1    10    EWR
 #> # ... with 26,120 more rows
 ```

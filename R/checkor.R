@@ -1,15 +1,3 @@
-try_check <- function(expr) {
-  try <- try(eval(expr, envir = parent.frame(3)), silent = TRUE)
-  try
-}
-
-try_message <- function(x) {
-  x <- as.character(x)
-  x <- sub("^Error.*[:] ", "", x, perl = TRUE)
-  x <- sub("\n$", "", x, perl = TRUE)
-  x
-}
-
 #' Multiple Checks
 #'
 #' Checks that one or more checks return without an error.
@@ -19,7 +7,6 @@ try_message <- function(x) {
 #' @return Throws an informative error or returns an invisible TRUE.
 #' @export
 checkor <- function(...) {
-#  .NotYetImplemented()
   args <- substitute(list(...))
   args <- args[-1]
   n <- length(args)

@@ -1,3 +1,15 @@
+try_check <- function(expr) {
+  try <- try(eval(expr, envir = parent.frame(3)), silent = TRUE)
+  try
+}
+
+try_message <- function(x) {
+  x <- as.character(x)
+  x <- sub("^Error.*[:] ", "", x, perl = TRUE)
+  x <- sub("\n$", "", x, perl = TRUE)
+  x
+}
+
 is_flag <- function(x)  is.logical(x) && length(x) == 1 && !is.na(x)
 is_string <- function(x)  (is.character(x) || is.factor(x)) && length(x) == 1 && !is.na(x)
 is_count <- function(x)  (is.integer(x) || is.numeric(x)) && length(x) == 1 &&

@@ -1,6 +1,7 @@
 ### v0.2.0.9003
 
 - Added `check_xxxs` family of functions to check flags etc.
+- Added `check_length()`
 
 ### v0.2.0.9002
 

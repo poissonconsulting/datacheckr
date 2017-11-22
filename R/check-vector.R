@@ -18,15 +18,9 @@ check_vector <- function(vector, value, min_length = 1, max_length = max_nrow(),
 
   if (!is_vector(vector)) error(vector_name, " must be a vector")
   if (!is_vector(value)) error("value must be a vector")
-  check_count_internal(min_length)
-  check_count_internal(max_length)
-  if (max_length < min_length) error("max_length must not be less than min_length")
 
-  if (length(vector) < min_length)
-    error(vector_name, " must be at least of length ", min_length)
-
-  if (length(vector) > max_length)
-    error(vector_name, " must not be longer than ", max_length)
+  check_length(vector, min_length = min_length, max_length = max_length,
+               x_name = vector_name)
 
   classes <- get_classes(list(value))
   if (!inherits(vector, classes))

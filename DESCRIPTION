@@ -8,6 +8,8 @@ Description: Checks column names, classes, values, keys and joins in data frames
     Returns an informative error message if user-defined conditions are not met.
 Depends:
     R (>= 3.1.0)
+Imports:
+    magrittr
 License: MIT + file LICENSE
 URL: https://github.com/poissonconsulting/datacheckr
 LazyData: true

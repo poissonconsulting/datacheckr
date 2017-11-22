@@ -1,5 +1,6 @@
 ### v0.2.0.9003
 
+- `check_scalar()` now accepts missing `value` argue to simply check that a scalar.
 - Added `check_xxxs` family of functions to check flags etc.
 - Added `check_length()`
 

@@ -1,8 +1,8 @@
 context("check-scalar")
 
-test_that("check_scalar errors if value undefined", {
+test_that("check_scalar length 1 if value undefined", {
   x <- 2
-  expect_error(check_scalar(x), "argument \"value\" is missing, with no default")
+  expect_identical(check_scalar(x), 2)
 })
 
 test_that("check_scalar tests vector", {

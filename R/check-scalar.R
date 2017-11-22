@@ -14,6 +14,8 @@ check_scalar <- function(scalar, value, scalar_name = substitute(scalar)) {
   check_string_internal(scalar_name)
 
   if (!is_scalar(scalar)) error(scalar_name, " must be a scalar")
+  if (missing(value)) return(invisible(scalar))
+
   check_vector(scalar, value, min_length = 1, max_length = 1, vector_name = scalar_name)
 }
 

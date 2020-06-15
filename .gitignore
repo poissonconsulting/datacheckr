@@ -1,6 +1,15 @@
 .Rproj.user
 .Rhistory
 .RData
-inst/doc
+.Ruserdata
 
-rsconnect
+.DS_Store
+.Renviron
+.RProfile
+.httr-oauth
+
+*.html
+
+docs/
+inst/docs/
+docs

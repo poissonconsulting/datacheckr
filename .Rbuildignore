@@ -11,3 +11,4 @@
 ^document.R$
 ^LICENSE.md$
 ^\.github$
+^codecov\.yml$

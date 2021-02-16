@@ -1,5 +1,3 @@
-context("check-join")
-
 test_that("check_join checks colnames", {
   x <- data.frame(y = 2)
   y <- data.frame(y = 2)

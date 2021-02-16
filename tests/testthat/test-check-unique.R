@@ -1,5 +1,3 @@
-context("check-unique")
-
 test_that("check_unique errors", {
   expect_identical(check_unique(1), 1)
   expect_identical(check_unique(1:2), 1:2)

@@ -1,5 +1,3 @@
-context("check-number")
-
 test_that("check_number errors", {
   y <- 2
   expect_identical(check_number(y), y)

@@ -1,5 +1,3 @@
-context("check-scalar")
-
 test_that("check_scalar length 1 if value undefined", {
   x <- 2
   expect_identical(check_scalar(x), 2)

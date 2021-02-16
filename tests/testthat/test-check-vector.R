@@ -1,5 +1,3 @@
-context("check-vector")
-
 test_that("check_vector errors if value undefined", {
   x <- 2
   expect_error(check_vector(x), "argument \"value\" is missing, with no default")

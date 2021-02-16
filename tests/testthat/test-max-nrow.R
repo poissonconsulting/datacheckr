@@ -1,5 +1,3 @@
-context("max-nrow")
-
 test_that("max_nrow works", {
   expect_true(length(max_nrow()) == 1)
   expect_is(max_nrow(), "integer")

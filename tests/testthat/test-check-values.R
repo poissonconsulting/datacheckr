@@ -1,5 +1,3 @@
-context("check-values")
-
 test_that("check_values does nothing with NULL values", {
   x <- data.frame(y = 2)
   expect_identical(x, check_values(x))

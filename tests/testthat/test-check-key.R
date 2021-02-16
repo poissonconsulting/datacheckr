@@ -1,5 +1,3 @@
-context("check-key")
-
 test_that("check_key checks colnames", {
   x <- data.frame(y = 2)
   expect_identical(check_key(x), x)

@@ -1,5 +1,3 @@
-context("check-string")
-
 test_that("check_string errors", {
   y <- "oeu"
   expect_identical(check_string(y), y)

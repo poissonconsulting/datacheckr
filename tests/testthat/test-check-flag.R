@@ -1,5 +1,3 @@
-context("check-flag")
-
 test_that("check_flag errors", {
   y <- TRUE
   expect_identical(check_flag(y), y)

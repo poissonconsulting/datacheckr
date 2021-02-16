@@ -1,5 +1,3 @@
-context("checkor")
-
 test_that("checkor works", {
   expect_identical(checkor(), TRUE)
   expect_identical(checkor(x <- 1), TRUE)

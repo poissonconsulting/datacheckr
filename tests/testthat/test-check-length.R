@@ -1,5 +1,3 @@
-context("check-length")
-
 test_that("check_length errors", {
   y <- 2L
   expect_identical(check_length(y), y)

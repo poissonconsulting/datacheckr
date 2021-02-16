@@ -1,5 +1,3 @@
-context("check-data-frame")
-
 test_that("check_data_frame requires a data frame", {
   x <- data.frame(y = 2)
   expect_identical(check_data_frame(x), x)

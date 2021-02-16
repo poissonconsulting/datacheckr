@@ -1,5 +1,3 @@
-context("check-rows")
-
 test_that("check_rows requires a data frame", {
   x <- data.frame(y = 2)
   expect_identical(check_rows(x), x)

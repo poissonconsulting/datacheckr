@@ -4,8 +4,12 @@
 \alias{check_length}
 \title{Check Length}
 \usage{
-check_length(x, min_length = 1L, max_length = max_integer(),
-  x_name = substitute(x))
+check_length(
+  x,
+  min_length = 1L,
+  max_length = max_integer(),
+  x_name = substitute(x)
+)
 }
 \arguments{
 \item{x}{The object to check.}

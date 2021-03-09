@@ -4,8 +4,13 @@
 \alias{check_vector}
 \title{Check Vector}
 \usage{
-check_vector(vector, value, min_length = 1, max_length = max_nrow(),
-  vector_name = substitute(vector))
+check_vector(
+  vector,
+  value,
+  min_length = 1,
+  max_length = max_nrow(),
+  vector_name = substitute(vector)
+)
 }
 \arguments{
 \item{vector}{The vector to check.}

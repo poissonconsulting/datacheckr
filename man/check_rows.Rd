@@ -4,8 +4,12 @@
 \alias{check_rows}
 \title{Check Rows}
 \usage{
-check_rows(data, min_row = 1, max_row = max_nrow(),
-  data_name = substitute(data))
+check_rows(
+  data,
+  min_row = 1,
+  max_row = max_nrow(),
+  data_name = substitute(data)
+)
 }
 \arguments{
 \item{data}{The data frame to check.}

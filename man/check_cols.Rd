@@ -4,8 +4,13 @@
 \alias{check_cols}
 \title{Check Cols}
 \usage{
-check_cols(data, colnames = NULL, exclusive = FALSE, ordered = FALSE,
-  data_name = substitute(data))
+check_cols(
+  data,
+  colnames = NULL,
+  exclusive = FALSE,
+  ordered = FALSE,
+  data_name = substitute(data)
+)
 }
 \arguments{
 \item{data}{The data frame to check.}

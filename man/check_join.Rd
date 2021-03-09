@@ -4,9 +4,16 @@
 \alias{check_join}
 \title{Check Join}
 \usage{
-check_join(data, parent, join = NULL, referential = TRUE,
-  extra = "Comments", ignore_nas = FALSE, data_name = substitute(data),
-  parent_name = substitute(parent))
+check_join(
+  data,
+  parent,
+  join = NULL,
+  referential = TRUE,
+  extra = "Comments",
+  ignore_nas = FALSE,
+  data_name = substitute(data),
+  parent_name = substitute(parent)
+)
 }
 \arguments{
 \item{data}{The data frame to check.}

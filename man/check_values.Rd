@@ -4,8 +4,13 @@
 \alias{check_values}
 \title{Check Values}
 \usage{
-check_values(data, values = NULL, unique = TRUE, nulls = FALSE,
-  data_name = substitute(data))
+check_values(
+  data,
+  values = NULL,
+  unique = TRUE,
+  nulls = FALSE,
+  data_name = substitute(data)
+)
 }
 \arguments{
 \item{data}{The data frame to check.}

@@ -4,8 +4,15 @@
 \alias{check_data3}
 \title{Check Data3}
 \usage{
-check_data3(data, values = NULL, min_row = 1, max_row = max_nrow(),
-  key = character(0), select = FALSE, data_name = substitute(data))
+check_data3(
+  data,
+  values = NULL,
+  min_row = 1,
+  max_row = max_nrow(),
+  key = character(0),
+  select = FALSE,
+  data_name = substitute(data)
+)
 }
 \arguments{
 \item{data}{The data frame to check.}

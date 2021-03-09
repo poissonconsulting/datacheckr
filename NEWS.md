@@ -1,32 +1,32 @@
-### v0.2.0.9003
+# v0.2.0.9003
 
 - `check_scalar()` now accepts missing `value` argue to simply check that a scalar.
 - Added `check_length()`
 
-### v0.2.0.9002
+# v0.2.0.9002
 
 - Added `checkor()` to check at least one check passed.
 - Added `check_null()` to check if NULL.
 
-### v0.2.0.9001
+# v0.2.0.9001
 
 - Fixed bug in check_key when checking sf data frames with key = character(0)
 
-## v0.2.0
+# v0.2.0
 
 - Removed `check_data()` which was deprecated in v0.1.0.
 - Removed all dependencies.
 - Moved vignettes into README
 
-### v0.1.2
+# v0.1.2
 
 - Add function `check_unique()` to confirm an object doesn't have any duplicated elements.
 
-### v0.1.1
+# v0.1.1
 
 - Fixed tests so that compatible with testthat v0.11.0.9000
 
-## v0.1.0
+# v0.1.0
 
 - Added arguments `min_row = 0` and `max_row = max_nrow()` to `check_data`
 to allow checking of the number of rows.
@@ -52,7 +52,7 @@ as well as an alias `check_data1` for `check_data` and deprecated `check_data`.
 - Added argument `data_name = substitute(data)` to all functions so users can overide
 the name of data.
 
-### v0.0.2
+# v0.0.2
 
 - Added vignette datacheckr.
 - The copy of the original data frame returned by `check_data` is now invisible.
@@ -60,6 +60,6 @@ the name of data.
 - On fail `check_data` now lists specific permitted values if 5 or less 
 (if 3 or less for character)
 
-## v0.0.1
+# v0.0.1
 
 - Initial Release

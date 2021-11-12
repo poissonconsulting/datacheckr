@@ -10,7 +10,7 @@ on:
       - master
       - dev
   schedule:
-    - cron:  '0 8 * * 0'
+    - cron:  '0 8 * * *'
 
 name: R-CMD-check
 

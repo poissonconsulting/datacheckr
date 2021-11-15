@@ -11,17 +11,14 @@ knitr::opts_chunk$set(
   fig.path = "tools/README-"
 )
 ```
-
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/datacheckr)](https://cran.r-project.org/package=datacheckr)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datacheckr)](http://www.r-pkg.org/pkg/cranlogs)
   <!-- badges: start -->
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/datacheckr)](https://cran.r-project.org/package=datacheckr)
   [![R-CMD-check](https://github.com/poissonconsulting/datacheckr/workflows/R-CMD-check/badge.svg)](https://github.com/poissonconsulting/datacheckr/actions)
-  <!-- badges: end -->
-
-[![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/joethorley/stability-badges#stable)
+  [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/datacheckr)](http://www.r-pkg.org/pkg/cranlogs)
 [![Codecov test coverage](https://codecov.io/gh/poissonconsulting/datacheckr/branch/master/graph/badge.svg)](https://codecov.io/gh/poissonconsulting/datacheckr?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
+[![stability-stable](https://img.shields.io/badge/stability-stable-green.svg)](https://github.com/joethorley/stability-badges#stable)
+  <!-- badges: end -->
 # datacheckr
 
 ## Introduction
